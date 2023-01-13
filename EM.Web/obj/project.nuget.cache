@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "41vNn/eIHLMZgE9cTj1pHCAONp9MMcFM+NB8JpjoomEs+iEaM4DFwtajZ7vKBCu4LX3oR8ZK/STktyr7dmn38g==",
-  "success": false,
-  "projectFilePath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web.csproj",
+  "dgSpecHash": "x0wmGH7gNMvvbr1pJ0zlURRI6yWkdNhj+kRACNGvER578sKbSzwxBb44VaAW8li/qY5teZNciLcC7G0ZQ8/FeQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joaod\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\joaod\\.nuget\\packages\\entityframework.firebird\\9.1.0\\entityframework.firebird.9.1.0.nupkg.sha512",
@@ -61,24 +61,5 @@
     "C:\\Users\\joaod\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\joaod\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Não é possível encontrar o projeto 'C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
-      "libraryId": "C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Não é possível encontrar o projeto 'C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
-      "libraryId": "C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

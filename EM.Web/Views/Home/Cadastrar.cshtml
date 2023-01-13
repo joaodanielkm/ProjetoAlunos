@@ -2,49 +2,74 @@
 
 @{
     ViewData["Title"] = "Cadastrar";
+    <script>
+        function validardataDeNascimento(data) {
 
+            dataAtual = new Date();
+
+            data = new Date(data);
+
+            if (data < dataAtual) {
+                console.log("Data Válida");
+                return true;
+            } else {
+                console.log("Data Inválida");
+                return false;
+            }
+
+
+        }
+    </script>
 }
 
 <h4>Novo aluno</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post" class="form-control">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <div class="form-group">
+            <div class="container">
+            <div class="row">
+                <div class="col-3 ">
                 <label asp-for="Matricula" class="control-label"></label>
-                <input placeholder="Apenas numeros" type="text" text-align="right" asp-for="Matricula" class="form-control" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                <input placeholder="Apenas numeros" type="text" style="text-align:right;"  asp-for="Matricula" class="form-control" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
                 <span asp-validation-for="Matricula" class="text-danger"></span>
-
+                </div> 
+                <div class="col-9">
                 <label asp-for="Nome" class="control-label"></label>
                 <input placeholder="Digite o nome do aluno" asp-for="Nome" class="form-control" maxlength="100" required/>
                 <span asp-validation-for="Nome" class="text-danger"></span>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                 <label asp-for="Sexo" class="control-label"></label>
-                <select name="sexo" class="form-control">
+                <select name="sexo" class="form-control" required>
                     <option value="Masculuno">Masculuno</option>
                     <option value="Feminino">Feminino</option>
                 </select>
-
+                </div>
+                    <div class="col">
                 <label asp-for="Nascimento" class="control-label"></label>
-                <input type="date" asp-for="Nascimento" class="form-control" min="1900-01-01" max=currentYear />
+                        <input onchange="validardataDeNascimento(this.value);" type="date" asp-for="Nascimento" class="form-control" min="1900-01-01" required />
                 <span asp-validation-for="Nascimento" class="text-danger"></span>
-
-
-
+                </div>
+                    <div class="col">
                 <label asp-for="CPF" class="control-label"></label>
-                <input placeholder="Digite o CPF" asp-for=" CPF"  class="form-control" maxlength="14" type="text" />
+                <input placeholder="Digite o CPF" asp-for=" CPF"  class="form-control" type="text" />
                 <span asp-validation-for="CPF" class="text-danger"></span>
-
-
-
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" asp-action="Cadastrar"/>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">Voltar</a>
-            </div>
+                </div>
+             </div>
+                </br>                
+                <div class="row">
+                <div class="col-sm-12 text-right">
+                    <input type="submit" value="Salvar" class="btn btn-success" asp-action="Cadastrar" />
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-warning">Voltar</a>
+                </div>
+                </div>
+     </div>
+            
+           
         </form>
     </div>
 </div>

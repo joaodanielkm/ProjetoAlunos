@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Core.Objects.DataClasses;
 
     namespace ProjetoEM.EM.Domain
     {
@@ -11,6 +12,7 @@
             [Key]
             [Display(Name = "Matricula")]
             [Column("MATRICULA")]
+            [MaxLength(9)]
             public int Matricula { get; set; }
 
             [Display(Name = "Nome")]
@@ -19,10 +21,13 @@
 
             [Display(Name = "Sexo")]
             [Column("SEXO")]
-            public int Sexo = 1;
+            [Required(ErrorMessage = "Campo obrigatório!")]
+            public int Sexo = 0;
 
             [Display(Name = "CPF")]
             [Column("CPF")]
+            [MaxLength(14)]
+            //[RegularExpression()]
             public string? CPF { get; set; }
 
             [Display(Name = "Nascimento")]

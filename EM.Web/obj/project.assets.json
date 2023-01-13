@@ -1002,6 +1002,37 @@
             "rid": "win"
           }
         }
+      },
+      "EM.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EntityFramework.Firebird": "9.1.0",
+          "FirebirdSql.EntityFrameworkCore.Firebird": "9.1.0",
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.12"
+        },
+        "compile": {
+          "bin/placeholder/EM.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EM.Domain.dll": {}
+        }
+      },
+      "EM.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EM.Domain": "1.0.0",
+          "EntityFramework.Firebird": "9.1.0",
+          "FirebirdSql.EntityFrameworkCore.Firebird": "9.1.0",
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.12"
+        },
+        "compile": {
+          "bin/placeholder/EM.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EM.Repository.dll": {}
+        }
       }
     }
   },
@@ -2709,12 +2740,22 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "EM.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EM.Domain/EM.Domain.csproj",
+      "msbuildProject": "../EM.Domain/EM.Domain.csproj"
+    },
+    "EM.Repository/1.0.0": {
+      "type": "project",
+      "path": "../EM.Repository/EM.Repository.csproj",
+      "msbuildProject": "../EM.Repository/EM.Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj",
-      "C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj",
+      "EM.Domain >= 1.0.0",
+      "EM.Repository >= 1.0.0",
       "EntityFramework.Firebird >= 9.1.0",
       "FirebirdSql.EntityFrameworkCore.Firebird >= 9.1.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 6.0.12",
@@ -2729,11 +2770,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web.csproj",
+      "projectUniqueName": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj",
       "projectName": "EM.Web",
-      "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web.csproj",
+      "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj",
       "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\obj\\",
+      "outputPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2755,11 +2796,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj": {
-              "projectPath": "C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj"
+            "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+              "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
             },
-            "C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj": {
-              "projectPath": "C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj"
+            "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
+              "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj"
             }
           }
         }
@@ -2821,25 +2862,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Não é possível encontrar o projeto 'C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
-      "libraryId": "C:\\Users\\joaod\\source\\repos\\EM.Domain\\EM.Domain.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1104",
-      "level": "Error",
-      "message": "Não é possível encontrar o projeto 'C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
-      "libraryId": "C:\\Users\\joaod\\source\\repos\\EM.Repository\\EM.Repository.csproj",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  }
 }
