@@ -1,0 +1,60 @@
+﻿@model EM.Domain.ProjetoEM.EM.Domain.Aluno
+
+@{
+    ViewData["Title"] = "Cadastrar";
+
+}
+
+<h4>Novo aluno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" class="form-control">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Matricula" class="control-label"></label>
+                <input placeholder="Apenas numeros" type="text" text-align="right" asp-for="Matricula" class="form-control" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                <span asp-validation-for="Matricula" class="text-danger"></span>
+
+                <label asp-for="Nome" class="control-label"></label>
+                <input placeholder="Digite o nome do aluno" asp-for="Nome" class="form-control" maxlength="100" required/>
+                <span asp-validation-for="Nome" class="text-danger"></span>
+
+                <label asp-for="Sexo" class="control-label"></label>
+                <select name="sexo" class="form-control">
+                    <option value="Masculuno">Masculuno</option>
+                    <option value="Feminino">Feminino</option>
+                </select>
+
+                <label asp-for="Nascimento" class="control-label"></label>
+                <input type="date" asp-for="Nascimento" class="form-control" min="1900-01-01" max=currentYear />
+                <span asp-validation-for="Nascimento" class="text-danger"></span>
+
+
+
+                <label asp-for="CPF" class="control-label"></label>
+                <input placeholder="Digite o CPF" asp-for=" CPF"  class="form-control" maxlength="14" type="text" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+
+
+
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" asp-action="Cadastrar"/>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<h1>@ViewBag.Mensagem</h1>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
