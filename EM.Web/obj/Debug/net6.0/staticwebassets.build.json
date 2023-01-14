@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7H8J22lEnN3zxczlpI7Q5orwoFvkz23zFJZM0nwWPlM=",
+  "Hash": "WILCCGxkPkpNeh/GrBQERoYLHI4FK7SVkwb26YIxu24=",
   "Source": "EM.Web",
   "BasePath": "_content/EM.Web",
   "Mode": "Default",
@@ -68,12 +68,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\favicon-old.ico",
       "SourceId": "EM.Web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\",
       "BasePath": "_content/EM.Web",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "favicon-old.ico",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -82,7 +82,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\favicon-old.ico"
+    },
+    {
+      "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\icon.ico",
+      "SourceId": "EM.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\",
+      "BasePath": "_content/EM.Web",
+      "RelativePath": "icon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icon.ico"
     },
     {
       "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\js\\site.js",
@@ -100,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\js\\vanilla-masker.min.js",
+      "SourceId": "EM.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\",
+      "BasePath": "_content/EM.Web",
+      "RelativePath": "js/vanilla-masker.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\vanilla-masker.min.js"
     },
     {
       "Identity": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

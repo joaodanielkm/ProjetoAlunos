@@ -9,12 +9,20 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\favicon.ico",
-      "PackagePath": "staticwebassets\\favicon.ico"
+      "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\favicon-old.ico",
+      "PackagePath": "staticwebassets\\favicon-old.ico"
+    },
+    {
+      "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\icon.ico",
+      "PackagePath": "staticwebassets\\icon.ico"
     },
     {
       "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\js\\vanilla-masker.min.js",
+      "PackagePath": "staticwebassets\\js\\vanilla-masker.min.js"
     },
     {
       "Id": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\wwwroot\\lib\\bootstrap\\LICENSE",

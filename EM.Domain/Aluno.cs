@@ -48,23 +48,12 @@
 
             [Display(Name = "CPF")]
             [Column("CPF")]
-            [MaxLength(14)]
-            [DisplayFormat(DataFormatString = "{0:999.999.999-99}", ApplyFormatInEditMode = true)]
-            [ExisteCPF]
-            [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "CPF Invalido!")]
+            //[MaxLength(14)]
+            //[DisplayFormat(DataFormatString = "{0:999.999.999-99}", ApplyFormatInEditMode = true)]
+            //[ExisteCPF]
+            //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "CPF Invalido!")]
             public string? CPF { get; set; }
 
-
-            //public Aluno(string cpf)
-            //{
-            //    Uteis uteis = new Uteis();
-            //    if (uteis.EhValidoCPF(cpf))
-            //    {
-            //        CPF = cpf;
-            //        return;
-            //    }
-            //    else return;
-            //}
 
             public class ExisteMatricula : ValidationAttribute
             {
