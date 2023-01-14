@@ -774,3 +774,10 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\refint\EM.Web.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.pdb
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.genruntimeconfig.cache
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\ref\EM.Web.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Mvc.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

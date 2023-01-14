@@ -1,38 +1,66 @@
 ﻿namespace EM.Domain
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Core.Objects.DataClasses;
+    //using System.Web.Mvc;
+    using Utilitarios;
 
     namespace ProjetoEM.EM.Domain
     {
+
+
         [Table("ALUNO")]
         public class Aluno
         {
+
+
             [Key]
             [Display(Name = "Matricula")]
             [Column("MATRICULA")]
             [MaxLength(9)]
+            [Range(1,999999999, ErrorMessage = "Matricula invalida!")]
             public int Matricula { get; set; }
 
             [Display(Name = "Nome")]
             [Column("NOME")]
+            [Required(ErrorMessage = "Campo Requerido!")]
+            [StringLength(100, MinimumLength = 3)]
             public string? Nome { get; set; }
 
             [Display(Name = "Sexo")]
             [Column("SEXO")]
-            [Required(ErrorMessage = "Campo obrigatório!")]
+            [Required(ErrorMessage = "Campo Requerido!")]
             public int Sexo = 0;
+
+            [Display(Name = "Nascimento")]
+            [Column("NASCIMENTO")]
+            [Required(ErrorMessage = "Campo Requerido!")]
+            //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+            //[DataType(DataType.Date, ErrorMessage = "Uma data válida deve ser informada!")]
+            //[RegularExpression(@"^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|          (29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$", ErrorMessage = "Data invalida")]
+            public string Nascimento { get; set; }
+
+            //dataonly
 
             [Display(Name = "CPF")]
             [Column("CPF")]
             [MaxLength(14)]
-            //[RegularExpression()]
+            [RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{ 2}$", ErrorMessage = "CPF Invalido!")]
             public string? CPF { get; set; }
 
-            [Display(Name = "Nascimento")]
-            [Column("NASCIMENTO")]
-            public DateOnly Nascimento { get; set; }
+
+            //public Aluno(string cpf)
+            //{
+            //    Uteis uteis = new Uteis();
+            //    if (uteis.EhValidoCPF(cpf))
+            //    {
+            //        CPF = cpf;
+            //        return;
+            //    }
+            //    else return;
+            //}
 
 
             public override bool Equals(object? obj)

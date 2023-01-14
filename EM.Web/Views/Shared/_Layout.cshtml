@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EM.Web</title>
+    <title>@ViewData["Title"] - 2023</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EM.Web.styles.css" asp-append-version="true" />
@@ -12,21 +12,11 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EM.Web</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Projeto EM</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </nav>
     </header>
@@ -38,12 +28,82 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - EM.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Projeto EM - <a href="https://github.com/joaodanielkm">João Daniel</a>
         </div>
     </footer>
+    @*<script>
+        function validaCPF(cpf) {
+        var Soma = 0
+        var Resto
+
+        var strCPF = String(cpf).replace(/[^\d]/g, '')
+
+        if (strCPF.length !== 11)
+        return false
+
+        if ([
+        '00000000000',
+        '11111111111',
+        '22222222222',
+        '33333333333',
+        '44444444444',
+        '55555555555',
+        '66666666666',
+        '77777777777',
+        '88888888888',
+        '99999999999',
+        ].indexOf(strCPF) !== -1)
+        return false
+
+        for (i=1; i<=9; i++)
+        Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+
+        Resto = (Soma * 10) % 11
+
+        if ((Resto == 10) || (Resto == 11))
+        Resto = 0
+
+        if (Resto != parseInt(strCPF.substring(9, 10)) )
+        return false
+
+        Soma = 0
+
+        for (i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i)
+
+        Resto = (Soma * 10) % 11
+
+        if ((Resto == 10) || (Resto == 11))
+        Resto = 0
+
+        if (Resto != parseInt(strCPF.substring(10, 11) ) )
+        return false
+
+        return true
+        }
+    </script>*@
+    <script>
+        function validardataDeNascimento(data) {
+
+            dataAtual = new Date();
+
+            data = new Date(data);
+
+            if (data < dataAtual) {
+                console.log("Data Válida");
+                return true;
+            } else {
+                console.log("Data Inválida");
+                return false;
+            }
+
+
+        }
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="vanilla-masker.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
