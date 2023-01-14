@@ -21,7 +21,7 @@
             [Column("MATRICULA")]
             [Required(ErrorMessage = "Campo Requerido!")]
             [ExisteMatricula]
-            [Range(1,999999999, ErrorMessage = "Matricula invalida!")]
+            [Range(1, 999999999, ErrorMessage = "Matricula invalida!")]
             public int Matricula { get; set; }
 
             [Display(Name = "Nome")]

@@ -7,38 +7,55 @@
 <h4>Editar aluno</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post" class="form-control">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Matricula" />
-            <div class="form-group">
-                <label asp-for="Matricula" class="control-label"></label>
-                <input readonly asp-for="Matricula" class="form-control" />
-                <span asp-validation-for="Matricula" class="text-danger"></span>
-
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
-
-                <label for="sexo">Sexo</label>
-                <select name="sexo" class="form-control">
-                    <option value="Masculuno">Masculuno</option>
-                    <option value="Feminino">Feminino</option>
-                </select>
-
-                <label asp-for="CPF" class="control-label"></label>
-                <input type="number" asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-
-                <label asp-for="Nascimento" class="control-label"></label>
-                <input type="date" asp-for="Nascimento" class="form-control" />
-                <span asp-validation-for="Nascimento" class="text-danger"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 ">
+                        <label asp-for="Matricula" class="control-label"></label>
+                        <input  type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" readonly  />
+                        <span asp-validation-for="Matricula" class="text-danger"></span>
+                    </div>
+                    <div class="col-9">
+                        <label asp-for="Nome" class="control-label"></label>
+                        <input  asp-for="Nome" class="form-control" minlength="3" maxlength="100" required />
+                        <span asp-validation-for="Nome" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-9">
+                        <label asp-for="Sexo" class="control-label"></label>
+                        <input  asp-for="Sexo" class="form-control" minlength="3" maxlength="100" required />
+                        <span asp-validation-for="Sexo" class="text-danger"></span>
+                    </div>
+                    @*<div class="col">
+                        <label asp-for="Sexo" class="control-label"></label>
+                        <select name="sexo" class="form-control">
+                            <option value="Masculuno">Masculuno</option>
+                            <option value="Feminino">Feminino</option>
+                        </select>
+                    </div>*@
+                    <div class="col">
+                        <label asp-for="Nascimento" class="control-label"></label>
+                        <input id="nasc" asp-for="Nascimento" class="form-control" maxlength="10" required />
+                        <span asp-validation-for="Nascimento" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="CPF" class="control-label"></label>
+                        <input id="cpf"  asp-for="CPF" class="form-control" autocomplete="off" maxlength="14" type="text" onblur="return verificarCPF(this.value)" onkeypress="return onlynumberCpf();" />
+                        <span asp-validation-for="CPF" class="text-danger"></span>
+                    </div>
+                </div>
+                </br>
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <input type="submit" value="Editar" class="btn btn-info" asp-action="Editar" />
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-warning">Voltar</a>
+                    </div>
+                </div>
             </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-light">Voltar</a>
-            </div>
+
         </form>
     </div>
 </div>

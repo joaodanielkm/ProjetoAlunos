@@ -2,6 +2,7 @@
 using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 
 namespace EM.Web.Controllers
@@ -16,6 +17,12 @@ namespace EM.Web.Controllers
             _logger = logger;
             _rep = rep;
         }
+        public IActionResult Pesquisa(string id)
+        {
+            var alunos = _rep.Selecionar(id);
+
+            return View(alunos);
+        }
 
         public IActionResult Index()
         {
@@ -24,11 +31,18 @@ namespace EM.Web.Controllers
             return View(alunos);
         }
 
-        public IActionResult Editar(string mat)
+        [HttpGet]
+        public IActionResult Editar(string id)
         {
-            var aluno = _rep.Selecionar(mat);
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var aluno = _rep.Selecionar(id);
 
             return View(aluno);
+
+
         }
 
         [HttpPost]
@@ -53,43 +67,70 @@ namespace EM.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Cadastrar()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Cadastrar(Aluno aluno)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
 
+        [HttpPost]
+        public  IActionResult Cadastrar(Aluno getAluno)
+        {
+            var aluno = new Aluno()
+            {
+                Matricula = getAluno.Matricula,
+                Nome = getAluno.Nome,
+                Sexo = getAluno.Sexo,
+                Nascimento = getAluno.Nascimento,
+                CPF = getAluno.CPF,
+            };
             try
             {
-                _rep.Persistir(aluno);
+               _rep.Persistir(aluno);
 
-                ViewBag.Mensagem = "Sucesso";
+                ViewBag.Mensagem = "Sucessooooooooooooooooo";
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Cadastrar");
+                _logger.LogError(ex, "Cadastrarrrrrrrrrrrrrrrrr");
                 ViewBag.Mensagem = ex.Message;
             }
-            return View();
+            return RedirectToAction("Cadastrar");
+
         }
 
-        public IActionResult Deletar(int mat)
+        //public IActionResult Cadastrar(Aluno aluno)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View();
+        //    }
+
+        //    try
+        //    {
+        //        _rep.Persistir(aluno);
+
+        //        ViewBag.Mensagem = "Sucesso";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Cadastrarrrrrrrrrrrrrrrrr");
+        //        ViewBag.Mensagem = ex.Message;
+        //    }
+        //    return View();
+        //}
+
+        public IActionResult Deletar(int id)
         {
-            if (mat == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             try
             {
-                _rep.Excluir(mat);
+                _rep.Excluir(id);
                 ViewBag.Mensagem = "Sucesso";
             }
             catch (Exception ex)

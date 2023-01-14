@@ -24,39 +24,50 @@ inputNasc.addEventListener('keypress', () => {
         inputNasc.value += '/';
     }
 })
+
 function verificarCPF(c) {
-    c = c.replace(/[^\d]+/g, ''); 
-    if (c == '') return alert("CPF " + c + "  Inválido")
+    c = c.replace(/[^\d]+/g, '');
+    var verifica = c;
+    var v = false;
     var i;
     s = c;
     var c = s.substr(0, 9);
     var dv = s.substr(9, 2);
     var d1 = 0;
-    var v = false;
-    if (cpf.length != 11 ||
-        cpf == "00000000000" ||
-        cpf == "11111111111" ||
-        cpf == "22222222222" ||
-        cpf == "33333333333" ||
-        cpf == "44444444444" ||
-        cpf == "55555555555" ||
-        cpf == "66666666666" ||
-        cpf == "77777777777" ||
-        cpf == "88888888888" ||
-        cpf == "99999999999")
-        return alert("CPF " + c + "  Inválido")  
+
+    //if (c.length != 11 ||
+    //    c == "00000000000" ||
+    //    c == "11111111111" ||
+    //    c == "22222222222" ||
+    //    c == "33333333333" ||
+    //    c == "44444444444" ||
+    //    c == "55555555555" ||
+    //    c == "66666666666" ||
+    //    c == "77777777777" ||
+    //    c == "88888888888" ||
+    //    c == "99999999999")
+    //    alert("CPF " + c + "  Inválido");
+    //setTimeout(function () { $('#cpf').focus(); }, 1);
+    //v = true;
+    //return false;
+
+   
     for (i = 0; i < 9; i++) {
         d1 += c.charAt(i) * (10 - i);
     }
     if (d1 == 0) {
-        alert("CPF " +c +" Inválido")
+        alert("CPF " + verifica + " Inválido1");
+        document.getElementById("#cpf").focus();
+        setTimeout(function () { $('#cpf').focus(); }, 1);
         v = true;
         return false;
     }
     d1 = 11 - (d1 % 11);
     if (d1 > 9) d1 = 0;
     if (dv.charAt(0) != d1) {
-        alert("CPF "+ c+ "  Inválido")
+        alert("CPF " + verifica + " Inválido2");
+        document.getElementById("#cpf").focus();
+        setTimeout(function () { $('#cpf').focus(); }, 1);
         v = true;
         return false;
     }
@@ -68,16 +79,19 @@ function verificarCPF(c) {
     d1 = 11 - (d1 % 11);
     if (d1 > 9) d1 = 0;
     if (dv.charAt(1) != d1) {
-        alert("CPF "+ c+ " Inválido")
+        alert("CPF " + verifica + " Inválido3");
+        document.getElementById("#cpf").focus();
+        setTimeout(function () { $('#cpf').focus(); }, 1);
         v = true;
         return false;
     }
     if (!v) {
-        alert(c + "nCPF Válido")
+        return alert(verifica + " CPF Válido")
     }
 }
 function validadata() {
-    var data = document.querySelector('#nasc'); // pega o valor do input
+    const inputNasc = document.querySelector('#nasc');
+    var data = document.querySelector(inputNasc); // pega o valor do input
     data = data.replace(/\//g, "-"); // substitui eventuais barras (ex. IE) "/" por hífen "-"
     var data_array = data.split("-"); // quebra a data em array
 
@@ -88,12 +102,12 @@ function validadata() {
 
     // comparo as datas e calculo a idade
     var hoje = new Date();
-    var nasc = new Date(data);
-    var idade = hoje.getFullYear() - nasc.getFullYear();
-    var m = hoje.getMonth() - nasc.getMonth();
-    if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+    var nasci = new Date(data);
+    var idade = hoje.getFullYear() - nasci.getFullYear();
+    var m = hoje.getMonth() - nasci.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < nasci.getDate())) idade--;
 
-    if (idade < 18) {
+    if (idade < 2) {
         alert("Pessoas menores de 18 não podem se cadastrar.");
         return false;
     }
@@ -112,6 +126,17 @@ function onlynumber(evt) {
     key = String.fromCharCode(key);
     //var regex = /^[0-9.,]+$/;
     var regex = /^[0-9]+$/;
+    if (!regex.test(key)) {
+        theEvent.returnValue = false;
+        if (theEvent.preventDefault) theEvent.preventDefault();
+    }
+}
+function onlynumberCpf(evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode(key);
+    //var regex = /^[0-9.,]+$/;
+    var regex = /^[0-9.-]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();

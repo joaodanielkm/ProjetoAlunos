@@ -13,7 +13,7 @@
     </div>
 </div>
 <br />
-<form class="card card-sm">
+<form method="post" class="card card-sm">
     <div class="card-body row no-gutters align-items-center">
         <div class="col-auto">
         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
@@ -29,7 +29,9 @@
             <input class="form-control form-control-lg form-control-borderless" id="pesquisa" type="search" placeholder="">
         </div>
         <div class="col-auto">
-            <button class="btn btn-lg btn-success" type="button" id="botaoPesquisar">Buscar Aluno</button>
+            <button class="btn btn-lg btn-success" type="button" id="botaoPesquisar"><a asp-area="" asp-controller="Home" asp-action="Pesquisar" asp-route-id="pesquisa">Buscar Aluno</a></button>
+            @*implementar pesqusiar por matricula ou nome*@
+            @*<button class="btn btn-lg btn-success" type="button" id="botaoPesquisar">Buscar Aluno</button>*@
         </div>
     </div>
 </form>
@@ -54,7 +56,7 @@
                 {
                     <tr>
                         <th style="max-width: 9px;" scope="row">@item.Matricula</th>
-                        <td style="max-width: 100px; pxoverflow: hidden; text-overflow: ellipsis;">@item.Nome</td>
+                        <td style="max-width: 100px; text-overflow: ellipsis;">@item.Nome</td>
                         <td style ="max-width: 9px;">@item.Sexo</td>
                         <td style="max-width: 14px;">@item.CPF</td>
                         <td style="max-width: 10px;">@item.Nascimento</td>
@@ -68,6 +70,5 @@
             </tbody>
         </table>
     }
-</div>
 </div>
 
