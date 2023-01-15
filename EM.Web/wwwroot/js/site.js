@@ -5,7 +5,6 @@
 const inputCpf = document.querySelector('#cpf');
 const inputNasc = document.querySelector('#nasc');
 
-
 inputCpf.addEventListener('keypress', () => {
     let inputlength = inputCpf.value.length
     //console.log(inputlength);
@@ -131,14 +130,15 @@ function onlynumber(evt) {
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
 }
-function onlynumberCpf(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
-    key = String.fromCharCode(key);
-    //var regex = /^[0-9.,]+$/;
-    var regex = /^[0-9.-]+$/;
-    if (!regex.test(key)) {
-        theEvent.returnValue = false;
-        if (theEvent.preventDefault) theEvent.preventDefault();
-    }
-}
+
+//function onlynumberCpf(evt) {
+//    var theEvent = evt || window.event;
+//    var key = theEvent.keyCode || theEvent.which;
+//    key = String.fromCharCode(key);
+//    //var regex = /^[0-9.,]+$/;
+//    var regex = /^[0-9.-]+$/;
+//    if (!regex.test(key)) {
+//        theEvent.returnValue = false;
+//        if (theEvent.preventDefault) theEvent.preventDefault();
+//    }
+//}

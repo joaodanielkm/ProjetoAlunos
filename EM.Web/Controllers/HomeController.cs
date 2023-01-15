@@ -4,11 +4,14 @@ using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Web.WebPages;
 
 namespace EM.Web.Controllers
 {
     public class HomeController : Controller
     {
+        Domain.Utilitarios.Uteis uteis = new Domain.Utilitarios.Uteis();
         private readonly ILogger<HomeController> _logger;
         private readonly IAlunoRepository _rep;
 
@@ -17,47 +20,40 @@ namespace EM.Web.Controllers
             _logger = logger;
             _rep = rep;
         }
-        //public IActionResult Pesquisar(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    try
-        //    {
-        //        var alunos = _rep.Listar();
-
-
-        //        return View(alunos.Where(s => s.Nome.Contains(id)));
-
-        //        ViewBag.Mensagem = "Sucesso";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Cadastrar");
-        //        ViewBag.Mensagem = "Falha";
-        //    }
-        //    return RedirectToAction("Index", "Home");
-        //}
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string searchString, string pesquisePor)
         {
-            if (_rep.Listar == null)
-            {
-                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+                if (pesquisePor == "matricula")
+                {
+                    var alunosPorMatricula = from a in _rep.Listar()
+                                             select a;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    alunosPorMatricula = alunosPorMatricula.Where(a => a.Matricula.ToString().Contains(searchString));
+                } 
+
+                    return View(alunosPorMatricula.ToList());
+                }
+                else
+                {
+
+                    if (_rep.Listar == null)
+                    {
+                        return Problem("Aluno não encontrado!");
+                    }
+
+                    var alunosPorNome = from a in _rep.Listar()
+                                 select a;
+
+                    if (!String.IsNullOrEmpty(searchString))
+                    {
+                    alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString));
+                    }
+
+                    return View(alunosPorNome.ToList());
+                }
             }
-
-            var alunos = from m in _rep.Listar()
-                         select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                alunos = alunos.Where(s => s.Nome!.Contains(searchString));
-            }
-
-            return View(alunos.ToList());
-        }
-
+        
         [HttpPost]
         public string Index(string searchString, bool notUsed)
         {
