@@ -33,25 +33,28 @@
             [Display(Name = "Sexo")]
             [Column("SEXO")]
             [Required(ErrorMessage = "Campo Requerido!")]
-            public int Sexo = 1;
+            public EnumeradorDeSexo Sexo { get; set; }
+
+            //[Display(Name = "Sexo")]
+            //[Column("SEXO")]
+            //[Required(ErrorMessage = "Campo Requerido!")]
+            //public int Sexo = 1;
 
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
             //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
             //[DataType(DataType.Date, ErrorMessage = "Uma data válida deve ser informada!")]
             [Required(ErrorMessage = "Campo Requerido!")]
-            [MaxLength(10)]
-            [RegularExpression(@"^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|          (29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$", ErrorMessage = "Data invalida")]
-            public string Nascimento { get; set; }
+            //[MaxLength(10)]
+            //[RegularExpression(@"^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|          (29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$", ErrorMessage = "Data invalida")]
+            public string? Nascimento { get; set; }
 
             //dataonly
 
             [Display(Name = "CPF")]
             [Column("CPF")]
             //[MaxLength(14)]
-            //[DisplayFormat(DataFormatString = "{0:999.999.999-99}", ApplyFormatInEditMode = true)]
             //[ExisteCPF]
-            //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "CPF Invalido!")]
             public string? CPF { get; set; }
 
 
@@ -94,6 +97,14 @@
                 return Matricula + " - " + Nome;
             }
 
+            public enum EnumeradorDeSexo
+            {
+                 Masculino = 0,
+                 Feminino = 1,
+
+
+            }
         }
+        
     }
 }

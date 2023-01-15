@@ -5,6 +5,7 @@
 const inputCpf = document.querySelector('#cpf');
 const inputNasc = document.querySelector('#nasc');
 
+
 inputCpf.addEventListener('keypress', () => {
     let inputlength = inputCpf.value.length
     //console.log(inputlength);
@@ -27,8 +28,6 @@ inputNasc.addEventListener('keypress', () => {
 function verificarCPF(c) {
 
     if (c.length === 14) {
-
-
         c = c.replace(/[^\d]+/g, '');
         var baseCpf = c;
         var v = false;
@@ -138,14 +137,20 @@ function onlynumber(evt) {
     }
 }
 
-//function onlynumberCpf(evt) {
-//    var theEvent = evt || window.event;
-//    var key = theEvent.keyCode || theEvent.which;
-//    key = String.fromCharCode(key);
-//    //var regex = /^[0-9.,]+$/;
-//    var regex = /^[0-9.-]+$/;
-//    if (!regex.test(key)) {
-//        theEvent.returnValue = false;
-//        if (theEvent.preventDefault) theEvent.preventDefault();
+//document.getElementById("pesq").disabled = true;
+
+////cria um event listener que escuta mudanças no input
+//document.getElementById("SearchString").addEventListener("SearchString", function (event) {
+
+//    //busca conteúdo do input
+//    var conteudo = document.getElementById("SearchString").value;
+
+//    //valida conteudo do input 
+//    if (conteudo !== null && conteudo !== '') {
+//        //habilita o botão
+//        document.getElementById("pesq").disabled = false;
+//    } else {
+//        //desabilita o botão se o conteúdo do input ficar em branco
+//        document.getElementById("pesq").disabled = true;
 //    }
-//}
+//});

@@ -55,9 +55,9 @@ namespace EM.Web.Controllers
             }
         
         [HttpPost]
-        public string Index(string searchString, bool notUsed)
+        public string Index(string searchString, string pesquisePor, bool notUsed)
         {
-            return "From [HttpPost]Index: filter on " + searchString;
+            return "From [HttpPost]Index: filter on " + pesquisePor + searchString ;
         }
 
         [HttpGet]
@@ -87,6 +87,7 @@ namespace EM.Web.Controllers
                 _rep.Atualizar(aluno);
 
                 ViewBag.Mensagem = "Sucesso";
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

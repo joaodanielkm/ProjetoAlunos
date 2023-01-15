@@ -26,10 +26,14 @@
             </select>
         </div>
         <div class="col">
-            <input name="SearchString" class="form-control form-control-lg form-control-borderless" type="text" placeholder="" autocomplete="off" id="pesquisaaaa">
+            <input name="SearchString" class="form-control form-control-lg form-control-borderless" type="text" placeholder="" autocomplete="off" id="pesquisa" >
+            @*implementar buscar por digitar*@
         </div>
         <div class="col-auto">
-            <button class="btn btn-lg btn-success" type="submit" value="Filter">Buscar Aluno</button>
+            <button class="btn btn-lg btn-success" id="pesq" type="submit" value="Filter">Buscar Aluno</button>
+        </div>
+        <div class="col-auto">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-lg btn-outline-warning">Resetar</a>
         </div>
     </div>
 </form>
@@ -52,13 +56,13 @@
             <tbody class="text-center">
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="align-middle">
                         <th style="max-width: 9px;" scope="row">@item.Matricula</th>
                         <td style="max-width: 100px; text-overflow: ellipsis;">@item.Nome</td>
                         <td style ="max-width: 9px;">@item.Sexo</td>
                         <td style="max-width: 14px;">@item.CPF</td>
-                        <td style="max-width: 10px;">@item.Nascimento</td>
-                        <td>
+                        <td  style="max-width: 10px;">@item.Nascimento</td>
+                        <td  >
                             <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onblur="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white">Excluir</a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white">Editar</a>
                         </td>

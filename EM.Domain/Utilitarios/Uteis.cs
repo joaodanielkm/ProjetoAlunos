@@ -11,8 +11,6 @@ namespace EM.Domain.Utilitarios
     {
         public bool EhValidoCPF(string cpf)
         {
-             
-
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             string tempCpf;
@@ -58,8 +56,31 @@ namespace EM.Domain.Utilitarios
                 return textoLimpo;
             }
             return texto;
-            
+
         }
-       
+        public int DefineOSexo(string sexo)
+        {
+            if (string.IsNullOrWhiteSpace(sexo))
+                return Constantes.SEXO_MASCULINO;
+
+
+            if (sexo.Equals("Masculino"))
+                return Constantes.SEXO_MASCULINO;
+            if (sexo.Equals("Feminino"))
+                return Constantes.SEXO_FEMININO;
+
+            return Constantes.SEXO_MASCULINO;
+        }
+
+        //public static int DefineOSexo(int? sexo, int tipoParaMasculino, int tipoParaFeminino)
+        //{
+        //    if (!sexo.HasValue || (sexo != tipoParaMasculino && sexo != tipoParaFeminino)) return Constantes.SEXO_MASCULINO;
+        //    return sexo == tipoParaMasculino ? Constantes.SEXO_MASCULINO : Constantes.SEXO_FEMININO;
+        //}
+        public static class Constantes
+        {
+            public const int SEXO_MASCULINO = 0;
+            public const int SEXO_FEMININO = 1;
+        }
     }
 }
