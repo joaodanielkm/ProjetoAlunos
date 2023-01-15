@@ -4,12 +4,12 @@ namespace EM.Repository
 {
     public interface IAlunoRepository
     {
-        Aluno Selecionar(string mat);
+        Aluno Selecionar(string id);
 
         int Persistir(Aluno aluno);
         IEnumerable<Aluno> Listar();
 
-        int Excluir(int mat);
+        int Excluir(int id);
 
         int Atualizar(Aluno aluno);
 
@@ -42,27 +42,27 @@ namespace EM.Repository
             return _contexto.SaveChanges();
         }
 
-        public int Excluir(int mat)
+        public int Excluir(int id)
         {
-            _contexto.Alunos.Remove(_contexto.Alunos.Find(mat));
+            _contexto.Alunos.Remove(_contexto.Alunos.Find(id));
             return _contexto.SaveChanges();
         }
 
-        public int PesquisarPorNome(string nome)
+        public int PesquisarPorNome(string id)
         {
-            _contexto.Alunos.Update(_contexto.Alunos.Find(nome));
+            _contexto.Alunos.Update(_contexto.Alunos.Find(id));
             return _contexto.SaveChanges();
         }
 
-        public int PesquisarPorMatricula(int mat)
+        public int PesquisarPorMatricula(int id)
         {
-            _contexto.Alunos.Update(_contexto.Alunos.Find(mat));
+            _contexto.Alunos.Update(_contexto.Alunos.Find(id));
             return _contexto.SaveChanges();
         }
 
-        public Aluno Selecionar(string mat)
+        public Aluno Selecionar(string id)
         {
-            return _contexto.Set<Aluno>().FirstOrDefault(x => x.Matricula == Convert.ToInt32(mat));
+            return _contexto.Set<Aluno>().FirstOrDefault(x => x.Matricula == Convert.ToInt32(id));
         }
     }
 }

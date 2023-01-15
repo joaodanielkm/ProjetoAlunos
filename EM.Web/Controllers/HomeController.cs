@@ -17,18 +17,51 @@ namespace EM.Web.Controllers
             _logger = logger;
             _rep = rep;
         }
-        public IActionResult Pesquisa(string id)
-        {
-            var alunos = _rep.Selecionar(id);
+        //public IActionResult Pesquisar(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(alunos);
+        //    try
+        //    {
+        //        var alunos = _rep.Listar();
+
+
+        //        return View(alunos.Where(s => s.Nome.Contains(id)));
+
+        //        ViewBag.Mensagem = "Sucesso";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Cadastrar");
+        //        ViewBag.Mensagem = "Falha";
+        //    }
+        //    return RedirectToAction("Index", "Home");
+        //}
+        public IActionResult Index(string searchString)
+        {
+            if (_rep.Listar == null)
+            {
+                return Problem("Entity set 'MvcMovieContext.Movie'  is null.");
+            }
+
+            var alunos = from m in _rep.Listar()
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                alunos = alunos.Where(s => s.Nome!.Contains(searchString));
+            }
+
+            return View(alunos.ToList());
         }
 
-        public IActionResult Index()
+        [HttpPost]
+        public string Index(string searchString, bool notUsed)
         {
-            var alunos = _rep.Listar();
-
-            return View(alunos);
+            return "From [HttpPost]Index: filter on " + searchString;
         }
 
         [HttpGet]
@@ -89,11 +122,11 @@ namespace EM.Web.Controllers
             {
                _rep.Persistir(aluno);
 
-                ViewBag.Mensagem = "Sucessooooooooooooooooo";
+                ViewBag.Mensagem = "Sucesso";
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Cadastrarrrrrrrrrrrrrrrrr");
+                _logger.LogError(ex, "Cadastrar");
                 ViewBag.Mensagem = ex.Message;
             }
             return RedirectToAction("Cadastrar");

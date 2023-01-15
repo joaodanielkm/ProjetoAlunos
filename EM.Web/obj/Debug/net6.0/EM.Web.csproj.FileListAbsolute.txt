@@ -386,6 +386,7 @@ C:\Users\joaod\source\repos\EM.Web\bin\Debug\net6.0\refs\Microsoft.Extensions.Lo
 C:\Users\joaod\source\repos\EM.Web\bin\Debug\net6.0\refs\Microsoft.Extensions.Logging.dll
 C:\Users\joaod\source\repos\EM.Web\bin\Debug\net6.0\refs\Microsoft.Extensions.Options.dll
 C:\Users\joaod\source\repos\EM.Web\bin\Debug\net6.0\refs\Microsoft.Extensions.Primitives.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\appsettings.json
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Web.staticwebassets.runtime.json
@@ -688,6 +689,12 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EntityFramework.Fi
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\FirebirdSql.Data.FirebirdClient.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\FirebirdSql.EntityFrameworkCore.Firebird.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Humanizer.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Mvc.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -701,6 +708,7 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.EntityFr
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
@@ -742,7 +750,6 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win-x86\n
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Domain.dll
@@ -774,10 +781,3 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\refint\EM.Web.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.pdb
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.genruntimeconfig.cache
 C:\Users\joaod\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\ref\EM.Web.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Mvc.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Razor.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.Helpers.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\System.Web.WebPages.dll
-C:\Users\joaod\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

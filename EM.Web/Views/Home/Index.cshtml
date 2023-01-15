@@ -13,25 +13,24 @@
     </div>
 </div>
 <br />
-<form method="post" class="card card-sm">
+
+<form asp-controller="Home" asp-action="Index" method="get" class="card card-sm">
     <div class="card-body row no-gutters align-items-center">
         <div class="col-auto">
-        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
-        </div>    
+            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
+        </div>
         <div class="col-auto">
-        <select class="custom-select my-1 mr-sm-1 form-control" id="inlineFormCustomSelectPref">
-            <option selected>Escolher...</option>
-            <option value="matricula">Matricula</option>
-            <option value="nome">Nome</option>
-        </select>
+            <select class="custom-select my-1 mr-sm-1 form-control" id="inlineFormCustomSelectPref">
+                <option selected>Escolher...</option>
+                <option value="matricula">Matricula</option>
+                <option value="nome">Nome</option>
+            </select>
         </div>
         <div class="col">
-            <input class="form-control form-control-lg form-control-borderless" id="pesquisa" type="search" placeholder="">
+            <input name="SearchString" class="form-control form-control-lg form-control-borderless" type="text" placeholder="" autocomplete="off">
         </div>
         <div class="col-auto">
-            <button class="btn btn-lg btn-success" type="button" id="botaoPesquisar"><a asp-area="" asp-controller="Home" asp-action="Pesquisar" asp-route-id="pesquisa">Buscar Aluno</a></button>
-            @*implementar pesqusiar por matricula ou nome*@
-            @*<button class="btn btn-lg btn-success" type="button" id="botaoPesquisar">Buscar Aluno</button>*@
+            <button class="btn btn-lg btn-success" type="submit" value="Filter">Buscar Aluno</button>
         </div>
     </div>
 </form>
