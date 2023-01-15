@@ -39,14 +39,14 @@
                 </div>
                     <div class="col">
                 <label asp-for="CPF" class="control-label"></label>
-                        <input id="cpf" placeholder="Digite o CPF" asp-for="CPF" class="form-control" autocomplete="off" maxlength="14" type="text" onblur="return verificarCPF(this.value)" />
+                        <input id="cpf" placeholder="Digite o CPF" asp-for="CPF" class="form-control" autocomplete="off" maxlength="14" type="text" onkeypress="return verificarCPF(this.value)" />
                 <span asp-validation-for="CPF" class="text-danger"></span>
                 </div>
              </div>
                 </br>                
                 <div class="row">
                 <div class="col-sm-12 text-right">
-                        <input type="submit" value="Salvar" class="btn btn-info" asp-action="Cadastrar"  />
+                        <input type="submit" value="Salvar" class="btn btn-info" asp-action="Cadastrar" onclick='return validadata()'  />
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-warning">Voltar</a>
                 </div>
                 </div>
