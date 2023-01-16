@@ -1,9 +1,11 @@
 ﻿using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using EM.Web.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Web.WebPages;
 
@@ -13,7 +15,8 @@ namespace EM.Web.Controllers
     {
         Domain.Utilitarios.Uteis uteis = new Domain.Utilitarios.Uteis();
         private readonly ILogger<HomeController> _logger;
-        private readonly IAlunoRepository _rep;
+        public readonly IAlunoRepository _rep;
+        Aluno.ExisteMatricula aluno1 = new Aluno.ExisteMatricula();
 
         public HomeController(ILogger<HomeController> logger, IAlunoRepository rep)
         {
@@ -75,13 +78,23 @@ namespace EM.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Editar(Aluno aluno)
+        public IActionResult Editar(Aluno getAluno)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
+            var aluno = new Aluno()
+            {
+
+                Matricula = getAluno.Matricula,
+                Nome = getAluno.Nome,
+                Sexo = getAluno.Sexo,
+                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
+                CPF = getAluno.CPF,
+
+            };
             try
             {
                 _rep.Atualizar(aluno);
@@ -97,22 +110,71 @@ namespace EM.Web.Controllers
             return View();
         }
 
+
+        //[HttpPost]
+        //public IActionResult Editar(Aluno aluno)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View();
+        //    }
+
+        //    try
+        //    {
+        //        _rep.Atualizar(aluno);
+
+        //        ViewBag.Mensagem = "Sucesso";
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Cadastrar");
+        //        ViewBag.Mensagem = ex.Message;
+        //    }
+        //    return View();
+        //}
+
         [HttpGet]
         public IActionResult Cadastrar()
         {
             return View();
         }
 
+        //[HttpGet]
+        //public IActionResult Cadastrar( )
+        //{
+        //    Aluno aluno = new Aluno();
+
+        //    var getUltimaMatricula = _rep.Listar().Max(m => m.Matricula + 1);
+
+        //    aluno.Matricula = getUltimaMatricula;
+
+        //    return View();
+        //}
+
 
         [HttpPost]
         public  IActionResult Cadastrar(Aluno getAluno)
         {
+            var getMatriculas = from a in _rep.Listar()
+                                select a;
+
+            int mat = getAluno.Matricula;
+
+
+            //getMatriculas = getMatriculas.Where(a => a.Matricula == mat);
+
+
+            var getUltimaMatricula = _rep.Listar().Max(a => a.Matricula + 1) ;
+
+             aluno1.UltimaMatricula = Convert.ToInt32(mat);//erro de cast aqui-verificar para validar matricula já existente.
+
             var aluno = new Aluno()
             {
-                Matricula = getAluno.Matricula,
+                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatricula,
                 Nome = getAluno.Nome,
                 Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
+                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = getAluno.CPF,
             };
             try
@@ -129,27 +191,6 @@ namespace EM.Web.Controllers
             return RedirectToAction("Cadastrar");
 
         }
-
-        //public IActionResult Cadastrar(Aluno aluno)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View();
-        //    }
-
-        //    try
-        //    {
-        //        _rep.Persistir(aluno);
-
-        //        ViewBag.Mensagem = "Sucesso";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Cadastrarrrrrrrrrrrrrrrrr");
-        //        ViewBag.Mensagem = ex.Message;
-        //    }
-        //    return View();
-        //}
 
         public IActionResult Deletar(int id)
         {

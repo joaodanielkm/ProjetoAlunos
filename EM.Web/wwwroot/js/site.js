@@ -26,7 +26,7 @@ inputNasc.addEventListener('keypress', () => {
 })
 
 function verificarCPF(c) {
-
+    var cpfOriginal = c;
     if (c.length === 14) {
         c = c.replace(/[^\d]+/g, '');
         var baseCpf = c;
@@ -48,7 +48,8 @@ function verificarCPF(c) {
             baseCpf == "77777777777" ||
             baseCpf == "88888888888" ||
             baseCpf == "99999999999")
-            alert("CPF " + baseCpf + "  Inválido 0");
+            alert("CPF " + cpfOriginal + "  Inválido 0");
+        console.log(cpfOriginal);
         v = true;
         setTimeout(function () { $('#cpf').focus(); }, 1);
         return false;
@@ -57,21 +58,21 @@ function verificarCPF(c) {
             d1 += c.charAt(i) * (10 - i);
         }
         if (d1 == 0) {
-            alert("CPF " + baseCpf + " Inválido1");
-            document.getElementById("#cpf").focus();
-            
+            alert("CPF " + cpfOriginal + " Inválido1");
+            //document.getElementById("#cpf").focus();
+            console.log(cpfOriginal);
             v = true;
-            setTimeout(function () { $('#cpf').focus(); }, 1);
+            new setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(0) != d1) {
-            alert("CPF " + baseCpf + " Inválido2");
-            document.getElementById("#cpf").focus();
-            
+            alert("CPF " + cpfOriginal + " Inválido2");
+            //document.getElementById("#cpf").focus();
+            console.log(cpfOriginal);
             v = true;
-            setTimeout(function () { $('#cpf').focus(); }, 1);
+            new setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
 
@@ -82,15 +83,18 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(1) != d1) {
-            alert("CPF " + baseCpf + " Inválido3");
+            console.log(cpfOriginal);
+            alert("CPF " + cpfOriginal + " Inválido3");
            
             v = true;
-            document.getElementById("#cpf").focus();
+            new setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
-        //if (!v) {
-        //    return alert(baseCpf + " CPF Válido")
-        //}
+        if (!v) {
+            return alert(cpfOriginal + " CPF Válido")
+            console.log(cpfOriginal);
+            return true;
+        }
     }
 }
 
@@ -111,17 +115,20 @@ function validadata() {
     var m = hoje.getMonth() - nasc.getMonth();
     if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
 
-    if (idade < 1) {
+    if (idade < 1 || idade > 119 ) {
         alert("Data inválida!");
+        setTimeout(function () { $('#nasc').focus(); }, 1);
+        console.log(idade);
         return false;
     }
 
-    if (idade >= 18 && idade <= 60) {
+    if (idade >= 1 && idade <= 120) {
         //alert("Data valida");
+        console.log(idade);
         return true;
     }
 
-    // se for maior que 60 não vai acontecer nada!
+    // se for maior que 120 não vai acontecer nada!
     return false;
 }
 

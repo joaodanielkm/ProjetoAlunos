@@ -57,7 +57,10 @@
   --bs-body-color: #212529;
   --bs-body-bg: #fff;
 }
-
+.required:after {
+    content: " *";
+    color: red;
+}
 *,
 *::before,
 *::after {

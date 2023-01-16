@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-3 ">
                         <label asp-for="Matricula" class="control-label"></label>
-                        <input placeholder="Apenas numeros" type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" required />
+                        <input placeholder="Apenas numeros" type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" required readonly/>
                         <span asp-validation-for="Matricula" class="text-danger"></span>
                     </div>
                     <div class="col-9">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="col">
                         <label asp-for="Nascimento" class="control-label"></label>
-                        <input id="nasc" asp-for="Nascimento" class="form-control" maxlength="10" required />
+                        <input id="nasc" asp-for="Nascimento" class="form-control" maxlength="10" required onblur='return validadata()'/>
                         <span asp-validation-for="Nascimento" class="text-danger"></span>
                     </div>
                     <div class="col">
@@ -42,7 +42,7 @@
                         <span asp-validation-for="CPF" class="text-danger"></span>
                     </div>
                 </div>
-                </br>
+                <br/>
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <input type="submit" value="Editar" class="btn btn-info" asp-action="Editar" />

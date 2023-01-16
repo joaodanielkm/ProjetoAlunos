@@ -9,6 +9,7 @@ namespace EM.Domain.Utilitarios
 {
     public class Uteis
     {
+        public static DateOnly DataNaoInformada = new(1910, 1, 1);
         public bool EhValidoCPF(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -81,6 +82,32 @@ namespace EM.Domain.Utilitarios
         {
             public const int SEXO_MASCULINO = 0;
             public const int SEXO_FEMININO = 1;
+        }
+        public DateOnly ConvertaData(object dataEntrada)
+        {
+            if (DBNull.Value.Equals(dataEntrada)) return DataNaoInformada;
+
+            var dtEntrada = dataEntrada?.ToString();
+            if (DateOnly.TryParse(dtEntrada, out var dt))
+            {
+                return dt;
+            }
+
+            if (!int.TryParse(dtEntrada, out int anoMesDia)) return DataNaoInformada;
+            try
+            {
+                var ano = Convert.ToInt32(anoMesDia.ToString().Substring(0, 4));
+                var mes = Convert.ToInt32(anoMesDia.ToString().Substring(4, 2));
+                var dia = Convert.ToInt32(anoMesDia.ToString().Substring(6, 2));
+
+                return new DateOnly(ano, mes, dia);
+            }
+            catch
+            {
+                return DataNaoInformada.AddDays(anoMesDia - 2);
+            }
+
+
         }
     }
 }

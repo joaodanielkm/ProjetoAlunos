@@ -3,9 +3,13 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data;
     using System.Data.Entity.Core.Objects.DataClasses;
     //using System.Web.Mvc;
     using Utilitarios;
+    using System.Globalization;
+    using Microsoft.AspNetCore.Mvc.Controllers;
+    using Microsoft.Extensions.Logging;
 
     namespace ProjetoEM.EM.Domain
     {
@@ -14,7 +18,6 @@
         [Table("ALUNO")]
         public class Aluno
         {
-
 
             [Key]
             [Display(Name = "Matricula")]
@@ -35,34 +38,38 @@
             [Required(ErrorMessage = "Campo Requerido!")]
             public EnumeradorDeSexo Sexo { get; set; }
 
-            //[Display(Name = "Sexo")]
-            //[Column("SEXO")]
-            //[Required(ErrorMessage = "Campo Requerido!")]
-            //public int Sexo = 1;
-
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
-            //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-            //[DataType(DataType.Date, ErrorMessage = "Uma data válida deve ser informada!")]
             [Required(ErrorMessage = "Campo Requerido!")]
             //[MaxLength(10)]
-            //[RegularExpression(@"^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|          (29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$", ErrorMessage = "Data invalida")]
-            public string? Nascimento { get; set; }
-
-            //dataonly
+            public DateOnly? Nascimento { get; set; }
+                        
+            //DateOnly
 
             [Display(Name = "CPF")]
             [Column("CPF")]
             //[MaxLength(14)]
-            //[ExisteCPF]
+            [ExisteCPF]
             public string? CPF { get; set; }
+
+            public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf  )
+            {
+                Matricula = matricula;
+                Nome = nome;
+                Sexo = sexo;
+                Nascimento = nascimento;
+                CPF = cpf;
+            }
 
 
             public class ExisteMatricula : ValidationAttribute
             {
+                public int UltimaMatricula { get; set; }
+
                 protected override ValidationResult IsValid(object value, ValidationContext validationContext)
                 {
-                    return (Int32)value == 1010
+                    //fazer consulta no banco e ver se esxite se sim rodar abaixo  
+                    return (Int32)value == 0
                         ? new ValidationResult(errorMessage: "Matricula em uso!")
                         : ValidationResult.Success;
                 }
