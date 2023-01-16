@@ -98,7 +98,7 @@ function verificarCPF(c) {
     }
 }
 
-function validadata() {
+function validadata(control) {
     var data = document.getElementById("nasc").value; // pega o valor do input
     data = data.replace(/\//g, "-"); // substitui eventuais barras (ex. IE) "/" por hífen "-"
     var data_array = data.split("-"); // quebra a data em array

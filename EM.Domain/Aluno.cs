@@ -22,44 +22,45 @@
             [Key]
             [Display(Name = "Matricula")]
             [Column("MATRICULA")]
-            [Required(ErrorMessage = "Campo Requerido!")]
+            [Required(ErrorMessage = "Matricula Requerida!")]
             [ExisteMatricula]
             [Range(1, 999999999, ErrorMessage = "Matricula invalida!")]
             public int Matricula { get; set; }
 
             [Display(Name = "Nome")]
             [Column("NOME")]
-            [Required(ErrorMessage = "Campo Requerido!")]
-            [StringLength(100, MinimumLength = 3)]
+            [Required(ErrorMessage = "Nome Requerido!")]
+            [StringLength(100, MinimumLength = 3, ErrorMessage ="Favor preencher com no minimo 3 e no máximo 100 caracteres!")]
             public string? Nome { get; set; }
 
             [Display(Name = "Sexo")]
             [Column("SEXO")]
-            [Required(ErrorMessage = "Campo Requerido!")]
+            [Required(ErrorMessage = "Sexo Requerido!")]
             public EnumeradorDeSexo Sexo { get; set; }
 
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
-            [Required(ErrorMessage = "Campo Requerido!")]
-            //[MaxLength(10)]
+            [Required(ErrorMessage = "Nascimento Requerido!")]
+            [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
+            [MaxLength(10)]
             public DateOnly? Nascimento { get; set; }
                         
             //DateOnly
 
             [Display(Name = "CPF")]
             [Column("CPF")]
-            //[MaxLength(14)]
+            [MaxLength(14)]
             [ExisteCPF]
             public string? CPF { get; set; }
 
-            public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf  )
-            {
-                Matricula = matricula;
-                Nome = nome;
-                Sexo = sexo;
-                Nascimento = nascimento;
-                CPF = cpf;
-            }
+            //public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf  )
+            //{
+            //    Matricula = matricula;
+            //    Nome = nome;
+            //    Sexo = sexo;
+            //    Nascimento = nascimento;
+            //    CPF = cpf;
+            //}
 
 
             public class ExisteMatricula : ValidationAttribute

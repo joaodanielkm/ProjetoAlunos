@@ -77,48 +77,24 @@ namespace EM.Web.Controllers
 
         }
 
-        [HttpPost]
-        public IActionResult Editar(Aluno getAluno)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            var aluno = new Aluno()
-            {
-
-                Matricula = getAluno.Matricula,
-                Nome = getAluno.Nome,
-                Sexo = getAluno.Sexo,
-                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
-                CPF = getAluno.CPF,
-
-            };
-            try
-            {
-                _rep.Atualizar(aluno);
-
-                ViewBag.Mensagem = "Sucesso";
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = ex.Message;
-            }
-            return View();
-        }
-
-
         //[HttpPost]
-        //public IActionResult Editar(Aluno aluno)
+        //public IActionResult Editar(Aluno getAluno)
         //{
         //    if (!ModelState.IsValid)
         //    {
         //        return View();
         //    }
 
+        //    var aluno = new Aluno()
+        //    {
+
+        //        Matricula = getAluno.Matricula,
+        //        Nome = getAluno.Nome,
+        //        Sexo = getAluno.Sexo,
+        //        Nascimento = uteis.ConvertaData(getAluno.Nascimento),
+        //        CPF = getAluno.CPF,
+
+        //    };
         //    try
         //    {
         //        _rep.Atualizar(aluno);
@@ -133,6 +109,30 @@ namespace EM.Web.Controllers
         //    }
         //    return View();
         //}
+
+
+        [HttpPost]
+        public IActionResult Editar(Aluno aluno)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                _rep.Atualizar(aluno);
+
+                ViewBag.Mensagem = "Sucesso";
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Cadastrar");
+                ViewBag.Mensagem = ex.Message;
+            }
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Cadastrar()
