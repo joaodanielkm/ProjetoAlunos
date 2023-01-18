@@ -30,21 +30,21 @@
             [Display(Name = "Nome")]
             [Column("NOME")]
             [Required(ErrorMessage = "Nome Requerido!")]
-            [StringLength(100, MinimumLength = 3, ErrorMessage ="Favor preencher com no minimo 3 e no máximo 100 caracteres!")]
+            [StringLength(100, MinimumLength = 3, ErrorMessage = "Favor preencher com no minimo 3 e no máximo 100 caracteres!")]
             public string? Nome { get; set; }
 
             [Display(Name = "Sexo")]
             [Column("SEXO")]
             [Required(ErrorMessage = "Sexo Requerido!")]
-            public EnumeradorDeSexo Sexo { get; set; }
+            public Sexo Sexo { get; set; }
 
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
             [Required(ErrorMessage = "Nascimento Requerido!")]
             [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
             [MaxLength(10)]
-            public DateOnly? Nascimento { get; set; }
-                        
+            public string? Nascimento { get; set; }
+
             //DateOnly
 
             [Display(Name = "CPF")]
@@ -53,7 +53,7 @@
             [ExisteCPF]
             public string? CPF { get; set; }
 
-            //public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf  )
+            //public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf)
             //{
             //    Matricula = matricula;
             //    Nome = nome;
@@ -105,14 +105,7 @@
                 return Matricula + " - " + Nome;
             }
 
-            public enum EnumeradorDeSexo
-            {
-                 Masculino = 0,
-                 Feminino = 1,
-
-
-            }
         }
-        
+
     }
 }

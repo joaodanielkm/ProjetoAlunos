@@ -48,31 +48,31 @@ function verificarCPF(c) {
             baseCpf == "77777777777" ||
             baseCpf == "88888888888" ||
             baseCpf == "99999999999")
+        {
+            console.log(cpfOriginal + "  Inválido 0");
             alert("CPF " + cpfOriginal + "  Inválido 0");
-        console.log(cpfOriginal);
-        v = true;
-        setTimeout(function () { $('#cpf').focus(); }, 1);
-        return false;
+            v = true;
+            setTimeout(function () { $('#cpf').focus(); }, 1);
+            return false;
+        }
 
         for (i = 0; i < 9; i++) {
             d1 += c.charAt(i) * (10 - i);
         }
         if (d1 == 0) {
+            console.log(cpfOriginal + " Inválido1");
             alert("CPF " + cpfOriginal + " Inválido1");
-            //document.getElementById("#cpf").focus();
-            console.log(cpfOriginal);
             v = true;
-            new setTimeout(function () { $('#cpf').focus(); }, 1);
+             setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(0) != d1) {
+            console.log(cpfOriginal + " Inválido2");
             alert("CPF " + cpfOriginal + " Inválido2");
-            //document.getElementById("#cpf").focus();
-            console.log(cpfOriginal);
             v = true;
-            new setTimeout(function () { $('#cpf').focus(); }, 1);
+             setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
             return false;
         }
 
@@ -83,16 +83,15 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(1) != d1) {
-            console.log(cpfOriginal);
+            console.log(cpfOriginal + " Inválido3");
             alert("CPF " + cpfOriginal + " Inválido3");
-           
+
             v = true;
-            new setTimeout(function () { $('#cpf').focus(); }, 1);
+             setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
         if (!v) {
-            return alert(cpfOriginal + " CPF Válido")
-            console.log(cpfOriginal);
+            console.log("Cpf valido: "+cpfOriginal); 
             return true;
         }
     }
@@ -115,7 +114,7 @@ function validadata(control) {
     var m = hoje.getMonth() - nasc.getMonth();
     if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
 
-    if (idade < 1 || idade > 119 ) {
+    if (idade < 1 || idade > 119) {
         alert("Data inválida!");
         setTimeout(function () { $('#nasc').focus(); }, 1);
         console.log(idade);

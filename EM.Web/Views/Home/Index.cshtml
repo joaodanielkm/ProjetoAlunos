@@ -62,7 +62,7 @@
                         <th scope="row">@item.Matricula</th>
                         <td scope="row">@item.Nome</td>
                         <td scope="row">@item.Sexo</td>
-                        <td scope="row">@item.CPF</td>
+                        <td scope="row" id="cpf">@item.CPF</td>
                         <td scope="row">@item.Nascimento</td>
                         <td scope="row">
                             <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onblur="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white">Excluir</a>

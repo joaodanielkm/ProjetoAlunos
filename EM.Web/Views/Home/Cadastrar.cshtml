@@ -1,4 +1,5 @@
-﻿@model EM.Domain.ProjetoEM.EM.Domain.Aluno
+﻿@using EM.Domain;
+@model EM.Domain.ProjetoEM.EM.Domain.Aluno
 
 @{
     ViewData["Title"] = "Cadastrar";
@@ -19,34 +20,26 @@
                     <span asp-validation-for="Matricula" class="text-danger"></span>
                     </div> *@
                     <div class="col-12">
-                        @*<label asp-for="Nome" class="control-label"></label>*@
-                        @*<input placeholder="Digite o nome do aluno" asp-for="Nome" class="form-control" minlength="3" maxlength="100" required />*@
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @placeholder="Digite o nome do aluno"})
-                        <span asp-validation-for="Nome" class="text-danger"></span>
+                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue", @placeholder="Digite o nome do aluno"})
+                        @*<span asp-validation-for="Nome" class="text-danger"></span>*@
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label asp-for="Sexo" class="control-label"></label>
-                        <select name="sexo" class="form-control" required placeholder="Escolha o gênero">
-                            <option ></option>
-                            <option value="Masculuno">Masculuno</option>
-                            <option value="Feminino">Feminino</option>
-                        </select>
+                        <div class="form-control">
+                        <label for="Sexo"> Sexo</label>
+                        @Html.DropDownListFor(Model => Model.Sexo, new SelectList(Enum.GetValues(typeof(Sexo))))
+                        </div>
                     </div>
                     <div class="col">
-                        @*                <label asp-for="Nascimento" class="control-label"></label>
-                        <input id="nasc" type="date" asp-for="Nascimento" class="form-control" maxlength="10" required onblur='return validadata()' />
-                        *@                        @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.TextBoxFor(V => V.Nascimento, new {@class = "form-control" ,@type="date", @onblur="return validadata()"})
+                        @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
+                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()"})
                         <span asp-validation-for="Nascimento" class="text-danger"></span>
                     </div>
                     <div class="col">
-                        @*                <label asp-for="CPF" class="control-label"></label>
-                        <input id="cpf" placeholder="Digite o CPF" asp-for="CPF" class="form-control" autocomplete="off" maxlength="14" type="text" onblur="return verificarCPF(this.value)" />
-                        *@                        @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" , @onblur="return verificarCPF(this.value)"})
+                        @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)"})
                         <span asp-validation-for="CPF" class="text-danger"></span>
                     </div>
                 </div>
@@ -64,7 +57,7 @@
     </div>
 </div>
 
-@*
+
 
 <h1>@ViewBag.Mensagem</h1>
 
@@ -72,4 +65,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }*@
+    }

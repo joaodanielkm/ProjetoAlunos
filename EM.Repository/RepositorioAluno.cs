@@ -48,18 +48,6 @@ namespace EM.Repository
             return _contexto.SaveChanges();
         }
 
-        public int PesquisarPorNome(string id)
-        {
-            _contexto.Alunos.Update(_contexto.Alunos.Find(id));
-            return _contexto.SaveChanges();
-        }
-
-        public int PesquisarPorMatricula(int id)
-        {
-            _contexto.Alunos.Update(_contexto.Alunos.Find(id));
-            return _contexto.SaveChanges();
-        }
-
         public Aluno Selecionar(string id)
         {
             return _contexto.Set<Aluno>().FirstOrDefault(x => x.Matricula == Convert.ToInt32(id));
