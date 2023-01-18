@@ -18,6 +18,10 @@ namespace EM.Domain.Utilitarios
             string digito;
             int soma;
             int resto;
+            if (String.IsNullOrEmpty(cpf))
+            {
+                return false;
+            }
             cpf = cpf.Trim();
             cpf = cpf.Replace(".", "").Replace("-", "");
             if (cpf.Length != 11)

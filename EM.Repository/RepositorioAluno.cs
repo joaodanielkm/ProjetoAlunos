@@ -7,6 +7,7 @@ namespace EM.Repository
         Aluno Selecionar(string id);
 
         int Persistir(Aluno aluno);
+
         IEnumerable<Aluno> Listar();
 
         int Excluir(int id);

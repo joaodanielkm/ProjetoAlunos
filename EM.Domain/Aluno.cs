@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data;
     using System.Data.Entity.Core.Objects.DataClasses;
-    //using System.Web.Mvc;
     using Utilitarios;
     using System.Globalization;
     using Microsoft.AspNetCore.Mvc.Controllers;
@@ -41,10 +40,9 @@
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
             [Required(ErrorMessage = "Nascimento Requerido!")]
-            [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
+            //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
             [MaxLength(10)]
             public string? Nascimento { get; set; }
-
             //DateOnly
 
             [Display(Name = "CPF")]
@@ -61,7 +59,6 @@
             //    Nascimento = nascimento;
             //    CPF = cpf;
             //}
-
 
             public class ExisteMatricula : ValidationAttribute
             {

@@ -33,19 +33,20 @@ namespace EM.Web.Controllers
             {
                 var alunosPorMatricula = from a in _rep.Listar()
                                          select a;
+
                 if (!String.IsNullOrEmpty(searchString))
                 {
                     alunosPorMatricula = alunosPorMatricula.Where(a => a.Matricula.ToString().Contains(searchString));
                 }
 
-                return View(alunosPorMatricula.ToList());
+                return View(alunosPorMatricula.ToList().OrderBy(a => a.Matricula));
             }
             else
             {
 
                 if (_rep.Listar == null)
                 {
-                    return Problem("Aluno não encontrado!");
+                    return Problem();
                 }
 
                 var alunosPorNome = from a in _rep.Listar()
@@ -56,7 +57,8 @@ namespace EM.Web.Controllers
                     alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString));
                 }
 
-                return View(alunosPorNome.ToList());
+
+                return View(alunosPorNome.ToList().OrderBy(a => a.Nome));
             }
         }
 
@@ -80,22 +82,23 @@ namespace EM.Web.Controllers
         public IActionResult Editar111111111111111111111(Aluno getAluno)
         {
 
+                var aluno = new Aluno()
+                {
 
-            var aluno = new Aluno()
-            {
+                    Matricula = getAluno.Matricula,
+                    Nome = (getAluno.Nome).ToUpper(),
+                    Sexo = getAluno.Sexo,
+                    Nascimento = getAluno.Nascimento,
+                    CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
 
-                Matricula = getAluno.Matricula,
-                Nome = getAluno.Nome,
-                Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
-                CPF = getAluno.CPF,
-
-            };
+                };
             try
             {
                 _rep.Atualizar(aluno);
-
+                
                 ViewBag.Mensagem = "Sucesso";
+                Thread.Sleep(2000);
+
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
@@ -146,29 +149,6 @@ namespace EM.Web.Controllers
             Console.WriteLine(aluno.Sexo);
         }
 
-        //[HttpGet]
-        //public IActionResult Cadastrar( )
-        //{
-        //    Aluno aluno = new Aluno();
-
-        //    var getUltimaMatricula = _rep.Listar().Max(m => m.Matricula + 1);
-
-        //    aluno.Matricula = getUltimaMatricula;
-
-        //    return View();
-        //}
-        //[HttpGet]
-        //public ActionResult Index()
-        //{
-
-        //    //lista empresa
-        //    var tbuscarEmpresa = new Aluno();
-        //    var listarEmpresa = _rep.Listar();
-        //    ViewBag.Empresa = new SelectList(listarEmpresa, "Sexo"); //esta informação com o nome dos campos
-
-        //    return View();
-        //}
-
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
@@ -177,27 +157,23 @@ namespace EM.Web.Controllers
 
             int mat = getAluno.Matricula;
 
-
-            //getMatriculas = getMatriculas.Where(a => a.Matricula == mat);
-
-
-            var getUltimaMatricula = _rep.Listar().Max(a => a.Matricula + 1);
+            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula + 1);
 
             aluno1.UltimaMatricula = Convert.ToInt32(mat);//erro de cast aqui-verificar para validar matricula já existente.
 
             var aluno = new Aluno()
             {
-                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatricula,
-                Nome = getAluno.Nome,
+                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatriculaMaisUm,
+                Nome = getAluno.Nome.ToUpper(),
                 Sexo = getAluno.Sexo,
                 Nascimento = getAluno.Nascimento,
-                CPF = getAluno.CPF,
+                CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : "",
             };
             try
             {
                 _rep.Persistir(aluno);
-
                 ViewBag.Mensagem = "Sucesso";
+                Thread.Sleep(2000);
             }
             catch (Exception ex)
             {
