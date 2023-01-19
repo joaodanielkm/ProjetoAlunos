@@ -143,6 +143,17 @@ function onlynumber(evt) {
     }
 }
 
+function confirmaDeletar() {
+    var x;
+    var r = confirm("Deseja deletar?");
+    if (r == true) {
+        x = "Deletado!";
+    }
+    else {
+        x = "Cancelado!";
+    }
+    document.getElementById("demo").innerHTML = x;
+}
 //document.getElementById("pesq").disabled = true;
 
 ////cria um event listener que escuta mudanças no input
