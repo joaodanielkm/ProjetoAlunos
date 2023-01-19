@@ -12,7 +12,7 @@
 * implementar pesquisa sem presicar clicar em "Buscar Aluno";
 * imlpementar sugestão de numero de matricula para cadastro novo;
 * implementar um alert sempre que cadastrar ou editar um item;
-* implementar confirmação para deletar aluno;
+* ~implementar confirmação para deletar aluno;~
 
 **Defeitos:**
 * Existe um defeito de JS para validação dos campos;
