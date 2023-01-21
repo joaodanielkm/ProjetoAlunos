@@ -88,16 +88,13 @@ namespace EM.Web.Controllers
             try
             {
                 _rep.Atualizar(aluno);
-                
-                ViewBag.Mensagem = "Sucesso";
-                Thread.Sleep(2000);
-
-                return RedirectToAction("Index", "Home");
+                ViewBag.Mensagem = "Atualizado!";
+                //return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = ex.Message;
+                ViewBag.Mensagem = "erro";
             }
             return View();
         }
