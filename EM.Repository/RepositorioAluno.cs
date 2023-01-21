@@ -33,8 +33,7 @@ namespace EM.Repository
 
         public int Persistir(Aluno aluno)
         {
-            //_contexto.Alunos.Add(aluno);
-            _contexto.Add(aluno);
+            _contexto.Alunos.Add(aluno);
             return _contexto.SaveChanges();
         }
 

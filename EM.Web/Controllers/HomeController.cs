@@ -72,14 +72,14 @@ namespace EM.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Editar111111111111111111111(Aluno getAluno)
+        public IActionResult Editar(Aluno getAluno)
         {
 
                 var aluno = new Aluno()
                 {
 
                     Matricula = getAluno.Matricula,
-                    Nome = (getAluno.Nome).ToUpper(),
+                    Nome = getAluno.Nome.ToUpper(),
                     Sexo = getAluno.Sexo,
                     Nascimento = getAluno.Nascimento,
                     CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
@@ -104,7 +104,7 @@ namespace EM.Web.Controllers
 
 
         [HttpPost]
-        public IActionResult Editar(Aluno aluno)
+        public IActionResult Editar0000(Aluno aluno)
         {
             if (!ModelState.IsValid)
             {
@@ -126,27 +126,29 @@ namespace EM.Web.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Cadastrar()
         {
             Aluno aluno = new Aluno();
 
+            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
+
             aluno.Sexo = Sexo.Masculino;
+            aluno.Matricula = getUltimaMatriculaMaisUm;
 
-            return View();
-        }
-
-        [HttpPost]
-        public void Salvar(Aluno aluno)
-        {
-            Console.WriteLine(aluno.Sexo);
+            return View(aluno);
         }
 
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            var getMatriculas = from a in _rep.Listar()
+            var getMatriculas = from a in _rep.Listar().Where(m => m.Matricula.ToString().Contains(getAluno.Matricula.ToString()))//no results para matricula q nao tem
                                 select a;
+
+            //if (getMatriculas != null)
+            //{
+            //    ViewBag.Mensagem = "Matricula já está em uso!";
+            //    return View();
+            //}
 
             int mat = getAluno.Matricula;
             var getUltimaMatriculaMaisUm = 0;
@@ -157,7 +159,6 @@ namespace EM.Web.Controllers
             else
             {
                 getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula)+1;
-                //getUltimaMatriculaMaisUm = (getUltimaMatriculaMaisUm < 1) ? 1 : getUltimaMatriculaMaisUm;
             }
 
 
@@ -179,9 +180,10 @@ namespace EM.Web.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = ex.Message;
+                ViewBag.Mensagem = "erro";
             }
-            return RedirectToAction("Cadastrar");
+            return View();
+            // return RedirectToAction("Cadastrar");
 
         }
 

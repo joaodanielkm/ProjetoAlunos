@@ -34,7 +34,7 @@
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
             [Required(ErrorMessage = "Nascimento Requerido!")]
-            //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
+            [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
             [MaxLength(10)]
             public string? Nascimento { get; set; }
             //DateOnly
@@ -61,7 +61,7 @@
                 protected override ValidationResult IsValid(object value, ValidationContext validationContext)
                 {
                     //fazer consulta no banco e ver se esxite se sim rodar abaixo  
-                    return (Int32)value == 0
+                    return (Int32)value == UltimaMatricula
                         ? new ValidationResult(errorMessage: "Matricula em uso!")
                         : ValidationResult.Success;
                 }
