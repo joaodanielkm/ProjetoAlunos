@@ -3,12 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data;
-    using System.Data.Entity.Core.Objects.DataClasses;
-    using Utilitarios;
-    using System.Globalization;
-    using Microsoft.AspNetCore.Mvc.Controllers;
-    using Microsoft.Extensions.Logging;
 
     namespace ProjetoEM.EM.Domain
     {

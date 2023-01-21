@@ -143,31 +143,34 @@ function onlynumber(evt) {
     }
 }
 
-function confirmaDeletar() {
-    var x;
-    var r = confirm("Deseja deletar?");
-    if (r == true) {
-        x = "Deletado!";
-    }
-    else {
-        x = "Cancelado!";
-    }
-    document.getElementById("demo").innerHTML = x;
+document.getElementById('deleta').onclick = function () {
+    swal({
+        title: 'Você está certo disso?',
+        text: "Esta pergunta vale um milhão de reais!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, tenho certeza!',
+        cancelButtonText: 'Melhor eu parar...'
+    }).then((result) => {
+        if (result.value) {
+            swal(
+                'Parabéns!',
+                'Você acertou e ganhou um milhão de reais!',
+                'success'
+            )
+        }
+    })
+};
+
+function alerta(type, title, mensage) {
+    Swal.fire({
+        type: type,
+        title: title,
+        text: mensage,
+        icon: 'warning',
+        showConfirmeButton: false,
+        timer: 1500,
+    })
 }
-//document.getElementById("pesq").disabled = true;
-
-////cria um event listener que escuta mudanças no input
-//document.getElementById("SearchString").addEventListener("SearchString", function (event) {
-
-//    //busca conteúdo do input
-//    var conteudo = document.getElementById("SearchString").value;
-
-//    //valida conteudo do input 
-//    if (conteudo !== null && conteudo !== '') {
-//        //habilita o botão
-//        document.getElementById("pesq").disabled = false;
-//    } else {
-//        //desabilita o botão se o conteúdo do input ficar em branco
-//        document.getElementById("pesq").disabled = true;
-//    }
-//});

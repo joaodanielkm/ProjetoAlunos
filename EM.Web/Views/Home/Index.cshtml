@@ -63,7 +63,7 @@
                         <td scope="row" id="cpf">@item.CPF</td>
                         <td scope="row">@item.Nascimento</td>
                         <td scope="row">
-                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onClick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white "><i class="fa fa-trash "></i></a>
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" itemid="deleta" class="btn btn-danger btn-sm text-white "><i class="fa fa-trash "></i></a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit"></i></a>
                         </td>
                     </tr>
@@ -72,4 +72,3 @@
         </table>
     }
 </div>
-

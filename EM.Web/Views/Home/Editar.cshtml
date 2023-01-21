@@ -45,9 +45,29 @@
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left "></i></a>
                         <input type="submit" value="Editar" class="btn btn-info" />
                     </div>
-                    <div class="col">
-                        <h1>@ViewBag.Mensagem</h1>
-                    </div>
+                    @if (@ViewBag.Mensagem == "Atualizado!")
+                    {
+
+                        <script>
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Alterado com sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        </script>
+                    }
+                    else if (@ViewBag.Mensagem == "erro")
+                    {
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href="">Why do I have this issue?</a>'
+                            })</script>
+                    }
                 </div>
             </div>
 

@@ -1,16 +1,9 @@
-﻿using EM.Domain.ProjetoEM.EM.Domain;
+﻿using EM.Domain;
+using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using EM.Web.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Sockets;
-using System.Web.WebPages;
-using EM.Domain;
 
 namespace EM.Web.Controllers
 {
@@ -122,8 +115,8 @@ namespace EM.Web.Controllers
             {
                 _rep.Atualizar(aluno);
 
-                ViewBag.Mensagem = "Sucesso";
                 //return RedirectToAction("Index", "Home");
+                ViewBag.Mensagem = "Atualizado!";
             }
             catch (Exception ex)
             {
@@ -138,7 +131,7 @@ namespace EM.Web.Controllers
         {
             Aluno aluno = new Aluno();
 
-            aluno.Sexo = Sexo.Mascuino;
+            aluno.Sexo = Sexo.Masculino;
 
             return View();
         }
@@ -156,8 +149,17 @@ namespace EM.Web.Controllers
                                 select a;
 
             int mat = getAluno.Matricula;
+            var getUltimaMatriculaMaisUm = 0;
+            if (getAluno.Matricula == null || getAluno.Matricula < 1)
+            {
+                getAluno.Matricula = 1;
+            }
+            else
+            {
+                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula)+1;
+                //getUltimaMatriculaMaisUm = (getUltimaMatriculaMaisUm < 1) ? 1 : getUltimaMatriculaMaisUm;
+            }
 
-            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula + 1);
 
             aluno1.UltimaMatricula = Convert.ToInt32(mat);//erro de cast aqui-verificar para validar matricula já existente.
 
@@ -172,8 +174,7 @@ namespace EM.Web.Controllers
             try
             {
                 _rep.Persistir(aluno);
-                ViewBag.Mensagem = "Sucesso";
-                Thread.Sleep(2000);
+                ViewBag.Mensagem = "Cadastrado!";
             }
             catch (Exception ex)
             {
@@ -194,7 +195,7 @@ namespace EM.Web.Controllers
             try
             {
                 _rep.Excluir(id);
-                ViewBag.Mensagem = "Sucesso";
+                ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)
             {

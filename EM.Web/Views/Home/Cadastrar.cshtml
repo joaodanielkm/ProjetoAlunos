@@ -1,10 +1,8 @@
 ﻿@using EM.Domain;
-@model EM.Domain.ProjetoEM.EM.Domain.Aluno
-
 @{
-    ViewData["Title"] = "Cadastrar";
-
+    ViewData["Title"] = "Cadastrar aluno";
 }
+@model EM.Domain.ProjetoEM.EM.Domain.Aluno
 
 <h4>Novo aluno</h4>
 <hr />
@@ -16,7 +14,7 @@
                 <div class="row">
                     @*<div class="col-3 ">
                     <label asp-for="Matricula" class="control-label"></label>
-                    <input placeholder="Apenas numeros" type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" required />
+                        <input  type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" required  />
                     <span asp-validation-for="Matricula" class="text-danger"></span>
                     </div> *@
                     <div class="col-12">
@@ -44,13 +42,31 @@
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left"></i></a>
                         <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" />
                     </div>
-                    <div class="col text-center">
-                        <h1>@ViewBag.Mensagem</h1>
-                    </div>
+                    @if (@ViewBag.Mensagem == "Cadastrado!")
+                    {
+
+                        <script>
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Cadastrado com sucesso!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        </script>
+                    }
+                    else if (@ViewBag.Mensagem == "erro")
+                    {
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                                footer: '<a href="">Why do I have this issue?</a>'
+                            })</script>
+                    }
                 </div>
-
             </div>
-
         </form>
     </div>
 </div>
