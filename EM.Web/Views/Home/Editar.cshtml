@@ -14,9 +14,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3 ">
-                        <label asp-for="Matricula" class="control-label"></label>
-                        <input placeholder="Apenas numeros" type="text" style="text-align:right;" asp-for="Matricula" autocomplete="off" class="form-control" minlength="1" maxlength="9" onkeypress="return onlynumber();" required readonly />
-                        <span asp-validation-for="Matricula" class="text-danger"></span>
+                         @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
+                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="tue", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true})
                     </div>
                     <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
@@ -63,8 +62,9 @@
                         <script>
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Algo deu errado...',
-                                text: 'Contate o adminsitrador do sistema!',
+                                title: 'Verifique os dados digitados!',
+                                showConfirmButton: false,
+                                timer: 1500
                             })</script>
                     }
                 </div>
