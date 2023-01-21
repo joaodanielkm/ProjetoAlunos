@@ -129,7 +129,7 @@ function validadata(control) {
 
     // se for maior que 120 não vai acontecer nada!
     return false;
-}
+};
 
 function onlynumber(evt) {
     var theEvent = evt || window.event;
@@ -141,12 +141,12 @@ function onlynumber(evt) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
-}
+};
 
-document.getElementById('deleta').onclick = function () {
+document.getElementById('dele888tarrr').onclick = function (a) {
     swal({
-        title: 'Você está certo disso?',
-        text: "Esta pergunta vale um milhão de reais!",
+        title: 'Quer mesmo deletar?',
+        text: a,
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -156,9 +156,31 @@ document.getElementById('deleta').onclick = function () {
     }).then((result) => {
         if (result.value) {
             swal(
-                'Parabéns!',
-                'Você acertou e ganhou um milhão de reais!',
+                'Deletado',
+                'OK!',
                 'success'
+            )
+        }
+    })
+};
+
+function deletar(a) {
+    new swal({
+        title: 'Quer mesmo deletar?',
+        text: a,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, tenho certeza!',
+        cancelButtonText: 'Melhor não...'
+    }).then((result) => {
+        if (result.value) {
+            swal(
+                'Deletado!',
+                'Deletado com Sucesso!',
+                'success'
+
             )
         }
     })

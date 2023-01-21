@@ -50,7 +50,6 @@
                     <th scope="col">CPF</th>
                     <th scope="col">Nascimento</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -63,12 +62,37 @@
                         <td scope="row" id="cpf">@item.CPF</td>
                         <td scope="row">@item.Nascimento</td>
                         <td scope="row">
-                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" itemid="deleta" class="btn btn-danger btn-sm text-white "><i class="fa fa-trash "></i></a>
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white "><i class="fa fa-trash "></i></a>
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit"></i></a>
+                            <button id="deletarrr" onclick="return deletar('teste');">tetete</button>
                         </td>
                     </tr>
+                    
                 }
             </tbody>
         </table>
+    }
+    @if (@ViewBag.Mensagem == "Deletado")
+    {
+
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Alterado com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        </script>
+    }
+    else if (@ViewBag.Mensagem == "erro")
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href="">Why do I have this issue?</a>'
+            })</script>
     }
 </div>
