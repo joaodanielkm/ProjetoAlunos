@@ -28,11 +28,11 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()"})
+                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()",@onpaste="return false", @ondrop="return false"})
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)" , @placeholder="Digite o cpf do aluno"})
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)" , @placeholder="Digite o cpf do aluno",@onpaste="return false", @ondrop="return false"})
                     </div>
                 </div>
                 <br />

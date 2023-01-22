@@ -4,6 +4,7 @@ using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace EM.Web.Controllers
 {
@@ -22,6 +23,7 @@ namespace EM.Web.Controllers
 
         public IActionResult Index(string searchString, string pesquisePor)
         {
+
             if (pesquisePor == "matricula")
             {
                 var alunosPorMatricula = from a in _rep.Listar()
@@ -66,7 +68,6 @@ namespace EM.Web.Controllers
         {
             var aluno = _rep.Selecionar(id);
 
-
             return View(aluno);
 
         }
@@ -74,22 +75,23 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Editar(Aluno getAluno)
         {
+            Domain.Utilitarios.Uteis uteis = new Domain.Utilitarios.Uteis();
 
-                var aluno = new Aluno()
-                {
+            var aluno = new Aluno()
+            {
 
-                    Matricula = getAluno.Matricula,
-                    Nome = getAluno.Nome.ToUpper(),
-                    Sexo = getAluno.Sexo,
-                    Nascimento = getAluno.Nascimento,
-                    CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
+                Matricula = getAluno.Matricula,
+                Nome = getAluno.Nome.ToUpper(),
+                Sexo = getAluno.Sexo,
+                Nascimento = getAluno.Nascimento,
+                CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
 
-                };
+            };
             try
             {
                 _rep.Atualizar(aluno);
                 ViewBag.Mensagem = "Atualizado!";
-                //return RedirectToAction("Index", "Home");
+                return View();
             }
             catch (Exception ex)
             {
@@ -138,28 +140,13 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            var getMatriculas = from a in _rep.Listar().Where(m => m.Matricula.ToString().Contains(getAluno.Matricula.ToString()))//no results para matricula q nao tem
+            //var getMatriculas = from a in _rep.Listar().Where(m => m.Matricula.ToString().Contains(getAluno.Matricula.ToString()))//no results para matricula q nao tem
+            //                    select a;
+            var getMatriculas = from a in _rep.Listar()
                                 select a;
+            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
 
-            //if (getMatriculas != null)
-            //{
-            //    ViewBag.Mensagem = "Matricula já está em uso!";
-            //    return View();
-            //}
-
-            int mat = getAluno.Matricula;
-            var getUltimaMatriculaMaisUm = 0;
-            if (getAluno.Matricula == null || getAluno.Matricula < 1)
-            {
-                getAluno.Matricula = 1;
-            }
-            else
-            {
-                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula)+1;
-            }
-
-
-            aluno1.UltimaMatricula = Convert.ToInt32(mat);//erro de cast aqui-verificar para validar matricula já existente.
+            aluno1.UltimaMatricula = Convert.ToInt32(getUltimaMatriculaMaisUm);//erro de cast aqui-verificar para validar matricula já existente.
 
             var aluno = new Aluno()
             {
@@ -173,6 +160,7 @@ namespace EM.Web.Controllers
             {
                 _rep.Persistir(aluno);
                 ViewBag.Mensagem = "Cadastrado!";
+                return View();
             }
             catch (Exception ex)
             {

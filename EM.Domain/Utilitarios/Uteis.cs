@@ -9,7 +9,7 @@ namespace EM.Domain.Utilitarios
 {
     public class Uteis
     {
-        public static DateOnly DataNaoInformada = new(1910, 1, 1);
+        public static DateOnly DataNaoInformada = new (1910, 1, 1);
         public bool EhValidoCPF(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -63,30 +63,6 @@ namespace EM.Domain.Utilitarios
             return texto;
 
         }
-        public int DefineOSexo(string sexo)
-        {
-            if (string.IsNullOrWhiteSpace(sexo))
-                return Constantes.SEXO_MASCULINO;
-
-
-            if (sexo.Equals("Masculino"))
-                return Constantes.SEXO_MASCULINO;
-            if (sexo.Equals("Feminino"))
-                return Constantes.SEXO_FEMININO;
-
-            return Constantes.SEXO_MASCULINO;
-        }
-
-        //public static int DefineOSexo(int? sexo, int tipoParaMasculino, int tipoParaFeminino)
-        //{
-        //    if (!sexo.HasValue || (sexo != tipoParaMasculino && sexo != tipoParaFeminino)) return Constantes.SEXO_MASCULINO;
-        //    return sexo == tipoParaMasculino ? Constantes.SEXO_MASCULINO : Constantes.SEXO_FEMININO;
-        //}
-        public static class Constantes
-        {
-            public const int SEXO_MASCULINO = 0;
-            public const int SEXO_FEMININO = 1;
-        }
         public DateOnly ConvertaData(object dataEntrada)
         {
             if (DBNull.Value.Equals(dataEntrada)) return DataNaoInformada;
@@ -112,6 +88,11 @@ namespace EM.Domain.Utilitarios
             }
 
 
+        }
+        public object DataToBD(DateOnly? Data)
+        {
+            if (!Data.HasValue) return DBNull.Value;
+            return Data.Value.ToString("yyyyMMdd");
         }
     }
 }

@@ -15,11 +15,12 @@
                 <div class="row">
                     <div class="col-3 ">
                          @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="tue", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true})
+                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="true", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true})
                     </div>
                     <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue", @placeholder="Digite o nome do aluno"})
+                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="true", @placeholder="Digite o nome do aluno"})
+                        @Html.ValidationMessageFor(model => model.Nome)
                     </div>
                 </div>
                 <div class="row">
@@ -29,13 +30,11 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()"})
-                        <span asp-validation-for="Nascimento" class="text-danger"></span>
+                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc",@type="date", @required="true", @onkeypress="return onlynumberData()",@onblur="return validadata()",@onpaste="return false", @ondrop="return false",@maxlength="10"})
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)"})
-                        <span asp-validation-for="CPF" class="text-danger"></span>
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)",@onpaste="return false", @ondrop="return false"})
                     </div>
                 </div>
                 <br />
