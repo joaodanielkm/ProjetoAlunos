@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+#inputNascimento:focus {
+    border-color: #ffffff;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
