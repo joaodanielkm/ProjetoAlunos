@@ -35,9 +35,9 @@
             [Column("NASCIMENTO")]
             [Required(ErrorMessage = "Nascimento Requerido!")]
             //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
-            //[DataType(DataType.Date)]
-            //[DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:yyyy-MM-dd}")]
-            public string? Nascimento { get; set; }
+            [DataType(DataType.Date)]
+            //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+            public DateTime? Nascimento { get; set; }
 
             [Display(Name = "CPF")]
             [Column("CPF")]

@@ -28,13 +28,13 @@
                         <label for="Sexo"> Sexo</label>
                         @Html.DropDownListFor(Model => Model.Sexo, new SelectList(Enum.GetValues(typeof(Sexo))),htmlAttributes: new { @class = "form-control" })
                     </div>
-                    <div class="col">
+                    <div class="col ">
                         @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc",@type="date", @required="true", @onkeypress="return onlynumberData()",@onblur="return validadata()",@onpaste="return false", @ondrop="return false",@maxlength="10"})
+                        @Html.EditorFor(a => a.Nascimento, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)",@onpaste="return false", @ondrop="return false"})
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)",@onpaste="return false"})
                     </div>
                 </div>
                 <br />
