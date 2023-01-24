@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-3 ">
                          @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="true", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true})
+                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="true", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true, @id="nome", @onblur="return valida_form(this)"})
                     </div>
                     <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})

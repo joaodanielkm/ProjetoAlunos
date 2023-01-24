@@ -153,26 +153,6 @@ function onlynumberData(evt) {
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
 };
-document.getElementById('dele888tarrr').onclick = function (a) {
-    swal({
-        title: 'Quer mesmo deletar?',
-        text: a,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, tenho certeza!',
-        cancelButtonText: 'Melhor eu parar...'
-    }).then((result) => {
-        if (result.value) {
-            swal(
-                'Deletado',
-                'OK!',
-                'success'
-            )
-        }
-    })
-};
 
 function deletar(a) {
     new swal({
@@ -206,3 +186,13 @@ function alerta(type, title, mensage) {
         timer: 1500,
     })
 }
+function valida_form() {
+    const nomee = document.querySelector('#nome');
+    if (nomee.value.trim() == "") {
+        alert('Por favor, preencha o campo nome');
+        setTimeout(function () { $('#nome').focus(); }, 1);
+       /* document.getElementById("nome").focus();*/
+        return false
+    }
+}
+
