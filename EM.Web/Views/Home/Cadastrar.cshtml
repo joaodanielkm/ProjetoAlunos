@@ -12,13 +12,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container">
                 <div class="row">
-                    @*<div class="col-3 ">
+                    <div class="col-3 ">
                         @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="tue", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()"})
-                    </div>*@
-                    <div class="col-12">
+                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="tue", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @onpaste="return false", @ondrop="return false", @id="matricula"})
+                    </div>
+                    <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue",@id="nome", @placeholder="Digite o nome do aluno",@onblur="return valida_form(this)"})
+                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue",@id="nome", @placeholder="Digite o nome do aluno",@onblur="return validaCampoNome(this)"})
                     </div>
                 </div>
                 <div class="row">
@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" />
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this)" />
                     </div>
                     @if (@ViewBag.Mensagem == "Cadastrado!")
                     {
@@ -54,7 +54,7 @@
                             })
                         </script>
                     }
-                    else if (@ViewBag.Mensagem == "Matricula já está em uso!")
+                    else if (@ViewBag.Mensagem == "Matricula já em uso!")
                     {
                         <script>
                             Swal.fire({

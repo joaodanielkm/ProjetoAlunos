@@ -186,12 +186,21 @@ function alerta(type, title, mensage) {
         timer: 1500,
     })
 }
-function valida_form() {
+function validaCampoNome() {
     const nomee = document.querySelector('#nome');
     if (nomee.value.trim() == "") {
         alert('Por favor, preencha o campo nome');
         setTimeout(function () { $('#nome').focus(); }, 1);
        /* document.getElementById("nome").focus();*/
+        return false
+    }
+}
+function validaCampoMatricula() {
+    const nomee = document.querySelector('#matricula');
+    if (nomee.value.trim() == "" || nomee.value < 1) {
+        alert('Matricula 0, você é burro?');
+        setTimeout(function () { $('#matricula').focus(); }, 1);
+        /* document.getElementById("nome").focus();*/
         return false
     }
 }

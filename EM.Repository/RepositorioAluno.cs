@@ -1,16 +1,20 @@
-﻿using EM.Domain.ProjetoEM.EM.Domain;
+﻿using Microsoft.Extensions.Configuration;
+using FirebirdSql.Data.FirebirdClient;
+using Dapper;
+using EM.Domain.ProjetoEM.EM.Domain;
 
 namespace EM.Repository
 {
+    //interface
     public interface IAlunoRepository
     {
         Aluno Selecionar(string id);
 
         int Persistir(Aluno aluno);
-
+        
         IEnumerable<Aluno> Listar();
 
-        int Excluir(int id);
+        int Excluir(string id);
 
         int Atualizar(Aluno aluno);
 
@@ -19,39 +23,70 @@ namespace EM.Repository
     public class AlunoRepository : IAlunoRepository
     {
 
-        private readonly Contexto _contexto;
+        private IConfiguration _configuracoes;
+        private string _conexao { get { return _configuracoes.GetConnectionString("firedb"); } }
 
-        public AlunoRepository(Contexto contexto)
+        public AlunoRepository(IConfiguration config)
         {
-            _contexto = contexto;
+            _configuracoes = config;
         }
 
         public IEnumerable<Aluno> Listar()
         {
-            return _contexto.Set<Aluno>();
+            using (var conexao = new FbConnection(_conexao))
+            {
+                return conexao.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO");
+            }
         }
 
         public int Persistir(Aluno aluno)
         {
-            _contexto.Alunos.Add(aluno);
-            return _contexto.SaveChanges();
+
+            using (var conexao = new FbConnection(_conexao))
+            {
+                return conexao.Execute("INSERT INTO ALUNO VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)", new
+                {
+                    MATRICULA = aluno.Matricula,
+                    NOME = aluno.Nome.Trim(),
+                    NASCIMENTO = aluno.Nascimento,
+                    SEXO = aluno.Sexo,
+                    CPF = aluno.CPF
+                });
+            }
         }
 
         public int Atualizar(Aluno aluno)
         {
-            _contexto.Update(aluno);
-            return _contexto.SaveChanges();
+            using (var conexao = new FbConnection(_conexao))
+            {
+                return conexao.Execute("UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA", new
+                {
+                    MATRICULA = aluno.Matricula,
+                    NOME = aluno.Nome.Trim(),
+                    NASCIMENTO = aluno.Nascimento,
+                    SEXO = aluno.Sexo,
+                    CPF = aluno.CPF
+                });
+            }
         }
 
-        public int Excluir(int id)
+        public int Excluir(string id)
         {
-            _contexto.Alunos.Remove(_contexto.Alunos.Find(id));
-            return _contexto.SaveChanges();
+            using (var conexao = new FbConnection(_conexao))
+            {
+                return conexao.Execute("DELETE FROM ALUNO WHERE MATRICULA = @MATRICULA", new
+                {
+                    MATRICULA = id,
+                });
+            }
         }
 
         public Aluno Selecionar(string id)
         {
-            return _contexto.Set<Aluno>().FirstOrDefault(x => x.Matricula == Convert.ToInt32(id));
+            using (var conexao = new FbConnection(_conexao))
+            {
+                return conexao.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA", new { MATRICULA = id }).FirstOrDefault();
+            }
         }
     }
 }

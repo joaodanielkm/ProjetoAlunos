@@ -4,7 +4,6 @@ using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Globalization;
 
 namespace EM.Web.Controllers
 {
@@ -49,7 +48,7 @@ namespace EM.Web.Controllers
 
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString));
+                    alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString.ToUpper()));
                 }
 
 
@@ -91,36 +90,13 @@ namespace EM.Web.Controllers
             {
                 _rep.Atualizar(aluno);
                 ViewBag.Mensagem = "Atualizado!";
+                //return RedirectToAction("Index", "Home");
                 return View();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Cadastrar");
                 ViewBag.Mensagem = "erro";
-            }
-            return View();
-        }
-
-
-        [HttpPost]
-        public IActionResult Editar0000(Aluno aluno)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            try
-            {
-                _rep.Atualizar(aluno);
-
-                //return RedirectToAction("Index", "Home");
-                ViewBag.Mensagem = "Atualizado!";
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = ex.Message;
             }
             return View();
         }
@@ -156,16 +132,26 @@ namespace EM.Web.Controllers
                 Nascimento = getAluno.Nascimento,
                 CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : "",
             };
-            try
+            Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
+
+            if (verificaSeMatriculaExiste == null)
             {
-                _rep.Persistir(aluno);
-                ViewBag.Mensagem = "Cadastrado!";
-                return View();
+                try
+                {
+                    _rep.Persistir(aluno);
+                    ViewBag.Mensagem = "Cadastrado!";
+                    return View();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Cadastrar");
+                    ViewBag.Mensagem = "erro";
+                }
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = "erro";
+                ViewBag.Mensagem = "Matricula já em uso!";
+                return View();
             }
             return View();
             // return RedirectToAction("Cadastrar");
@@ -181,7 +167,7 @@ namespace EM.Web.Controllers
 
             try
             {
-                _rep.Excluir(id);
+                _rep.Excluir(id.ToString());
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)

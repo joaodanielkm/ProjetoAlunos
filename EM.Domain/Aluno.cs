@@ -16,7 +16,7 @@
             [Display(Name = "Matricula")]
             [Column("MATRICULA")]
             [Required(ErrorMessage = "Matricula Requerida!")]
-            [ExisteMatricula]
+            //[ExisteMatricula]
             [Range(1, 999999999, ErrorMessage = "Matricula invalida!")]
             public int Matricula { get; set; }
 
@@ -34,9 +34,7 @@
             [Display(Name = "Nascimento")]
             [Column("NASCIMENTO")]
             [Required(ErrorMessage = "Nascimento Requerido!")]
-            //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
             [DataType(DataType.Date)]
-            //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
             public DateTime? Nascimento { get; set; }
 
             [Display(Name = "CPF")]
