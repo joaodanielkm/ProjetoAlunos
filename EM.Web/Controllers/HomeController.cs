@@ -82,21 +82,30 @@ namespace EM.Web.Controllers
                 Matricula = getAluno.Matricula,
                 Nome = getAluno.Nome.ToUpper(),
                 Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
+                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
 
             };
-            try
+            Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
+            if (verificaSeMatriculaExiste == null)
             {
-                _rep.Atualizar(aluno);
-                ViewBag.Mensagem = "Atualizado!";
-                //return RedirectToAction("Index", "Home");
-                return View();
+                try
+                {
+                    _rep.Atualizar(aluno);
+                    ViewBag.Mensagem = "Atualizado!";
+                    //return RedirectToAction("Index", "Home");
+                    return View();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Cadastrar");
+                    ViewBag.Mensagem = "erro";
+                }
             }
-            catch (Exception ex)
+            else
             {
-                _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = "erro";
+                ViewBag.Mensagem = "Matricula já em uso!";
+                return View();
             }
             return View();
         }
@@ -125,7 +134,7 @@ namespace EM.Web.Controllers
                 Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatriculaMaisUm,
                 Nome = getAluno.Nome.ToUpper(),
                 Sexo = getAluno.Sexo,
-                Nascimento = getAluno.Nascimento,
+                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : "",
             };
             Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());

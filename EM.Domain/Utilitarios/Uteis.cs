@@ -9,7 +9,7 @@ namespace EM.Domain.Utilitarios
 {
     public class Uteis
     {
-        public static DateOnly DataNaoInformada = new (1910, 1, 1);
+        public static DateTime DataNaoInformada = new (1910, 1, 1);
         public bool EhValidoCPF(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -63,12 +63,12 @@ namespace EM.Domain.Utilitarios
             return texto;
 
         }
-        public DateOnly ConvertaData(object dataEntrada)
+        public DateTime ConvertaData(object dataEntrada)
         {
             if (DBNull.Value.Equals(dataEntrada)) return DataNaoInformada;
 
             var dtEntrada = dataEntrada?.ToString();
-            if (DateOnly.TryParse(dtEntrada, out var dt))
+            if (DateTime.TryParse(dtEntrada, out var dt))
             {
                 return dt;
             }
@@ -80,7 +80,7 @@ namespace EM.Domain.Utilitarios
                 var mes = Convert.ToInt32(anoMesDia.ToString().Substring(4, 2));
                 var dia = Convert.ToInt32(anoMesDia.ToString().Substring(6, 2));
 
-                return new DateOnly(ano, mes, dia);
+                return new DateTime(ano, mes, dia);
             }
             catch
             {
