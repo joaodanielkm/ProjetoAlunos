@@ -116,13 +116,9 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            //var getMatriculas = from a in _rep.Listar().Where(m => m.Matricula.ToString().Contains(getAluno.Matricula.ToString()))//no results para matricula q nao tem
-            //                    select a;
             var getMatriculas = from a in _rep.Listar()
                                 select a;
             var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
-
-            aluno1.UltimaMatricula = Convert.ToInt32(getUltimaMatriculaMaisUm);//erro de cast aqui-verificar para validar matricula já existente.
 
             var aluno = new Aluno()
             {
@@ -177,7 +173,6 @@ namespace EM.Web.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
