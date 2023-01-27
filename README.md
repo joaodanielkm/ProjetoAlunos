@@ -9,8 +9,8 @@
 * ~Limitar visualiação do nome;~
 * ~Implementar obrigatoriedade de campos de forma visual;~
 * ~Criar validações no back;~
-* implementar pesquisa sem presicar clicar em "Buscar Aluno";
-* imlpementar sugestão de numero de matricula para cadastro novo;
+* ~implementar pesquisa sem presicar clicar em "Buscar Aluno";(cancelado)~
+* ~imlpementar sugestão de numero de matricula para cadastro novo;~
 * ~implementar um alert sempre que cadastrar ou editar um item;~
 * ~implementar confirmação para deletar aluno;~
 * implementar teste unitário;
