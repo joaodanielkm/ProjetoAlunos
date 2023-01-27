@@ -15,13 +15,10 @@
 * ~implementar confirmação para deletar aluno;~
 * implementar teste unitário;
 
-
 **Defeitos:**
 * ~Existe um defeito de JS para validação dos campos;~
 * ~Na versão 6899b31 começou apresentar erro ao persistir edições de alguns itens;~
 * ~Existe um erro na index "addEventListener" ao carregar a pagina;~
-* na edição o sistema não validou data futura em um teste;
-* ~como foi alterado o repositorio do aluno, deve-se adicionar todas as validações antes de persistir e editar;~
-* ~corrigir a forma que a data é salva no banco, MMdd;~
+
 
 

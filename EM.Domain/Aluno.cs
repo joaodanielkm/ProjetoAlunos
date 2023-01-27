@@ -43,22 +43,12 @@
             [ExisteCPF]
             public string? CPF { get; set; }
 
-            //public Aluno(int matricula, string nome, EnumeradorDeSexo sexo, DateOnly nascimento, string cpf)
-            //{
-            //    Matricula = matricula;
-            //    Nome = nome;
-            //    Sexo = sexo;
-            //    Nascimento = nascimento;
-            //    CPF = cpf;
-            //}
-
             public class ExisteMatricula : ValidationAttribute
             {
                 public int UltimaMatricula { get; set; }
 
-                protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+                protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
                 {
-                    //fazer consulta no banco e ver se esxite se sim rodar abaixo  
                     return (Int32)value == UltimaMatricula
                         ? new ValidationResult(errorMessage: "Matricula em uso!")
                         : ValidationResult.Success;
@@ -67,7 +57,7 @@
 
             public class ExisteCPF : ValidationAttribute
             {
-                protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+                protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
                 {
                     return (string)value == "122"
                         ? new ValidationResult(errorMessage: "CPF em uso!")

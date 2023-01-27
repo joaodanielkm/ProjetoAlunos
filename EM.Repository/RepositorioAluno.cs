@@ -1,10 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using FirebirdSql.Data.FirebirdClient;
-using Dapper;
+﻿using FirebirdSql.Data.FirebirdClient;
 using EM.Domain.ProjetoEM.EM.Domain;
+using System.Data;
+using EM.Domain;
+using EM.Domain.Utilitarios;
+using Dapper;
 
 namespace EM.Repository
 {
+
     //interface
     public interface IAlunoRepository
     {
@@ -14,7 +17,7 @@ namespace EM.Repository
         
         IEnumerable<Aluno> Listar();
 
-        int Excluir(string id);
+        void Excluir(string id);
 
         int Atualizar(Aluno aluno);
 
@@ -22,71 +25,157 @@ namespace EM.Repository
 
     public class AlunoRepository : IAlunoRepository
     {
-
-        private IConfiguration _configuracoes;
-        private string _conexao { get { return _configuracoes.GetConnectionString("firedb"); } }
-
-        public AlunoRepository(IConfiguration config)
-        {
-            _configuracoes = config;
-        }
+        FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();
 
         public IEnumerable<Aluno> Listar()
         {
-            using (var conexao = new FbConnection(_conexao))
+           
+
+            using (conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
-                return conexao.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO");
+                List<Aluno> alunos = new List<Aluno>();
+
+                string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
+                DataTable dt = Banco.Banco.consulta(sql);
+
+                foreach (DataRow item in dt.Rows)
+                {
+                    Aluno aluno = new Aluno()
+                    {
+                        Matricula = item.Field<Int32>("MATRICULA"),
+                        Nome = item.Field<string>("NOME"),
+                        Sexo = item.Field<Sexo>("SEXO"),
+                        CPF = item.Field<string>("CPF"),
+                        Nascimento = item.Field<DateTime>("NASCIMENTO"),
+                    };
+
+                    alunos.Add(aluno);
+                }
+
+                return alunos;
             }
         }
 
         public int Persistir(Aluno aluno)
         {
-
-            using (var conexao = new FbConnection(_conexao))
+             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
-                return conexao.Execute("INSERT INTO ALUNO VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)", new
+                Uteis uteis = new Uteis();
+
+                try
                 {
-                    MATRICULA = aluno.Matricula,
-                    NOME = aluno.Nome.Trim(),
-                    NASCIMENTO = aluno.Nascimento,
-                    SEXO = aluno.Sexo,
-                    CPF = aluno.CPF
-                });
+                    conexaoFireBird.Open();
+                    string mSQL = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
+
+                    FbCommand cmd = new FbCommand(mSQL, conexaoFireBird);
+
+                    cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
+                    cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+
+                    cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
+                    cmd.Parameters["@NOME"].Value = aluno.Nome;
+                    cmd.Parameters["@SEXO"].Value = aluno.Sexo;
+                    cmd.Parameters["@CPF"].Value =  aluno.CPF;
+                    cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+
+
+                    return cmd.ExecuteNonQuery();
+                }
+                catch (FbException fbex)
+                {
+                    throw fbex;
+                }
+                finally
+                {
+                    conexaoFireBird.Close();
+                }
             }
+
         }
 
         public int Atualizar(Aluno aluno)
         {
-            using (var conexao = new FbConnection(_conexao))
+            using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
-                return conexao.Execute("UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA", new
+                Uteis uteis = new Uteis();
+
+                try
                 {
-                    MATRICULA = aluno.Matricula,
-                    NOME = aluno.Nome.Trim(),
-                    NASCIMENTO = aluno.Nascimento,
-                    SEXO = aluno.Sexo,
-                    CPF = aluno.CPF
-                });
+                    conexaoFireBird.Open();
+                    string mSQL = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
+
+                    FbCommand cmd = new FbCommand(mSQL, conexaoFireBird);
+
+                    cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
+                    cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
+                    cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+
+                    cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
+                    cmd.Parameters["@NOME"].Value = aluno.Nome;
+                    cmd.Parameters["@SEXO"].Value = aluno.Sexo;
+                    cmd.Parameters["@CPF"].Value =  aluno.CPF;
+                    cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+
+
+                    return cmd.ExecuteNonQuery();
+                }
+                catch (FbException fbex)
+                {
+                    throw fbex;
+                }
+                finally
+                {
+                    conexaoFireBird.Close();
+                }
             }
         }
 
-        public int Excluir(string id)
+        public void Excluir(string id)
         {
-            using (var conexao = new FbConnection(_conexao))
+            try
             {
-                return conexao.Execute("DELETE FROM ALUNO WHERE MATRICULA = @MATRICULA", new
-                {
-                    MATRICULA = id,
-                });
+                var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{id}'";
+                Banco.Banco.consulta(sql);
             }
+            catch (FbException fbex)
+            {
+                throw (fbex);
+            }
+            
         }
 
         public Aluno Selecionar(string id)
         {
-            using (var conexao = new FbConnection(_conexao))
-            {
-                return conexao.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA", new { MATRICULA = id }).FirstOrDefault();
-            }
+            //List<Aluno> alunos = new List<Aluno>();
+
+            using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
+            //{
+
+            //    string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @id";
+            //    DataTable dt = Banco.Banco.consulta(sql);
+
+            //    foreach (DataRow item in dt.Rows)
+            //    {
+            //        Aluno aluno = new Aluno()
+            //        {
+            //            Matricula = item.Field<Int32>("MATRICULA"),
+            //            Nome = item.Field<string>("NOME"),
+            //            Sexo = item.Field<Sexo>("SEXO"),
+            //            CPF = item.Field<string>("CPF"),
+            //            Nascimento = item.Field<DateTime>("NASCIMENTO"),
+            //        };
+
+            //        alunos.Add(aluno);
+            //    }
+
+            //    return alunos;
+            return conexaoFireBird.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA", new { MATRICULA = id }).FirstOrDefault();
+        }
         }
     }
-}
+
