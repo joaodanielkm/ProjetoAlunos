@@ -304,7 +304,6 @@ C:\Users\joaod\source\repos\EM.Repository\bin\Debug\net6.0\refs\Microsoft.Extens
 C:\Users\joaod\source\repos\EM.Repository\bin\Debug\net6.0\refs\Microsoft.Extensions.Options.dll
 C:\Users\joaod\source\repos\EM.Repository\bin\Debug\net6.0\refs\Microsoft.Extensions.Primitives.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\bin\Debug\net6.0\EM.Repository.deps.json
-C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\bin\Debug\net6.0\EM.Repository.runtimeconfig.json
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\bin\Debug\net6.0\EM.Repository.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\bin\Debug\net6.0\EM.Repository.pdb
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Antiforgery.dll
@@ -606,7 +605,6 @@ C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Reposito
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\refint\EM.Repository.dll
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.pdb
-C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.genruntimeconfig.cache
 C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\ref\EM.Repository.dll
 C:\Users\joaod\OneDrive\Área de Trabalho\ProjetoEM-master (2)\ProjetoEM-master\EM.Repository\bin\Debug\net6.0\EM.Repository.deps.json
 C:\Users\joaod\OneDrive\Área de Trabalho\ProjetoEM-master (2)\ProjetoEM-master\EM.Repository\bin\Debug\net6.0\EM.Repository.dll

@@ -86,9 +86,10 @@ namespace EM.Web.Controllers
                 CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
 
             };
-            Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
-            if (verificaSeMatriculaExiste == null)
-            {
+            //Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
+
+            //if (verificaSeMatriculaExiste == null)
+            //{
                 try
                 {
                     _rep.Atualizar(aluno);
@@ -101,12 +102,12 @@ namespace EM.Web.Controllers
                     _logger.LogError(ex, "Cadastrar");
                     ViewBag.Mensagem = "erro";
                 }
-            }
-            else
-            {
-                ViewBag.Mensagem = "Matricula já em uso!";
-                return View();
-            }
+            //}
+            //else
+            //{
+            //    ViewBag.Mensagem = "Matricula já em uso!";
+            //    return View();
+            //}
             return View();
         }
 

@@ -8,13 +8,13 @@ using Dapper;
 namespace EM.Repository
 {
 
-    //interface
+    //INTERFACE
     public interface IAlunoRepository
     {
         Aluno Selecionar(string id);
 
         int Persistir(Aluno aluno);
-        
+
         IEnumerable<Aluno> Listar();
 
         void Excluir(string id);
@@ -29,7 +29,7 @@ namespace EM.Repository
 
         public IEnumerable<Aluno> Listar()
         {
-           
+
 
             using (conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -58,7 +58,7 @@ namespace EM.Repository
 
         public int Persistir(Aluno aluno)
         {
-             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
+            using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
                 Uteis uteis = new Uteis();
 
@@ -78,7 +78,7 @@ namespace EM.Repository
                     cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
                     cmd.Parameters["@NOME"].Value = aluno.Nome;
                     cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-                    cmd.Parameters["@CPF"].Value =  aluno.CPF;
+                    cmd.Parameters["@CPF"].Value = aluno.CPF;
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
@@ -118,7 +118,7 @@ namespace EM.Repository
                     cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
                     cmd.Parameters["@NOME"].Value = aluno.Nome;
                     cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-                    cmd.Parameters["@CPF"].Value =  aluno.CPF;
+                    cmd.Parameters["@CPF"].Value = aluno.CPF;
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
@@ -146,36 +146,40 @@ namespace EM.Repository
             {
                 throw (fbex);
             }
-            
+
         }
 
         public Aluno Selecionar(string id)
         {
-            //List<Aluno> alunos = new List<Aluno>();
+            Aluno alunos = new Aluno();
+            var mat = id;
 
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
-            //{
+            {
 
-            //    string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @id";
-            //    DataTable dt = Banco.Banco.consulta(sql);
+                string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = " + mat;
+                DataTable dt = Banco.Banco.consulta(sql);
 
-            //    foreach (DataRow item in dt.Rows)
-            //    {
-            //        Aluno aluno = new Aluno()
-            //        {
-            //            Matricula = item.Field<Int32>("MATRICULA"),
-            //            Nome = item.Field<string>("NOME"),
-            //            Sexo = item.Field<Sexo>("SEXO"),
-            //            CPF = item.Field<string>("CPF"),
-            //            Nascimento = item.Field<DateTime>("NASCIMENTO"),
-            //        };
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        Aluno aluno = new Aluno()
+                        {
+                            Matricula = item.Field<Int32>("MATRICULA"),
+                            Nome = item.Field<string>("NOME"),
+                            Sexo = item.Field<Sexo>("SEXO"),
+                            CPF = item.Field<string>("CPF"),
+                            Nascimento = item.Field<DateTime>("NASCIMENTO"),
+                        };
 
-            //        alunos.Add(aluno);
-            //    }
+                    return alunos = aluno;
+                    }
+                }
 
-            //    return alunos;
-            return conexaoFireBird.Query<Aluno>("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA", new { MATRICULA = id }).FirstOrDefault();
-        }
+                return null;
+            }
         }
     }
+}
 

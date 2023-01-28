@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj": {}
+    "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+    "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
+        "projectUniqueName": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
         "projectName": "EM.Domain",
-        "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
+        "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
         "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\obj\\",
+        "outputPath": "C:\\ProjetoEM\\EM.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -86,14 +86,14 @@
         }
       }
     },
-    "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
+    "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectUniqueName": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
         "projectName": "EM.Repository",
-        "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectPath": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
         "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\obj\\",
+        "outputPath": "C:\\ProjetoEM\\EM.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -115,8 +115,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
+              "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
               }
             }
           }
@@ -168,14 +168,14 @@
         }
       }
     },
-    "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj": {
+    "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj",
+        "projectUniqueName": "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj",
         "projectName": "EM.Web",
-        "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\EM.Web.csproj",
+        "projectPath": "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj",
         "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Web\\obj\\",
+        "outputPath": "C:\\ProjetoEM\\EM.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -197,11 +197,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
+              "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
               },
-              "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
-                "projectPath": "C:\\Users\\joaod\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj"
+              "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
+                "projectPath": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj"
               }
             }
           }
