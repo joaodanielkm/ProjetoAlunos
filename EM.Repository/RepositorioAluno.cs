@@ -3,7 +3,6 @@ using EM.Domain.ProjetoEM.EM.Domain;
 using System.Data;
 using EM.Domain;
 using EM.Domain.Utilitarios;
-using Dapper;
 
 namespace EM.Repository
 {
