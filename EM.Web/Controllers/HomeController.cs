@@ -1,4 +1,5 @@
 ﻿using EM.Domain;
+using EM.Domain.Utilitarios;
 using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using EM.Web.Models;
@@ -9,10 +10,9 @@ namespace EM.Web.Controllers
 {
     public class HomeController : Controller
     {
-        Domain.Utilitarios.Uteis uteis = new Domain.Utilitarios.Uteis();
+        Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
         public readonly IAlunoRepository _rep;
-        Aluno.ExisteMatricula aluno1 = new Aluno.ExisteMatricula();
 
         public HomeController(ILogger<HomeController> logger, IAlunoRepository rep)
         {
@@ -74,21 +74,19 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Editar(Aluno getAluno)
         {
-            Domain.Utilitarios.Uteis uteis = new Domain.Utilitarios.Uteis();
 
             var aluno = new Aluno()
             {
 
                 Matricula = getAluno.Matricula,
-                Nome = getAluno.Nome.ToUpper(),
+                Nome = getAluno.Nome?.ToUpper(),
                 Sexo = getAluno.Sexo,
                 Nascimento = uteis.ConvertaData(getAluno.Nascimento),
-                CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : null,
+                CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : null,
 
             };
-            Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
 
-            if (verificaSeMatriculaExiste == null)
+            if (getAluno.Matricula == aluno.Matricula)
             {
                 try
                 {
@@ -102,11 +100,6 @@ namespace EM.Web.Controllers
                     _logger.LogError(ex, "Cadastrar");
                     ViewBag.Mensagem = "erro";
                 }
-            }
-            else
-            {
-                ViewBag.Mensagem = "Matricula já em uso!";
-                return View();
             }
             return View();
         }
@@ -126,17 +119,15 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            var getMatriculas = from a in _rep.Listar()
-                                select a;
             var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
 
             var aluno = new Aluno()
             {
                 Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatriculaMaisUm,
-                Nome = getAluno.Nome.ToUpper(),
+                Nome = getAluno.Nome?.ToUpper(),
                 Sexo = getAluno.Sexo,
                 Nascimento = uteis.ConvertaData(getAluno.Nascimento),
-                CPF = (uteis.EhValidoCPF(getAluno.CPF)) ? getAluno.CPF : "",
+                CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
             };
             Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
 
@@ -166,7 +157,7 @@ namespace EM.Web.Controllers
 
         public IActionResult Deletar(int id)
         {
-            if (id == null)
+            if (id == null || id < 1)
             {
                 return NotFound();
             }

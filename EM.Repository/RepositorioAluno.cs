@@ -6,7 +6,6 @@ using EM.Domain.Utilitarios;
 
 namespace EM.Repository
 {
-
     //INTERFACE
     public interface IAlunoRepository
     {
@@ -59,7 +58,6 @@ namespace EM.Repository
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
-                Uteis uteis = new Uteis();
 
                 try
                 {
@@ -150,7 +148,7 @@ namespace EM.Repository
 
         public Aluno Selecionar(string id)
         {
-            Aluno alunos = new Aluno();
+            Aluno alunoObtido = new Aluno();
             var mat = id;
 
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
@@ -172,7 +170,7 @@ namespace EM.Repository
                             Nascimento = item.Field<DateTime>("NASCIMENTO"),
                         };
 
-                    return alunos = aluno;
+                    return alunoObtido = aluno;
                     }
                 }
 
