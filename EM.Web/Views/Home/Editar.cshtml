@@ -19,8 +19,7 @@
                     </div>
                     <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="true", @placeholder="Digite o nome do aluno", @id="nome", @onblur="return validaCampoNome(this)"})
-                        @Html.ValidationMessageFor(model => model.Nome)
+                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="true", @id="nome", @placeholder="Digite o nome do aluno"})
                     </div>
                 </div>
                 <div class="row">
@@ -30,18 +29,19 @@
                     </div>
                     <div class="col ">
                         @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.EditorFor(a => a.Nascimento, new { htmlAttributes = new { @class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()",@onpaste="return false", @ondrop="return false"}})
+                        @Html.EditorFor(a => a.Nascimento, new { htmlAttributes = new { @class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()", @onpaste="return false", @ondrop="return false"}})
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)",@onpaste="return false"})
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)",@onpaste="return false", @autocomplete="off"})
                     </div>
                 </div>
                 <br />
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left "></i></a>
-                        <input type="submit" value="Editar" class="btn btn-info" />
+                        <input type="submit" value="Editar" class="btn btn-info " asp-action="Editar" onclick="return validaCampoNome(this), validaCampoMatricula(this)" />
+                        @*<input type="submit" value="Editar" class="btn btn-info" onclick="return validaCampoNome(this), validaCampoMatricula(this)" />*@
                     </div>
                     @if (@ViewBag.Mensagem == "Atualizado!")
                     {
@@ -65,6 +65,18 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })</script>
+
+                    }
+                    else if (@ViewBag.Mensagem == "Favor preencha o nome!")
+                    {
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Favor preencha o nome!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })</script>
+
                     }
                 </div>
 

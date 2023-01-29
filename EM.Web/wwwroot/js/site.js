@@ -47,8 +47,7 @@ function verificarCPF(c) {
             baseCpf == "66666666666" ||
             baseCpf == "77777777777" ||
             baseCpf == "88888888888" ||
-            baseCpf == "99999999999")
-        {
+            baseCpf == "99999999999") {
             console.log(cpfOriginal + "  Inválido 0");
             alert("CPF " + cpfOriginal + "  Inválido 0");
             v = true;
@@ -63,7 +62,7 @@ function verificarCPF(c) {
             console.log(cpfOriginal + " Inválido1");
             alert("CPF " + cpfOriginal + " Inválido1");
             v = true;
-             setTimeout(function () { $('#cpf').focus(); }, 1);
+            setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
         d1 = 11 - (d1 % 11);
@@ -72,7 +71,7 @@ function verificarCPF(c) {
             console.log(cpfOriginal + " Inválido2");
             alert("CPF " + cpfOriginal + " Inválido2");
             v = true;
-             setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
+            setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
             return false;
         }
 
@@ -87,11 +86,11 @@ function verificarCPF(c) {
             alert("CPF " + cpfOriginal + " Inválido3");
 
             v = true;
-             setTimeout(function () { $('#cpf').focus(); }, 1);
+            setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
         if (!v) {
-            console.log("Cpf valido: "+cpfOriginal); 
+            console.log("Cpf valido: " + cpfOriginal);
             return true;
         }
     }
@@ -154,6 +153,7 @@ function onlynumberData(evt) {
     }
 };
 
+
 function deletar(a) {
     new swal({
         title: 'Quer mesmo deletar?',
@@ -165,7 +165,7 @@ function deletar(a) {
         confirmButtonText: 'Sim, tenho certeza!',
         cancelButtonText: 'Melhor não...'
     }).then((result) => {
-        if (result.value) {
+        if (result.value == true) {
             swal(
                 'Deletado!',
                 'Deletado com Sucesso!',
@@ -189,16 +189,29 @@ function alerta(type, title, mensage) {
 function validaCampoNome() {
     const nomee = document.querySelector('#nome');
     if (nomee.value.trim() == "") {
-        alert('Por favor, preencha o campo nome');
+        Swal.fire({
+            icon: 'error',
+            title: 'Verifique os dados digitados!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        //alert('Por favor, preencha o campo nome!');
         setTimeout(function () { $('#nome').focus(); }, 1);
-       /* document.getElementById("nome").focus();*/
+        //document.getElementById("#nome").focus();
         return false
     }
 }
 function validaCampoMatricula() {
-    const nomee = document.querySelector('#matricula');
-    if (nomee.value.trim() == "" || nomee.value < 1) {
-        alert('Matricula 0, você é burro?');
+    const matricula = document.querySelector('#matricula');
+    if (matricula.value.trim() == "" || matricula.value < 1) {
+        Swal.fire({
+            type: type,
+            title: title,
+            text: mensage,
+            icon: 'warning',
+            showConfirmeButton: false,
+            timer: 1500,
+            //alert('Matricula' + matricula.value + ' não permitida!');
         setTimeout(function () { $('#matricula').focus(); }, 1);
         /* document.getElementById("nome").focus();*/
         return false

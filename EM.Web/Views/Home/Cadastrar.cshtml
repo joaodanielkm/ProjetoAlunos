@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-9">
                         @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue",@id="nome", @placeholder="Digite o nome do aluno",@onblur="return validaCampoNome(this)"})
+                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue",@id="nome", @placeholder="Digite o nome do aluno"})
                     </div>
                 </div>
                 <div class="row">
@@ -32,14 +32,15 @@
                     </div>
                     <div class="col">
                         @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)" , @placeholder="Digite o cpf do aluno",@onpaste="return false", @ondrop="return false"})
+                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)" , @placeholder="Digite o cpf do aluno",@onpaste="return false", @ondrop="return false", @autocomplete="off"})
                     </div>
                 </div>
                 <br />
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this)" />
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this)" onclick="validaCampoNome(this)" onclick="validadata()" />
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar"><i class="fa fa-refresh "></i> </a>
                     </div>
                     @if (@ViewBag.Mensagem == "Cadastrado!")
                     {
@@ -69,6 +70,17 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Verifique os dados digitados!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })</script>
+
+                    }
+                    else if (@ViewBag.Mensagem == "Favor preencha o nome!")
+                    {
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Favor preencha o nome!',
                                 showConfirmButton: false,
                                 timer: 1500
                             })</script>

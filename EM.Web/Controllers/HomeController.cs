@@ -79,14 +79,14 @@ namespace EM.Web.Controllers
             {
 
                 Matricula = getAluno.Matricula,
-                Nome = getAluno.Nome?.ToUpper(),
+                Nome = getAluno.Nome?.ToUpper().Trim(),
                 Sexo = getAluno.Sexo,
                 Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : null,
 
             };
 
-            if (getAluno.Matricula == aluno.Matricula)
+            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
             {
                 try
                 {
@@ -101,6 +101,11 @@ namespace EM.Web.Controllers
                     ViewBag.Mensagem = "erro";
                 }
             }
+            else 
+            {
+                ViewBag.Mensagem = "Favor preencha o nome!";
+                return View();
+            }
             return View();
         }
 
@@ -108,9 +113,10 @@ namespace EM.Web.Controllers
         {
             Aluno aluno = new Aluno();
 
-            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
+            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
 
             aluno.Sexo = Sexo.Masculino;
+
             aluno.Matricula = getUltimaMatriculaMaisUm;
 
             return View(aluno);
@@ -119,19 +125,19 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula) + 1;
+            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
 
             var aluno = new Aluno()
             {
-                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : getUltimaMatriculaMaisUm,
-                Nome = getAluno.Nome?.ToUpper(),
+                Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
+                Nome = getAluno.Nome?.ToUpper().Trim(),
                 Sexo = getAluno.Sexo,
                 Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
             };
             Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
 
-            if (verificaSeMatriculaExiste == null)
+            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome))
             {
                 try
                 {
@@ -147,7 +153,7 @@ namespace EM.Web.Controllers
             }
             else
             {
-                ViewBag.Mensagem = "Matricula já em uso!";
+                ViewBag.Mensagem = "erro";
                 return View();
             }
             return View();
