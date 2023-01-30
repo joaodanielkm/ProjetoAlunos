@@ -31,7 +31,7 @@
             @*implementar buscar por digitar*@
         </div>
         <div class="col-auto">
-            <button class="btn btn-success" id="pesq" type="submit" value="Filter"><i class="fa fa-search "></i></button>
+            <button class="btn btn-success" id="pesq" type="submit" value="Filter"><i class="fa fa-search " title="Pesquisar"></i></button>
         </div>
     </div>
 </form>
@@ -63,8 +63,8 @@
                             @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = " text-center  bg-transparent border-0  border-light col-6",@id="inputNascimento", @readOnly="true"})
                         </td>
                         <td scope="row" class=" text-center col-1">
-                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white "><i class="fa fa-trash "></i></a>
-                            <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit"></i></a>
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white " title="Deletar"><i class="fa fa-trash "></i></a>
+                            <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
                         </td>
                     </tr>
                     

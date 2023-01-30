@@ -38,9 +38,9 @@
                 <br />
                 <div class="row">
                     <div class="col-sm-12 text-right">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this)" onclick="validaCampoNome(this)" onclick="validadata()" />
-                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar"><i class="fa fa-refresh "></i> </a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this), validaCampoNome(this), validadata()" />
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar" title="Limpar"><i class="fa fa-broom "></i> </a>
                     </div>
                     @if (@ViewBag.Mensagem == "Cadastrado!")
                     {

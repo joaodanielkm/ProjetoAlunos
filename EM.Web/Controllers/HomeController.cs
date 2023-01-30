@@ -143,7 +143,7 @@ namespace EM.Web.Controllers
                 {
                     _rep.Persistir(aluno);
                     ViewBag.Mensagem = "Cadastrado!";
-                    return View();
+                   // return View();
                 }
                 catch (Exception ex)
                 {

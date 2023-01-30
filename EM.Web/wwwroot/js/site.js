@@ -19,7 +19,6 @@ inputCpf.addEventListener('keypress', () => {
 
 inputNasc.addEventListener('keypress', () => {
     let inputlength = inputNasc.value.length
-
     if (inputlength === 2 || inputlength === 5) {
         inputNasc.value += '/';
     }
@@ -48,8 +47,8 @@ function verificarCPF(c) {
             baseCpf == "77777777777" ||
             baseCpf == "88888888888" ||
             baseCpf == "99999999999") {
-            console.log(cpfOriginal + "  Inválido 0");
-            alert("CPF " + cpfOriginal + "  Inválido 0");
+            //console.log(cpfOriginal + "  Inválido 0");
+            alert("CPF " + cpfOriginal + "  Inválido");
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
@@ -59,8 +58,8 @@ function verificarCPF(c) {
             d1 += c.charAt(i) * (10 - i);
         }
         if (d1 == 0) {
-            console.log(cpfOriginal + " Inválido1");
-            alert("CPF " + cpfOriginal + " Inválido1");
+            //console.log(cpfOriginal + " Inválido1");
+            alert("CPF " + cpfOriginal + " Inválido");
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
@@ -68,8 +67,8 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(0) != d1) {
-            console.log(cpfOriginal + " Inválido2");
-            alert("CPF " + cpfOriginal + " Inválido2");
+            //console.log(cpfOriginal + " Inválido2");
+            alert("CPF " + cpfOriginal + " Inválido");
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
             return false;
@@ -82,8 +81,8 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(1) != d1) {
-            console.log(cpfOriginal + " Inválido3");
-            alert("CPF " + cpfOriginal + " Inválido3");
+            //console.log(cpfOriginal + " Inválido3");
+            alert("CPF " + cpfOriginal + " Inválido");
 
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);
@@ -116,13 +115,13 @@ function validadata(control) {
     if (idade < 1 || idade > 119) {
         alert("Data inválida!");
         setTimeout(function () { $('#nasc').focus(); }, 1);
-        console.log(idade);
+        //console.log(idade);
         return false;
     }
 
     if (idade >= 1 && idade <= 120) {
         //alert("Data valida");
-        console.log(idade);
+        //console.log(idade);
         return true;
     }
 
@@ -211,6 +210,7 @@ function validaCampoMatricula() {
             icon: 'warning',
             showConfirmeButton: false,
             timer: 1500,
+        })
             //alert('Matricula' + matricula.value + ' não permitida!');
         setTimeout(function () { $('#matricula').focus(); }, 1);
         /* document.getElementById("nome").focus();*/
