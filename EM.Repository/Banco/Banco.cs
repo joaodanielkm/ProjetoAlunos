@@ -17,8 +17,8 @@ namespace EM.Repository.Banco
 
         public FbConnection getConexao()
         {
-            //string conn = @"User=SYSDBA;Password=masterkey;Database=C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
-            string conn = @"User=SYSDBA;Password=masterkey;Database=192.168.1.160/3054:C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+            //string conn = @"User=SYSDBA;Password=masterkey;Database=C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+            string conn = @"User=SYSDBA;Password=masterkey;Database=192.168.1.160/3054:C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
             return new FbConnection(conn);
         }
 
