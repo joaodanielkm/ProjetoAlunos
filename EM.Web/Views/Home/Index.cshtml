@@ -17,15 +17,23 @@
 <form asp-controller="Home" asp-action="Index" method="get" class="card card-sm">
     <div class="card-body row no-gutters align-items-center">
         <div class="col-auto">
-            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
+            <label class="font-weight-bold my-1 mr-2" for="inlineFormCustomSelectPref">Pesquisar por:</label>
         </div>
         <div class="col-auto">
-            <select class="custom-select my-1 mr-sm-1 form-control" name="pesquisePor" id="selecionadoParaPesquisa">
+            <div class="btn-group d-flex" role="group">
+                <input type="radio" class="btn-check" name="pesquisePor" id="nome" value="nome" autocomplete="off" checked="">
+                <label class="btn btn-outline-success" for="nome">Nome</label>
 
-                <option value="nome" name="nome" id="nome" class="form-control">Nome</option>
-                <option value="matricula" name="matricula" class="form-control">Matricula</option>
-            </select>
+                <input type="radio" class="btn-check" name="pesquisePor" id="matricula" value="matricula" autocomplete="off">
+                <label class="btn btn-outline-success" for="matricula">Matricula</label>
+            </div>
         </div>
+        <script>
+            var RadioButtonPesquisePorAluno = new EMNGRadioButton({
+                id: 'pesquisePor',
+                valorDefault: true,
+            });
+        </script>
         <div class="col">
             <input name="SearchString" class="form-control" type="text" placeholder="" autocomplete="off" id="pesquisa">
             @*implementar buscar por digitar*@
