@@ -86,7 +86,7 @@ namespace EM.Web.Controllers
 
             };
 
-            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome))
+            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome) && uteis.EhValidoNome(aluno.Nome))
             {
                 try
                 {
@@ -137,7 +137,7 @@ namespace EM.Web.Controllers
             };
             Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
 
-            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome))
+            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome) && uteis.EhValidoNome(aluno.Nome))
             {
                 try
                 {

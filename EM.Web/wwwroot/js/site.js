@@ -187,6 +187,7 @@ function alerta(type, title, mensage) {
 }
 function validaCampoNome() {
     const nomee = document.querySelector('#nome');
+    console.log(nomee.length);
     if (nomee.value.trim() == "" || nomee.length < 3) {
         Swal.fire({
             icon: 'error',
@@ -194,10 +195,12 @@ function validaCampoNome() {
             showConfirmButton: false,
             timer: 1500
         })
+        console.log(nomee.length);
         //alert('Por favor, preencha o campo nome!');
         setTimeout(function () { $('#nome').focus(); }, 1);
         //document.getElementById("#nome").focus();
         return false
+       
     }
 }
 function validaCampoMatricula() {

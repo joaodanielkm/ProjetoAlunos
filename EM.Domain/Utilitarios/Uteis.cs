@@ -89,10 +89,15 @@ namespace EM.Domain.Utilitarios
 
 
         }
-        public object DataToBD(DateOnly? Data)
+
+        public bool EhValidoNome(string nome)
         {
-            if (!Data.HasValue) return DBNull.Value;
-            return Data.Value.ToString("yyyyMMdd");
+            if (nome.Length < 3 || nome.Length > 100)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
