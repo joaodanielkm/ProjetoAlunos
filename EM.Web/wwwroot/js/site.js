@@ -187,7 +187,7 @@ function alerta(type, title, mensage) {
 }
 function validaCampoNome() {
     const nomee = document.querySelector('#nome');
-    if (nomee.value.trim() == "") {
+    if (nomee.value.trim() == "" || nomee.length < 3) {
         Swal.fire({
             icon: 'error',
             title: 'Verifique os dados digitados!',
