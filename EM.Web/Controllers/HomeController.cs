@@ -113,7 +113,16 @@ namespace EM.Web.Controllers
         {
             Aluno aluno = new Aluno();
 
-            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+            int getUltimaMatriculaMaisUm = 0;
+
+            if (!string.IsNullOrEmpty(_rep.Listar().Max(a => a.Matricula.ToString())))
+            {
+                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+            }
+            else
+            {
+                getUltimaMatriculaMaisUm = 1;
+            }
 
             aluno.Sexo = Sexo.Masculino;
 
@@ -125,7 +134,16 @@ namespace EM.Web.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
-            var getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+            int getUltimaMatriculaMaisUm = 0;
+
+            if (!string.IsNullOrEmpty(_rep.Listar().Max(a => a.Matricula.ToString())))
+            {
+                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+            }
+            else
+            {
+                getUltimaMatriculaMaisUm = 1;
+            }
 
             var aluno = new Aluno()
             {
