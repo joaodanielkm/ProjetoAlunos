@@ -9,7 +9,7 @@
 
 
         [Table("ALUNO")]
-        public class Aluno
+        public class Aluno : Validation
         {
 
             [Key]
@@ -43,27 +43,6 @@
             [ExisteCPF]
             public string? CPF { get; set; }
 
-            public class ExisteMatricula : ValidationAttribute
-            {
-                public int UltimaMatricula { get; set; }
-
-                protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
-                {
-                    return (Int32)value == UltimaMatricula
-                        ? new ValidationResult(errorMessage: "Matricula em uso!")
-                        : ValidationResult.Success;
-                }
-            }
-
-            public class ExisteCPF : ValidationAttribute
-            {
-                protected override ValidationResult? IsValid(object value, ValidationContext validationContext)
-                {
-                    return (string)value == "122"
-                        ? new ValidationResult(errorMessage: "CPF em uso!")
-                        : ValidationResult.Success;
-                }
-            }
 
             public override bool Equals(object? obj)
             {
