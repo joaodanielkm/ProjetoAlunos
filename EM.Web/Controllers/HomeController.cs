@@ -13,9 +13,9 @@ namespace EM.Web.Controllers
     {
         Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
-        public readonly IEntidadeAluno _rep;
+        public readonly EntidadeAluno _rep;
 
-        public HomeController(ILogger<HomeController> logger, IEntidadeAluno rep)
+        public HomeController(ILogger<HomeController> logger, EntidadeAluno rep)
         {
             _logger = logger;
             _rep = rep;

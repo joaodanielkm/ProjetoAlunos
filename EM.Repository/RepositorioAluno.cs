@@ -6,7 +6,6 @@ using EM.Domain.Utilitarios;
 
 namespace EM.Repository
 {
-
     public class AlunoRepository : RepositorioAbstrato<Aluno>, IEntidade<Aluno> 
     {
         FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();

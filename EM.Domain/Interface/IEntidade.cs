@@ -4,11 +4,11 @@
     {
         IEnumerable<T> GetAll();
 
-        T Get(T obj);
+        T Get(string obj);
         
         void Add(T obj);
         
-        void Remove(T obj);
+        void Remove(string obj);
 
         void Update(T obj);
     }
