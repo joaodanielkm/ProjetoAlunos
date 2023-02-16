@@ -5,6 +5,7 @@ using EM.Repository;
 using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using EM.Domain.Interface;
 
 namespace EM.Web.Controllers
 {
@@ -12,9 +13,9 @@ namespace EM.Web.Controllers
     {
         Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
-        public readonly IAlunoRepository _rep;
+        public readonly IEntidadeAluno _rep;
 
-        public HomeController(ILogger<HomeController> logger, IAlunoRepository rep)
+        public HomeController(ILogger<HomeController> logger, IEntidadeAluno rep)
         {
             _logger = logger;
             _rep = rep;
@@ -25,7 +26,7 @@ namespace EM.Web.Controllers
 
             if (pesquisePor == "matricula")
             {
-                var alunosPorMatricula = from a in _rep.Listar()
+                var alunosPorMatricula = from a in _rep.GetAll()
                                          select a;
 
                 if (!String.IsNullOrEmpty(searchString))
@@ -38,12 +39,12 @@ namespace EM.Web.Controllers
             else
             {
 
-                if (_rep.Listar == null)
+                if (_rep.GetAll == null)
                 {
                     return Problem();
                 }
 
-                var alunosPorNome = from a in _rep.Listar()
+                var alunosPorNome = from a in _rep.GetAll()
                                     select a;
 
                 if (!String.IsNullOrEmpty(searchString))
@@ -65,7 +66,7 @@ namespace EM.Web.Controllers
         [HttpGet]
         public IActionResult Editar(string id)
         {
-            var aluno = _rep.Selecionar(id);
+            var aluno = _rep.Get(id);
 
             return View(aluno);
 
@@ -90,7 +91,7 @@ namespace EM.Web.Controllers
             {
                 try
                 {
-                    _rep.Atualizar(aluno);
+                    _rep.Update(aluno);
                     ViewBag.Mensagem = "Atualizado!";
                     //return RedirectToAction("Index", "Home");
                     return View();
@@ -115,9 +116,9 @@ namespace EM.Web.Controllers
 
             int getUltimaMatriculaMaisUm = 0;
 
-            if (!string.IsNullOrEmpty(_rep.Listar().Max(a => a.Matricula.ToString())))
+            if (!string.IsNullOrEmpty(_rep.GetAll().Max(a => a.Matricula.ToString())))
             {
-                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+                getUltimaMatriculaMaisUm = _rep.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.GetAll().Max(a => a.Matricula) + 1;
             }
             else
             {
@@ -136,9 +137,9 @@ namespace EM.Web.Controllers
         {
             int getUltimaMatriculaMaisUm = 0;
 
-            if (!string.IsNullOrEmpty(_rep.Listar().Max(a => a.Matricula.ToString())))
+            if (!string.IsNullOrEmpty(_rep.GetAll().Max(a => a.Matricula.ToString())))
             {
-                getUltimaMatriculaMaisUm = _rep.Listar().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.Listar().Max(a => a.Matricula) + 1;
+                getUltimaMatriculaMaisUm = _rep.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.GetAll().Max(a => a.Matricula) + 1;
             }
             else
             {
@@ -153,13 +154,13 @@ namespace EM.Web.Controllers
                 Nascimento = uteis.ConvertaData(getAluno.Nascimento),
                 CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
             };
-            Aluno? verificaSeMatriculaExiste = _rep.Selecionar(getAluno.Matricula.ToString());
+            Aluno? verificaSeMatriculaExiste = _rep.Get(getAluno.Matricula.ToString());
 
             if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome) && uteis.EhValidoNome(aluno.Nome))
             {
                 try
                 {
-                    _rep.Persistir(aluno);
+                    _rep.Add(aluno);
                     ViewBag.Mensagem = "Cadastrado!";
                    // return View();
                 }
@@ -188,7 +189,7 @@ namespace EM.Web.Controllers
 
             try
             {
-                _rep.Excluir(id.ToString());
+                _rep.Remove(id.ToString());
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)

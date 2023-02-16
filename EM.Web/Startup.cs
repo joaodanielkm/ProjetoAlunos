@@ -1,4 +1,5 @@
-﻿using EM.Repository;
+﻿using EM.Domain.Interface;
+using EM.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,7 @@ namespace EM.Web
         //injeção do repositório
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IAlunoRepository, AlunoRepository>();
+            services.AddTransient<IEntidadeAluno, IEntidadeAluno>();
 
             services.AddRazorPages();
         }

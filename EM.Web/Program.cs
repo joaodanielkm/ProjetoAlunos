@@ -1,3 +1,4 @@
+using EM.Domain.Interface;
 using EM.Repository;
 using Microsoft.AspNetCore.Mvc.Razor;
 //using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<Contexto>(x => x.UseFirebird(@"database=C:\Users\joaod\source\repos\ProjetoEM\EM.Repository\Banco\DBPROJETOEM.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3"));
 //builder.Services.AddDbContext<Contexto>(x => x.UseFirebird(@"database=192.168.1.160/3054:C:\Users\User\source\repos\ProjetoEM\EM.Repository\Banco\DBPROJETOEM.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3"));
-builder.Services.AddTransient<IAlunoRepository, AlunoRepository>();
+builder.Services.AddTransient<IEntidadeAluno, IEntidadeAluno>();
 
 builder.Services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation()

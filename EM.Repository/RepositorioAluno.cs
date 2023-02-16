@@ -6,26 +6,12 @@ using EM.Domain.Utilitarios;
 
 namespace EM.Repository
 {
-    //INTERFACE
-    public interface IAlunoRepository
-    {
-        Aluno Selecionar(string id);
 
-        int Persistir(Aluno aluno);
-
-        IEnumerable<Aluno> Listar();
-
-        void Excluir(string id);
-
-        int Atualizar(Aluno aluno);
-
-    }
-
-    public class AlunoRepository : IAlunoRepository
+    public class AlunoRepository : RepositorioAbstrato<Aluno>, IEntidade<Aluno> 
     {
         FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();
 
-        public IEnumerable<Aluno> Listar()
+        public IEnumerable<Aluno> GetAll()
         {
 
 
@@ -54,7 +40,7 @@ namespace EM.Repository
             }
         }
 
-        public int Persistir(Aluno aluno)
+        public int Add(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -93,7 +79,7 @@ namespace EM.Repository
 
         }
 
-        public int Atualizar(Aluno aluno)
+        public int Update(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -132,7 +118,7 @@ namespace EM.Repository
             }
         }
 
-        public void Excluir(string id)
+        public void Remove(string id)
         {
             try
             {
@@ -146,7 +132,7 @@ namespace EM.Repository
 
         }
 
-        public Aluno Selecionar(string id)
+        public Aluno Get(string id)
         {
             Aluno alunoObtido = new Aluno();
             var mat = id;
@@ -170,7 +156,7 @@ namespace EM.Repository
                             Nascimento = item.Field<DateTime>("NASCIMENTO"),
                         };
 
-                    return alunoObtido = aluno;
+                        return alunoObtido = aluno;
                     }
                 }
 
