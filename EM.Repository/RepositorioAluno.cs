@@ -39,7 +39,7 @@ namespace EM.Repository
             }
         }
 
-        public int Add(Aluno aluno)
+        public void Add(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -64,7 +64,7 @@ namespace EM.Repository
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
-                    return cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (FbException fbex)
                 {
@@ -78,7 +78,7 @@ namespace EM.Repository
 
         }
 
-        public int Update(Aluno aluno)
+        public void Update(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -104,7 +104,7 @@ namespace EM.Repository
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
-                    return cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (FbException fbex)
                 {
