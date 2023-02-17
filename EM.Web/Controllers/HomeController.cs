@@ -180,16 +180,25 @@ namespace EM.Web.Controllers
 
         }
 
-        public IActionResult Deletar(Aluno id)
+        public IActionResult Deletar(string id)
         {
-            if (id.Matricula == null || id.Matricula < 1)
+            var aluno = from a in _rep.GetAll()
+                                     select a;
+
+            aluno = aluno.Where(a => a.Matricula.ToString() == id);
+
+            Aluno alunoo = new Aluno();
+
+            alunoo = (Aluno)aluno;
+
+            if (alunoo == null || alunoo.Matricula < 1)
             {
                 return NotFound();
             }
 
             try
             {
-                _rep.Remove(id);
+                _rep.Remove(alunoo);
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)

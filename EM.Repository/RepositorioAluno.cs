@@ -117,11 +117,11 @@ namespace EM.Repository
             }
         }
 
-        public void Remove(string id)
+        public void Remove(Aluno aluno)
         {
             try
             {
-                var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{id}'";
+                var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{aluno.Matricula}'";
                 Banco.Banco.consulta(sql);
             }
             catch (FbException fbex)
