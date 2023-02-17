@@ -182,23 +182,27 @@ namespace EM.Web.Controllers
 
         public IActionResult Deletar(string id)
         {
-            var aluno = from a in _rep.GetAll()
-                                     select a;
+            if (!int.TryParse(id, out int matricula))
+            {
+                return BadRequest("ID inválido.");
+            }
 
-            aluno = aluno.Where(a => a.Matricula.ToString() == id);
+            var aluno = _rep.GetAll().FirstOrDefault(a => a.Matricula == matricula);
 
-            Aluno alunoo = new Aluno();
+            if (aluno == null)
+            {
+                return NotFound();
+            }
 
-            alunoo = (Aluno)aluno;
 
-            if (alunoo == null || alunoo.Matricula < 1)
+            if (aluno == null || aluno.Matricula < 1)
             {
                 return NotFound();
             }
 
             try
             {
-                _rep.Remove(alunoo);
+                _rep.Remove(aluno);
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)
