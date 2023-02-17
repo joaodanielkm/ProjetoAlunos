@@ -2,7 +2,7 @@
 
 namespace EM.Domain.Interface
 {
-    public interface EntidadeAluno : IEntidade<Aluno>
+    public interface IEntidadeAluno : IEntidade<Aluno>
     {
 
     }

@@ -13,9 +13,9 @@ namespace EM.Web.Controllers
     {
         Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
-        public readonly EntidadeAluno _rep;
+        public readonly IEntidade<Aluno> _rep;
 
-        public HomeController(ILogger<HomeController> logger, EntidadeAluno rep)
+        public HomeController(ILogger<HomeController> logger, IEntidade<Aluno> rep)
         {
             _logger = logger;
             _rep = rep;
@@ -180,16 +180,16 @@ namespace EM.Web.Controllers
 
         }
 
-        public IActionResult Deletar(int id)
+        public IActionResult Deletar(Aluno id)
         {
-            if (id == null || id < 1)
+            if (id.Matricula == null || id.Matricula < 1)
             {
                 return NotFound();
             }
 
             try
             {
-                _rep.Remove(id.ToString());
+                _rep.Remove(id);
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@
         
         void Add(T obj);
         
-        void Remove(string obj);
+        void Remove(T obj);
 
         void Update(T obj);
     }

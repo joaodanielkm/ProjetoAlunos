@@ -10,7 +10,7 @@ namespace EM.Repository
             Add(obj);
         }
 
-        public T Get(T obj)
+        public T Get(string obj)
         {
             return Get(obj);
         }

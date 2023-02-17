@@ -1,4 +1,6 @@
+using EM.Domain;
 using EM.Domain.Interface;
+using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -6,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<AlunoRepository, AlunoRepository>();
+builder.Services.AddTransient<IEntidade<Aluno>, AlunoRepository>();
 
 builder.Services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation()
