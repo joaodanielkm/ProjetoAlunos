@@ -6,26 +6,11 @@ using EM.Domain.Utilitarios;
 
 namespace EM.Repository
 {
-    //INTERFACE
-    public interface IAlunoRepository
-    {
-        Aluno Selecionar(string id);
-
-        int Persistir(Aluno aluno);
-
-        IEnumerable<Aluno> Listar();
-
-        void Excluir(string id);
-
-        int Atualizar(Aluno aluno);
-
-    }
-
-    public class AlunoRepository : IAlunoRepository
+    public class AlunoRepository : RepositorioAbstrato<Aluno>
     {
         FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();
 
-        public IEnumerable<Aluno> Listar()
+        public IEnumerable<Aluno> GetAll()
         {
 
 
@@ -54,7 +39,7 @@ namespace EM.Repository
             }
         }
 
-        public int Persistir(Aluno aluno)
+        public void Add(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -79,7 +64,7 @@ namespace EM.Repository
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
-                    return cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (FbException fbex)
                 {
@@ -93,7 +78,7 @@ namespace EM.Repository
 
         }
 
-        public int Atualizar(Aluno aluno)
+        public void Update(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -119,7 +104,7 @@ namespace EM.Repository
                     cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
 
-                    return cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                 }
                 catch (FbException fbex)
                 {
@@ -132,11 +117,11 @@ namespace EM.Repository
             }
         }
 
-        public void Excluir(string id)
+        public void Remove(Aluno aluno)
         {
             try
             {
-                var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{id}'";
+                var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{aluno.Matricula}'";
                 Banco.Banco.consulta(sql);
             }
             catch (FbException fbex)
@@ -146,7 +131,7 @@ namespace EM.Repository
 
         }
 
-        public Aluno Selecionar(string id)
+        public Aluno Get(string id)
         {
             Aluno alunoObtido = new Aluno();
             var mat = id;
@@ -170,7 +155,7 @@ namespace EM.Repository
                             Nascimento = item.Field<DateTime>("NASCIMENTO"),
                         };
 
-                    return alunoObtido = aluno;
+                        return alunoObtido = aluno;
                     }
                 }
 

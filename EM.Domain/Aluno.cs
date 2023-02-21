@@ -7,9 +7,8 @@
     namespace ProjetoEM.EM.Domain
     {
 
-
         [Table("ALUNO")]
-        public class Aluno : Validation
+        public class Aluno : Validation, IEntidade
         {
 
             [Key]
