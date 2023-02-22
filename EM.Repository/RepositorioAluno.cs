@@ -1,4 +1,4 @@
-﻿using FirebirdSql.Data.FirebirdClient;
+using FirebirdSql.Data.FirebirdClient;
 using EM.Domain.ProjetoEM.EM.Domain;
 using System.Data;
 using EM.Domain;
@@ -10,7 +10,7 @@ namespace EM.Repository
     {
         FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao();
 
-        public IEnumerable<Aluno> GetAll()
+        public override IEnumerable<Aluno> GetAll()
         {
 
 
@@ -39,7 +39,7 @@ namespace EM.Repository
             }
         }
 
-        public void Add(Aluno aluno)
+        public override void Add(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -78,7 +78,7 @@ namespace EM.Repository
 
         }
 
-        public void Update(Aluno aluno)
+        public override void Update(Aluno aluno)
         {
             using (FbConnection conexaoFireBird = Banco.Banco.getInstancia().getConexao())
             {
@@ -117,7 +117,7 @@ namespace EM.Repository
             }
         }
 
-        public void Remove(Aluno aluno)
+        public override void Remove(Aluno aluno)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace EM.Repository
 
         }
 
-        public Aluno Get(string id)
+        public override Aluno Get(string id)
         {
             Aluno alunoObtido = new Aluno();
             var mat = id;
