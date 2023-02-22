@@ -5,30 +5,14 @@ namespace EM.Repository
 {
     public abstract class RepositorioAbstrato<T> where T : IEntidade
     {
+        public abstract void Add(T obj);
 
-        public void Add(T obj)
-        {
-            Add(obj);
-        }
+        public abstract T Get(string obj);
 
-        public T Get(string obj)
-        {
-            return Get(obj);
-        }
+        public abstract IEnumerable<T> GetAll();
 
-        public IEnumerable<T> GetAll()
-        {
-            return GetAll();
-        }
+        public abstract void Remove(T obj);
 
-        public void Remove(T obj)
-        {
-            Remove(obj);
-        }
-
-        public void Update(T obj)
-        {
-            Update(obj);
-        }
+        public abstract void Update(T obj);
     }
 }
