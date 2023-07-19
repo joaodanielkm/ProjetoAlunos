@@ -4,7 +4,6 @@
 }
 @model EM.Domain.ProjetoEM.EM.Domain.Aluno
 
-
 <h4>Editar aluno</h4>
 <hr />
 <div class="row">
@@ -14,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3 ">
-                         @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
+                        @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
                         @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="true", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @readonly=true})
                     </div>
                     <div class="col-9">
@@ -44,7 +43,6 @@
                     </div>
                     @if (@ViewBag.Mensagem == "Atualizado!")
                     {
-
                         <script>
                             Swal.fire({
                                 position: 'top-center',
@@ -64,7 +62,6 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })</script>
-
                     }
                     else if (@ViewBag.Mensagem == "Favor preencha o nome!")
                     {
@@ -75,12 +72,9 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })</script>
-
                     }
                 </div>
-
             </div>
-
         </form>
     </div>
 </div>

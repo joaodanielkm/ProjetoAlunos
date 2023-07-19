@@ -1,14 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-const inputCpf = document.querySelector('#cpf');
+﻿const inputCpf = document.querySelector('#cpf');
 const inputNasc = document.querySelector('#nasc');
+debugger
+const inputDelete = document.querySelector('#deletar');
 
 
 inputCpf.addEventListener('keypress', () => {
     let inputlength = inputCpf.value.length
-    //console.log(inputlength);
 
     if (inputlength === 3 || inputlength === 7) {
         inputCpf.value += '.';
@@ -17,12 +14,18 @@ inputCpf.addEventListener('keypress', () => {
     }
 })
 
-inputNasc.addEventListener('keypress', () => {
-    let inputlength = inputNasc.value.length
-    if (inputlength === 2 || inputlength === 5) {
-        inputNasc.value += '/';
-    }
+inputDelete.addEventListener('keypress', () => {
+    debugger
+        deletar();
 })
+
+//inputNasc.addEventListener('keypress', () => {
+//    let inputlength = inputNasc.value.length
+//    if (inputlength === 2 || inputlength === 5) {
+//        inputNasc.value += '/';
+//    }
+//})
+
 
 function verificarCPF(c) {
     var cpfOriginal = c;
@@ -47,7 +50,6 @@ function verificarCPF(c) {
             baseCpf == "77777777777" ||
             baseCpf == "88888888888" ||
             baseCpf == "99999999999") {
-            //console.log(cpfOriginal + "  Inválido 0");
             alert("CPF " + cpfOriginal + "  Inválido");
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);
@@ -58,7 +60,6 @@ function verificarCPF(c) {
             d1 += c.charAt(i) * (10 - i);
         }
         if (d1 == 0) {
-            //console.log(cpfOriginal + " Inválido1");
             alert("CPF " + cpfOriginal + " Inválido");
             v = true;
             setTimeout(function () { $('#cpf').focus(); }, 1);
@@ -67,10 +68,9 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(0) != d1) {
-            //console.log(cpfOriginal + " Inválido2");
             alert("CPF " + cpfOriginal + " Inválido");
             v = true;
-            setTimeout(function () { $('#cpf').focus(); }, 1);// tava fazendo tesyte kkkkkk
+            setTimeout(function () { $('#cpf').focus(); }, 1);
             return false;
         }
 
@@ -81,7 +81,6 @@ function verificarCPF(c) {
         d1 = 11 - (d1 % 11);
         if (d1 > 9) d1 = 0;
         if (dv.charAt(1) != d1) {
-            //console.log(cpfOriginal + " Inválido3");
             alert("CPF " + cpfOriginal + " Inválido");
 
             v = true;
@@ -96,16 +95,13 @@ function verificarCPF(c) {
 }
 
 function validadata(control) {
-    var data = document.getElementById("nasc").value; // pega o valor do input
-    data = data.replace(/\//g, "-"); // substitui eventuais barras (ex. IE) "/" por hífen "-"
-    var data_array = data.split("-"); // quebra a data em array
+    var data = document.getElementById("nasc").value;
+    data = data.replace(/\//g, "-");
+    var data_array = data.split("-");
 
-    // para o IE onde será inserido no formato dd/MM/yyyy
     if (data_array[0].length != 4) {
-        data = data_array[2] + "-" + data_array[1] + "-" + data_array[0]; // remonto a data no formato yyyy/MM/dd
+        data = data_array[2] + "-" + data_array[1] + "-" + data_array[0];
     }
-
-    // comparo as datas e calculo a idade
     var hoje = new Date();
     var nasc = new Date(data);
     var idade = hoje.getFullYear() - nasc.getFullYear();
@@ -115,17 +111,12 @@ function validadata(control) {
     if (idade < 1 || idade > 119) {
         alert("Data inválida!");
         setTimeout(function () { $('#nasc').focus(); }, 1);
-        //console.log(idade);
         return false;
     }
 
     if (idade >= 1 && idade <= 120) {
-        //alert("Data valida");
-        //console.log(idade);
         return true;
     }
-
-    // se for maior que 120 não vai acontecer nada!
     return false;
 };
 
@@ -133,18 +124,17 @@ function onlynumber(evt) {
     var theEvent = evt || window.event;
     var key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    //var regex = /^[0-9.,]+$/;
     var regex = /^[0-9]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
 };
+
 function onlynumberData(evt) {
     var theEvent = evt || window.event;
     var key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    //var regex = /^[0-9.,]+$/;
     var regex = /^[0-9/]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
@@ -152,8 +142,8 @@ function onlynumberData(evt) {
     }
 };
 
-
 function deletar(a) {
+    debugger
     new swal({
         title: 'Quer mesmo deletar?',
         text: a,
@@ -185,6 +175,7 @@ function alerta(type, title, mensage) {
         timer: 1500,
     })
 }
+
 function validaCampoNome() {
     const nomee = document.querySelector('#nome');
     console.log(nomee.length);
@@ -196,13 +187,11 @@ function validaCampoNome() {
             timer: 1500
         })
         console.log(nomee.length);
-        //alert('Por favor, preencha o campo nome!');
         setTimeout(function () { $('#nome').focus(); }, 1);
-        //document.getElementById("#nome").focus();
         return false
-       
     }
 }
+
 function validaCampoMatricula() {
     const matricula = document.querySelector('#matricula');
     if (matricula.value.trim() == "" || matricula.value < 1) {
@@ -214,9 +203,7 @@ function validaCampoMatricula() {
             showConfirmeButton: false,
             timer: 1500,
         })
-            //alert('Matricula' + matricula.value + ' não permitida!');
         setTimeout(function () { $('#matricula').focus(); }, 1);
-        /* document.getElementById("nome").focus();*/
         return false
     }
 }

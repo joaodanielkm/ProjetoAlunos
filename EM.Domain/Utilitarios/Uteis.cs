@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace EM.Domain.Utilitarios
+﻿namespace EM.Domain.Utilitarios
 {
-    public class Uteis
+    public static class Uteis
     {
-        public static DateTime DataNaoInformada = new (1910, 1, 1);
-        public bool EhValidoCPF(string cpf)
+        private readonly static DateTime DataNaoInformada = new (1910, 1, 1);
+        public static bool EhValidoCPF(string? cpf)
         {
+            if (cpf == null) { return false; }
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             string tempCpf;
             string digito;
             int soma;
             int resto;
-            if (String.IsNullOrEmpty(cpf))
+            if (string.IsNullOrEmpty(cpf))
             {
                 return false;
             }
@@ -37,7 +31,7 @@ namespace EM.Domain.Utilitarios
             else
                 resto = 11 - resto;
             digito = resto.ToString();
-            tempCpf = tempCpf + digito;
+            tempCpf += digito;
             soma = 0;
             for (int i = 0; i < 10; i++)
                 soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
@@ -46,12 +40,13 @@ namespace EM.Domain.Utilitarios
                 resto = 0;
             else
                 resto = 11 - resto;
-            digito = digito + resto.ToString();
+            digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
-        public string ApenasNumeros(string texto)
+
+        public static string ApenasNumeros(string texto)
         {
-            if (!String.IsNullOrEmpty(texto))
+            if (!string.IsNullOrEmpty(texto))
             {
                 string textoLimpo = new string(texto.Where(char.IsDigit).ToArray());
                 if (string.IsNullOrWhiteSpace(textoLimpo) || string.IsNullOrEmpty(textoLimpo))
@@ -61,13 +56,13 @@ namespace EM.Domain.Utilitarios
                 return textoLimpo;
             }
             return texto;
-
         }
-        public DateTime ConvertaData(object dataEntrada)
+
+        public static DateTime ConvertaData(DateTime? dataEntrada)
         {
             if (DBNull.Value.Equals(dataEntrada)) return DataNaoInformada;
 
-            var dtEntrada = dataEntrada?.ToString();
+            var dtEntrada = dataEntrada.ToString();
             if (DateTime.TryParse(dtEntrada, out var dt))
             {
                 return dt;
@@ -86,17 +81,14 @@ namespace EM.Domain.Utilitarios
             {
                 return DataNaoInformada.AddDays(anoMesDia - 2);
             }
-
-
         }
 
-        public bool EhValidoNome(string nome)
+        public static bool EhValidoNome(string nome)
         {
             if (nome.Length < 3 || nome.Length > 100)
             {
                 return false;
             }
-
             return true;
         }
     }

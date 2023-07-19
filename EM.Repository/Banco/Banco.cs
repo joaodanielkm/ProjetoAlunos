@@ -1,47 +1,36 @@
 ﻿using System.Data;
-using EM.Domain.ProjetoEM.EM.Domain;
 using FirebirdSql.Data.FirebirdClient;
 
-namespace EM.Repository.Banco
+namespace EM.Repository
 {
-    public class Banco
+    public static class Banco
     {
-        public FbConnection? conexao;
-        private static readonly Banco instanciaFireBird = new Banco();
-
-
-        public static Banco getInstancia()
+        public static FbConnection ObtenhaConexao()
         {
-            return instanciaFireBird;
-        }
+            //string[] filePaths = Directory.GetFiles(@".\Banco", "DBPROJETOEM-.FD4");
+            //Console.WriteLine(filePaths);
+            //string conn = @"User=SYSDBA;Password=masterkey;Database="+filePaths+";DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+            string conn = @"User=SYSDBA;Password=masterkey;Database=192.168.1.217/3054:E:\EscolarManager\Dados\EMWeb\DBPROJETOEM.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+            //string conn = @"User=SYSDBA;Password=masterkey;Database=C:\ProjetoEM\EM.Repository\Banco\DBPROJETOEM-.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
 
-        public FbConnection getConexao()
-        {
-            string conn = @"User=SYSDBA;Password=masterkey;Database=C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
-            //string conn = @"User=SYSDBA;Password=masterkey;Database=192.168.1.160/3054:C:\ProjetoEM\EM.Repository\Banco\\DBPROJETOEM-.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
             return new FbConnection(conn);
         }
 
-        public static DataTable consulta(string sql)
+        public static DataTable Consulta(string sql)
         {
-
-            FbDataAdapter? da = null;
-            DataTable dt = new DataTable();
-
+            DataTable dt = new();
             try
             {
-                using (FbConnection conexaoFireBird = getInstancia().getConexao())
-                {
-                    conexaoFireBird.Open();
-                    da = new FbDataAdapter(sql, conexaoFireBird);
-                    da.Fill(dt);
-                    conexaoFireBird.Close();
-                    return dt;
-                }
+                using FbConnection conexaoFireBird = ObtenhaConexao();
+                conexaoFireBird.Open();
+                FbDataAdapter da = new(sql, conexaoFireBird);
+                da.Fill(dt);
+                conexaoFireBird.Close();
+                return dt;
             }
             catch (Exception ex)
             {
-                throw (ex);
+                throw new Exception($"Erro ao consultar o banco {ex}");
             }
         }
     }

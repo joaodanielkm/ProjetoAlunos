@@ -10,25 +10,24 @@ namespace EM.Web.Controllers
 {
     public class HomeController : Controller
     {
-        Uteis uteis = new Uteis();
         private readonly ILogger<HomeController> _logger;
-        public readonly RepositorioAbstrato<Aluno> _rep;
+        public readonly RepositorioAbstrato<Aluno> _repositorio;
 
-        public HomeController(ILogger<HomeController> logger, RepositorioAbstrato<Aluno> rep)
+        public HomeController(ILogger<HomeController> logger, RepositorioAbstrato<Aluno> repositorio)
         {
             _logger = logger;
-            _rep = rep;
+            _repositorio = repositorio;
         }
 
-        public IActionResult Index(string searchString, string pesquisePor)
+        public IActionResult Index(string? searchString, string? pesquisePor)
         {
 
             if (pesquisePor == "matricula")
             {
-                var alunosPorMatricula = from a in _rep.GetAll()
+                var alunosPorMatricula = from a in _repositorio.GetAll()
                                          select a;
 
-                if (!String.IsNullOrEmpty(searchString))
+                if (!string.IsNullOrEmpty(searchString))
                 {
                     alunosPorMatricula = alunosPorMatricula.Where(a => a.Matricula.ToString().Contains(searchString));
                 }
@@ -38,26 +37,24 @@ namespace EM.Web.Controllers
             else
             {
 
-                if (_rep.GetAll == null)
+                if (_repositorio.GetAll == null)
                 {
                     return Problem();
                 }
 
-                var alunosPorNome = from a in _rep.GetAll()
+                var alunosPorNome = from a in _repositorio.GetAll()
                                     select a;
 
-                if (!String.IsNullOrEmpty(searchString))
+                if (!string.IsNullOrEmpty(searchString))
                 {
                     alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString.ToUpper()));
                 }
-
-
                 return View(alunosPorNome.ToList().OrderBy(a => a.Nome));
             }
         }
 
         [HttpPost]
-        public string Index(string searchString, bool notUsed)
+        public string Index(string searchString)
         {
             return "From [HttpPost]Index: filter on " + searchString;
         }
@@ -65,10 +62,9 @@ namespace EM.Web.Controllers
         [HttpGet]
         public IActionResult Editar(string id)
         {
-            var aluno = _rep.Get(id);
+            var aluno = _repositorio.Get(id);
 
             return View(aluno);
-
         }
 
         [HttpPost]
@@ -81,18 +77,17 @@ namespace EM.Web.Controllers
                 Matricula = getAluno.Matricula,
                 Nome = getAluno.Nome?.ToUpper().Trim(),
                 Sexo = getAluno.Sexo,
-                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
-                CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : null,
+                Nascimento = Uteis.ConvertaData(getAluno.Nascimento),
+                CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : null,
 
             };
 
-            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome) && uteis.EhValidoNome(aluno.Nome))
+            if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome) && Uteis.EhValidoNome(aluno.Nome))
             {
                 try
                 {
-                    _rep.Update(aluno);
+                    _repositorio.Update(aluno);
                     ViewBag.Mensagem = "Atualizado!";
-                    //return RedirectToAction("Index", "Home");
                     return View();
                 }
                 catch (Exception ex)
@@ -101,7 +96,7 @@ namespace EM.Web.Controllers
                     ViewBag.Mensagem = "erro";
                 }
             }
-            else 
+            else
             {
                 ViewBag.Mensagem = "Favor preencha o nome!";
                 return View();
@@ -111,13 +106,13 @@ namespace EM.Web.Controllers
 
         public IActionResult Cadastrar()
         {
-            Aluno aluno = new Aluno();
+            Aluno aluno = new();
 
             int getUltimaMatriculaMaisUm = 0;
 
-            if (!string.IsNullOrEmpty(_rep.GetAll().Max(a => a.Matricula.ToString())))
+            if (!string.IsNullOrEmpty(_repositorio.GetAll().Max(a => a.Matricula.ToString())))
             {
-                getUltimaMatriculaMaisUm = _rep.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.GetAll().Max(a => a.Matricula) + 1;
+                getUltimaMatriculaMaisUm = _repositorio.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _repositorio.GetAll().Max(a => a.Matricula) + 1;
             }
             else
             {
@@ -125,21 +120,21 @@ namespace EM.Web.Controllers
             }
 
             aluno.Sexo = Sexo.Masculino;
-             
+
             aluno.Matricula = getUltimaMatriculaMaisUm;
 
             return View(aluno);
         }
 
-              
+
         [HttpPost]
         public IActionResult Cadastrar(Aluno getAluno)
         {
             int getUltimaMatriculaMaisUm = 0;
 
-            if (!string.IsNullOrEmpty(_rep.GetAll().Max(a => a.Matricula.ToString())))
+            if (!string.IsNullOrEmpty(_repositorio.GetAll().Max(a => a.Matricula.ToString())))
             {
-                getUltimaMatriculaMaisUm = _rep.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _rep.GetAll().Max(a => a.Matricula) + 1;
+                getUltimaMatriculaMaisUm = _repositorio.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _repositorio.GetAll().Max(a => a.Matricula) + 1;
             }
             else
             {
@@ -151,18 +146,17 @@ namespace EM.Web.Controllers
                 Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
                 Nome = getAluno.Nome?.ToUpper().Trim(),
                 Sexo = getAluno.Sexo,
-                Nascimento = uteis.ConvertaData(getAluno.Nascimento),
-                CPF = uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
+                Nascimento = Uteis.ConvertaData(getAluno.Nascimento),
+                CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
             };
-            Aluno? verificaSeMatriculaExiste = _rep.Get(getAluno.Matricula.ToString());
+            Aluno? verificaSeMatriculaExiste = _repositorio.Get(getAluno.Matricula.ToString());
 
-            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome) && uteis.EhValidoNome(aluno.Nome))
+            if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome) && Uteis.EhValidoNome(aluno.Nome))
             {
                 try
                 {
-                    _rep.Add(aluno);
+                    _repositorio.Add(aluno);
                     ViewBag.Mensagem = "Cadastrado!";
-                   // return View();
                 }
                 catch (Exception ex)
                 {
@@ -176,8 +170,6 @@ namespace EM.Web.Controllers
                 return View();
             }
             return View();
-            // return RedirectToAction("Cadastrar");
-
         }
 
         public IActionResult Deletar(string id)
@@ -187,7 +179,7 @@ namespace EM.Web.Controllers
                 return BadRequest("ID inválido.");
             }
 
-            var aluno = _rep.GetAll().FirstOrDefault(a => a.Matricula == matricula);
+            var aluno = _repositorio.GetAll().FirstOrDefault(a => a.Matricula == matricula);
 
             if (aluno == null)
             {
@@ -202,7 +194,7 @@ namespace EM.Web.Controllers
 
             try
             {
-                _rep.Remove(aluno);
+                _repositorio.Remove(aluno);
                 ViewBag.Mensagem = "Deletado";
             }
             catch (Exception ex)

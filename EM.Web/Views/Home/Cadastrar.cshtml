@@ -44,14 +44,13 @@
                     </div>
                     @if (@ViewBag.Mensagem == "Cadastrado!")
                     {
-
                         <script>
                             Swal.fire({
                                 position: 'top-center',
                                 icon: 'success',
                                 title: 'Cadastrado com sucesso!',
                                 showConfirmButton: false,
-                                timer: 1500
+                                timer: 1500,
                             })
                         </script>
                     }
@@ -62,7 +61,8 @@
                                 icon: 'error',
                                 title: 'Oops...',
                                 text: 'Matricula em uso!',
-                            })</script>
+                            })
+                        </script>
                     }
                     else if (@ViewBag.Mensagem == "erro")
                     {
@@ -72,7 +72,8 @@
                                 title: 'Verifique os dados digitados!',
                                 showConfirmButton: false,
                                 timer: 1500
-                            })</script>
+                            })
+                        </script>
 
                     }
                     else if (@ViewBag.Mensagem == "Favor preencha o nome!")
@@ -83,8 +84,8 @@
                                 title: 'Favor preencha o nome!',
                                 showConfirmButton: false,
                                 timer: 1500
-                            })</script>
-
+                            })
+                        </script>
                     }
                 </div>
             </div>

@@ -42,7 +42,6 @@
             [ExisteCPF]
             public string? CPF { get; set; }
 
-
             public override bool Equals(object? obj)
             {
                 return obj is Aluno aluno &&
@@ -61,8 +60,6 @@
             {
                 return Matricula + " - " + Nome;
             }
-
         }
-
     }
 }

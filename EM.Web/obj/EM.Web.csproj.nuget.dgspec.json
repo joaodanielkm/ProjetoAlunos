@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj": {}
+    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Web\\EM.Web.csproj": {}
   },
   "projects": {
-    "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
+        "projectUniqueName": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj",
         "projectName": "EM.Domain",
-        "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
-        "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\ProjetoEM\\EM.Domain\\obj\\",
+        "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joaod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,24 +81,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
+    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectUniqueName": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj",
         "projectName": "EM.Repository",
-        "projectPath": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
-        "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\ProjetoEM\\EM.Repository\\obj\\",
+        "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joaod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -108,15 +107,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
+              "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj"
               }
             }
           }
@@ -164,24 +162,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj": {
+    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Web\\EM.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj",
+        "projectUniqueName": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Web\\EM.Web.csproj",
         "projectName": "EM.Web",
-        "projectPath": "C:\\ProjetoEM\\EM.Web\\EM.Web.csproj",
-        "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
-        "outputPath": "C:\\ProjetoEM\\EM.Web\\obj\\",
+        "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Web\\EM.Web.csproj",
+        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
+        "outputPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\joaod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -190,18 +188,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
+              "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj"
               },
-              "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
-                "projectPath": "C:\\ProjetoEM\\EM.Repository\\EM.Repository.csproj"
+              "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj": {
+                "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj"
               }
             }
           }
@@ -252,7 +250,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
