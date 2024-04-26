@@ -1,4 +1,6 @@
-﻿using EM.Domain.ProjetoEM.EM.Domain;
+﻿using EM.Domain;
+using EM.Domain.Interface;
+using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Repository;
 
 namespace EM.Web
@@ -15,7 +17,7 @@ namespace EM.Web
         //injeção do repositório
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<RepositorioAbstrato<Aluno>, AlunoRepository>();
+            services.AddScoped<IRepositorioAluno, RepositorioAluno>();
             services.AddRazorPages();
         }
 

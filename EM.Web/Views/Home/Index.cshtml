@@ -69,7 +69,7 @@
       <i class="fa fa-trash"></i>
   </a>
 
-  <script defer>
+  @* <script defer>
       document.querySelectorAll('.delete-button').forEach(button => {
           button.addEventListener('click', async (event) => {
               event.preventDefault();
@@ -96,7 +96,7 @@
           });
 
           return result.isConfirmed;
-      }
+      } *@
                             <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
                         </td>
                     </tr>

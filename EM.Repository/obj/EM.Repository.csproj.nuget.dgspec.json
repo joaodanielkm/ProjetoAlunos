@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj": {}
+    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {}
   },
   "projects": {
-    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj": {
+    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
         "projectName": "EM.Domain",
-        "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj",
-        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
-        "outputPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\obj\\",
+        "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -81,24 +87,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj": {
+    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
         "projectName": "EM.Repository",
-        "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\EM.Repository.csproj",
-        "packagesPath": "C:\\Users\\Escolar Manager\\.nuget\\packages\\",
-        "outputPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Repository\\obj\\",
+        "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Escolar Manager\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -107,14 +113,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "D:\\Pessoal\\Projetos\\ProjetoEM-master\\EM.Domain\\EM.Domain.csproj"
+              "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Domain\\EM.Domain.csproj"
               }
             }
           }
@@ -123,6 +130,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -162,7 +174,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     }

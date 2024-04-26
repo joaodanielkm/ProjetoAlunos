@@ -1510,7 +1510,6 @@ C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repositor
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.AssemblyInfoInputs.cache
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.AssemblyInfo.cs
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.csproj.CoreCompileInputs.cache
-C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.csproj.CopyComplete
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\refint\EM.Repository.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.pdb
@@ -2121,3 +2120,5 @@ D:\Pessoal\Projetos\ProjetoEM-master\EM.Repository\obj\Debug\net6.0\EM.Repositor
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Repository\obj\Debug\net6.0\refint\EM.Repository.dll
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Repository\obj\Debug\net6.0\EM.Repository.pdb
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Repository\obj\Debug\net6.0\ref\EM.Repository.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repository.sourcelink.json
+C:\Users\User\source\repos\ProjetoEM\EM.Repository\obj\Debug\net6.0\EM.Repos.38E60255.Up2Date

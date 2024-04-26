@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="Sexo"> Sexo</label>
-                        @Html.DropDownListFor(Model => Model.Sexo, new SelectList(Enum.GetValues(typeof(Sexo))),htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownListFor(Model => Model.Sexo, new SelectList(Enum.GetValues(typeof(EnumeradorSexo))), htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col ">
                         @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})

@@ -337,9 +337,7 @@ C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\tr\Microsoft.CodeAn
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Domain.dll
-C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Domain.pdb
-C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.pdb
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.csproj.AssemblyReference.cache
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.AssemblyInfoInputs.cache
@@ -359,7 +357,6 @@ C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\staticwebassets.dev
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\scopedcss\bundle\EM.Web.styles.css
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\scopedcss\projectbundle\EM.Web.bundle.scp.css
-C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.csproj.CopyComplete
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\refint\EM.Web.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.pdb
@@ -1466,3 +1463,7 @@ D:\Pessoal\Projetos\ProjetoEM-master\EM.Web\obj\Debug\net6.0\refint\EM.Web.dll
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Web\obj\Debug\net6.0\EM.Web.pdb
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Web\obj\Debug\net6.0\EM.Web.genruntimeconfig.cache
 D:\Pessoal\Projetos\ProjetoEM-master\EM.Web\obj\Debug\net6.0\ref\EM.Web.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.sourcelink.json
+C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.csproj.Up2Date
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.pdb
