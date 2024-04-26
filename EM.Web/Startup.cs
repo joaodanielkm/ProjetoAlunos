@@ -1,6 +1,4 @@
-﻿using EM.Domain;
-using EM.Domain.Interface;
-using EM.Domain.ProjetoEM.EM.Domain;
+﻿using EM.Domain.Interface;
 using EM.Repository;
 
 namespace EM.Web

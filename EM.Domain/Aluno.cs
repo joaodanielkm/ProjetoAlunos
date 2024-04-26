@@ -18,7 +18,7 @@
             [Display(Name = "Nome")]
             [Required(ErrorMessage = "Nome Requerido!")]
             [StringLength(100, MinimumLength = 3, ErrorMessage = "Favor preencher com no minimo 3 e no máximo 100 caracteres!")]
-            public string? Nome { get; set; }
+            public string Nome { get; set; }
 
             [Display(Name = "Sexo")]
             [Required(ErrorMessage = "Sexo Requerido!")]

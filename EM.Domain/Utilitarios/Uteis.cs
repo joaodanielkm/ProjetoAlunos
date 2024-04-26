@@ -83,13 +83,6 @@
             }
         }
 
-        public static bool EhValidoNome(string nome)
-        {
-            if (nome.Length < 3 || nome.Length > 100)
-            {
-                return false;
-            }
-            return true;
-        }
+        public static bool EhValidoNome(string nome) => nome.Length < 3 || nome.Length > 100;
     }
 }

@@ -54,35 +54,24 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public string Index(string searchString)
-    {
-        return "From [HttpPost]Index: filter on " + searchString;
-    }
+    public string Index(string searchString) => "From [HttpPost]Index: filter on " + searchString;
 
     [HttpGet]
-    public IActionResult Editar(string id)
-    {
-        var aluno = _repositorio.Get(id);
-
-        return View(aluno);
-    }
+    public IActionResult Editar(string id) => View(_repositorio.Get(id));
 
     [HttpPost]
-    public IActionResult Editar(Aluno getAluno)
+    public IActionResult Editar(Aluno editaAluno)
     {
-
-        var aluno = new Aluno()
+        Aluno aluno = new()
         {
-
-            Matricula = getAluno.Matricula,
-            Nome = getAluno.Nome?.ToUpper().Trim(),
-            Sexo = getAluno.Sexo,
-            Nascimento = Uteis.ConvertaData(getAluno.Nascimento),
-            CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : null,
-
+            Matricula = editaAluno.Matricula,
+            Nome = editaAluno.Nome?.ToUpper().Trim() ?? string.Empty,
+            Sexo = editaAluno.Sexo,
+            Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
+            CPF = Uteis.EhValidoCPF(editaAluno.CPF) ? editaAluno.CPF : null,
         };
 
-        if (getAluno.Matricula == aluno.Matricula && !string.IsNullOrWhiteSpace(aluno.Nome) && Uteis.EhValidoNome(aluno.Nome))
+        if (Uteis.EhValidoNome(aluno.Nome))
         {
             try
             {
@@ -106,22 +95,14 @@ public class HomeController : Controller
 
     public IActionResult Cadastrar()
     {
-        Aluno aluno = new();
+        int matriculaUm = 1;
+        int ultimaMatricula = _repositorio.GetAll().Max(a => a.Matricula);
 
-        int getUltimaMatriculaMaisUm = 0;
-
-        if (!string.IsNullOrEmpty(_repositorio.GetAll().Max(a => a.Matricula.ToString())))
+        Aluno aluno = new()
         {
-            getUltimaMatriculaMaisUm = _repositorio.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _repositorio.GetAll().Max(a => a.Matricula) + 1;
-        }
-        else
-        {
-            getUltimaMatriculaMaisUm = 1;
-        }
-
-        aluno.Sexo = EnumeradorSexo.Masculino;
-
-        aluno.Matricula = getUltimaMatriculaMaisUm;
+            Sexo = EnumeradorSexo.Masculino,
+            Matricula = ultimaMatricula == 0 ? matriculaUm : ultimaMatricula++
+        };
 
         return View(aluno);
     }
@@ -141,7 +122,7 @@ public class HomeController : Controller
             getUltimaMatriculaMaisUm = 1;
         }
 
-        var aluno = new Aluno()
+        Aluno aluno = new()
         {
             Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
             Nome = getAluno.Nome?.ToUpper().Trim(),
