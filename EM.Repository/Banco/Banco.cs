@@ -8,7 +8,7 @@ public static class Banco
     public static FbConnection ObtenhaConexao()
     {
         var diretorio = Directory.GetCurrentDirectory();
-        string connString = $@"User=SYSDBA;Password=masterkey;Database=localhost/3054:{diretorio}\Banco\DBPROJETOEM.FD4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+        string connString = $@"User=SYSDBA;Password=masterkey;Database=localhost/3054:{diretorio}\Banco\DBPROJETOEM.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
 
         return new FbConnection(connString);
     }
