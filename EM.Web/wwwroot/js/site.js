@@ -19,16 +19,16 @@ if (inputDelete != null) {
 }
 
 function verificarCPF(c) {
-    var cpfOriginal = c;
+    let cpfOriginal = c;
     if (c.length === 14) {
         c = c.replace(/[^\d]+/g, '');
-        var baseCpf = c;
-        var v = false;
-        var i;
+        let baseCpf = c;
+        let v = false;
+        let i;
         s = c;
-        var c = s.substr(0, 9);
-        var dv = s.substr(9, 2);
-        var d1 = 0;
+        let c = s.substr(0, 9);
+        let dv = s.substr(9, 2);
+        let d1 = 0;
 
         if (
             baseCpf == "00000000000" ||
@@ -84,49 +84,66 @@ function verificarCPF(c) {
     }
 }
 
-function validadata(control) {
-    debugger
-    var data = document.getElementById("nasc").value;
+function validaCampoNome() {
+    const nome = document.querySelector('#nome');
+    if (nome.value.trim() == "" || nome.length < 3 && nome.length > 100) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Verifique o nome digitado!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        setTimeout(function () { $('#nome').focus(); }, 1);
+        return false
+    }
+}
+
+function validadataNascimento() {
+    let data = document.getElementById("nasc").value;
     data = data.replace(/\//g, "-");
-    var data_array = data.split("-");
+    let data_array = data.split("-");
 
     if (data_array[0].length != 4) {
         data = data_array[2] + "-" + data_array[1] + "-" + data_array[0];
     }
-    var hoje = new Date();
-    var nasc = new Date(data);
-    var idade = hoje.getFullYear() - nasc.getFullYear();
-    var m = hoje.getMonth() - nasc.getMonth();
+    let hoje = new Date();
+    let nasc = new Date(data);
+    let idade = hoje.getFullYear() - nasc.getFullYear();
+    let m = hoje.getMonth() - nasc.getMonth();
     if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
-
-    if (idade < 1 || idade > 119) {
-        alert("Data inválida!");
-        setTimeout(function () { $('#nasc').focus(); }, 1);
-        return false;
-    }
 
     if (idade >= 1 && idade <= 120) {
         return true;
     }
-    return false;
-};
+
+    if (isNaN(idade) || idade < 1 || idade > 119) {
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Verifique a data de nascimento!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        return false;
+    }
+}
 
 function onlynumber(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
+    let theEvent = evt || window.event;
+    let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    var regex = /^[0-9]+$/;
+    let regex = /^[0-9]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
     }
-};
+}
 
 function onlynumberData(evt) {
-    var theEvent = evt || window.event;
-    var key = theEvent.keyCode || theEvent.which;
+    let theEvent = evt || window.event;
+    let key = theEvent.keyCode || theEvent.which;
     key = String.fromCharCode(key);
-    var regex = /^[0-9/]+$/;
+    let regex = /^[0-9/]+$/;
     if (!regex.test(key)) {
         theEvent.returnValue = false;
         if (theEvent.preventDefault) theEvent.preventDefault();
@@ -153,7 +170,7 @@ function deletar(a) {
             )
         }
     })
-};
+}
 
 function alerta(type, title, mensage) {
     Swal.fire({
@@ -166,19 +183,6 @@ function alerta(type, title, mensage) {
     })
 }
 
-function validaCampoNome() {
-    const nome = document.querySelector('#nome');
-    if (nome.value.trim() == "" || nome.length < 3 && nome.length > 100) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Verifique o nome digitado!',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        setTimeout(function () { $('#nome').focus(); }, 1);
-        return false
-    }
-}
 
 function validaCampoMatricula() {
     const matricula = document.querySelector('#matricula');
@@ -195,4 +199,6 @@ function validaCampoMatricula() {
         return false
     }
 }
+
+
 

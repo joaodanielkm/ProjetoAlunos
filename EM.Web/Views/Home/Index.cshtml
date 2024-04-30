@@ -78,55 +78,58 @@
             </tbody>
         </table>
     }
-    @if (@ViewBag.Mensagem == "Deletado")
-    {
-        <script>
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Alterado com sucesso!',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        </script>
-    }
-    else if (@ViewBag.Mensagem == "erro")
-    {
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Algo deu errado...',
-                text: 'Contate o adminsitrador do sistema!',
-            })</script>
-    }
 </div>
 
 <script defer>
-    document.querySelectorAll('.delete-button').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            event.preventDefault();
+    let retorno = @ViewBag.Mensagem;
+    validaRetorno();
+    debugger
+    function validaRetorno() {
+        if (retorno) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Excluído com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro ao excluír...',
+                text: 'Contate o adminsitrador do sistema!',
+            })
+        }
+        window.location.href = '@Url.Action("Index", "Home")';
 
-            const itemDescription = button.getAttribute('data-item-description');
-            const confirmadoDelete = await podeDeletar(itemDescription);
-
-            if (confirmadoDelete) {
-                window.location.href = button.href;
-            }
-        });
-    });
-
-    async function podeDeletar(itemDescription) {
-        const result = await Swal.fire({
-            title: 'Tem certeza que deseja excluir?',
-            text: itemDescription,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Cancelar'
-        });
-
-        return result.isConfirmed;
     }
+
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', async (event) => {
+                event.preventDefault();
+
+                const itemDescription = button.getAttribute('data-item-description');
+                const confirmadoDelete = await podeDeletar(itemDescription);
+
+                if (confirmadoDelete) {
+                    window.location.href = button.href;
+                }
+            });
+        });
+
+        async function podeDeletar(itemDescription) {
+            const result = await Swal.fire({
+                title: 'Tem certeza que deseja excluir?',
+                text: itemDescription,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Cancelar'
+            });
+
+            return result.isConfirmed;
+        }
 </script>

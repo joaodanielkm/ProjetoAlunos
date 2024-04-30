@@ -15,7 +15,7 @@ public class RepositorioAluno : IRepositorioAluno
             List<Aluno> alunos = new();
 
             string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
-            DataTable dt = Banco.Consulta(sql);
+            DataTable dt = Banco.Comando(sql);
 
             foreach (DataRow item in dt.Rows)
             {
@@ -107,8 +107,8 @@ public class RepositorioAluno : IRepositorioAluno
     {
         try
         {
-            var sql = $"DELETE FROM ALUNO WHERE MATRICULA = '{aluno.Matricula}'";
-            Banco.Consulta(sql);
+            string sql = $"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}";
+            Banco.Comando(sql);
         }
         catch (FbException fbex)
         {
@@ -116,15 +116,14 @@ public class RepositorioAluno : IRepositorioAluno
         }
     }
 
-    public Aluno Get(string id)
+    public Aluno? Get(string matricula)
     {
         Aluno alunoObtido = new();
-        var mat = id;
 
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
 
-        string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = " + mat;
-        DataTable dt = Banco.Consulta(sql);
+        string sql = $"SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = {matricula}";
+        DataTable dt = Banco.Comando(sql);
 
         if (dt.Rows.Count > 0)
         {
@@ -141,8 +140,9 @@ public class RepositorioAluno : IRepositorioAluno
 
                 alunoObtido = aluno;
             }
+            return alunoObtido;
         }
-        return alunoObtido;
+        return null;
     }
 }
 

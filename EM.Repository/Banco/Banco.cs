@@ -13,7 +13,7 @@ public static class Banco
         return new FbConnection(connString);
     }
 
-    public static DataTable Consulta(string sql)
+    public static DataTable Comando(string sql)
     {
         DataTable dt = new ();
         try

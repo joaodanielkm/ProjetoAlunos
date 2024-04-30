@@ -1,8 +1,9 @@
 ﻿@using EM.Domain;
+@using EM.Domain.ProjetoEM.EM.Domain;
 @{
     ViewData["Title"] = "Cadastrar aluno";
 }
-@model EM.Domain.ProjetoEM.EM.Domain.Aluno
+@model Aluno
 
 <h4>Novo aluno</h4>
 <hr />
@@ -13,12 +14,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-3 ">
-                        @Html.LabelFor(a => a.Matricula, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Matricula, new {@class = "form-control", @required="tue", @type="text", @style="text-align:right", @minlength="1", @maxlength="9", @onkeypress="return onlynumber()", @onpaste="return false", @ondrop="return false", @id="matricula"})
+                        @Html.LabelFor(a => a.Matricula, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Matricula, new { @class = "form-control", @required = "tue", @type = "text", @style = "text-align:right", @minlength = "1", @maxlength = "9", @onkeypress = "return onlynumber()", @onpaste = "return false", @ondrop = "return false", @id = "matricula" })
                     </div>
                     <div class="col-9">
-                        @Html.LabelFor(a => a.Nome, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nome, new {@class = "form-control", @required="tue",@id="nome", @placeholder="Digite o nome do aluno"})
+                        @Html.LabelFor(a => a.Nome, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Nome, new { @class = "form-control", @required = "tue", @id = "nome", @placeholder = "Digite o nome do aluno" })
                     </div>
                 </div>
                 <div class="row">
@@ -27,68 +28,56 @@
                         @Html.DropDownListFor(Model => Model.Sexo, new SelectList(Enum.GetValues(typeof(EnumeradorSexo))), htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="col">
-                        @Html.LabelFor(a => a.Nascimento, new {@class = "control-label"})
-                        @Html.TextBoxFor(a => a.Nascimento, new {@class = "form-control" ,@id="nasc", @type="date", @required="tue", @onblur="return validadata()",@onpaste="return false", @ondrop="return false"})
+                        @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "date", @required = "tue", @onpaste = "return false", @ondrop = "return false" })
                     </div>
                     <div class="col">
-                        @Html.LabelFor(a => a.CPF, new {@class = "control-label" })
-                        @Html.TextBoxFor(a => a.CPF, new {@class = "form-control" ,@id="cpf", @onblur="return verificarCPF(this.value)" , @placeholder="Digite o cpf do aluno",@onpaste="return false", @ondrop="return false", @autocomplete="off"})
+                        @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @placeholder = "Digite o cpf do aluno", @onpaste = "return false", @ondrop = "return false", @autocomplete = "off" })
                     </div>
                 </div>
                 <br />
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this), validaCampoNome(this), validadata()" />
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
                         <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar" title="Limpar"><i class="fa fa-broom "></i> </a>
                     </div>
-                    @if (@ViewBag.Mensagem == "Cadastrado!")
-                    {
-                        <script>
-                            Swal.fire({
-                                position: 'top-center',
-                                icon: 'success',
-                                title: 'Cadastrado com sucesso!',
-                                showConfirmButton: false,
-                                timer: 1500,
-                            })
-                        </script>
-                    }
-                    else if (@ViewBag.Mensagem == "Matricula já em uso!")
-                    {
-                        <script>
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'Matricula em uso!',
-                            })
-                        </script>
-                    }
-                    else if (@ViewBag.Mensagem == "erro")
-                    {
-                        <script>
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Verifique os dados digitados!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        </script>
 
-                    }
-                    else if (@ViewBag.Mensagem == "Favor preencha o nome!")
-                    {
-                        <script>
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Favor preencha o nome!',
-                                showConfirmButton: false,
-                                timer: 1500
-                            })
-                        </script>
-                    }
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+<script defer>
+    let retorno = @ViewBag.Mensagem;
+    validaRetorno();
+
+    function validaRetorno() {
+        debugger
+        if (retorno) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Cadastrado com sucesso!',
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro ao cadastrar!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        limpeCampos();
+    }
+
+    function limpeCampos() {
+        window.location.href = '@Url.Action("Cadastrar", "Home")';
+    }
+
+</script>

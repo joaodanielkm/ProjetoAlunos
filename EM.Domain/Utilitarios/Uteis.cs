@@ -83,5 +83,5 @@ public static class Uteis
         }
     }
 
-    public static bool EhValidoNome(string nome) => nome.Length < 3 || nome.Length > 100;
+    public static bool EhValidoNome(string nome) => nome.Length > 2 && nome.Length < 101;
 }

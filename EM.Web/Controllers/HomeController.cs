@@ -3,6 +3,7 @@ using EM.Domain.Interface;
 using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Domain.Utilitarios;
 using EM.Web.Models;
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -75,32 +76,32 @@ public class HomeController : Controller
             try
             {
                 _repositorio.Update(aluno);
-                ViewBag.Mensagem = "Atualizado!";
+                RetorneTrue();
                 return View();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = "erro";
+                _logger.LogError(ex, "Atualizar");
+                Retornefalse();
             }
-        }
-        else
-        {
-            ViewBag.Mensagem = "Favor preencha o nome!";
-            return View();
         }
         return View();
     }
 
     public IActionResult Cadastrar()
     {
-        int matriculaUm = 1;
-        int ultimaMatricula = _repositorio.GetAll().Max(a => a.Matricula) + matriculaUm;
+        int novaMatricula = 1;
+        IEnumerable<Aluno> alunos = _repositorio.GetAll();
+
+        if (alunos.Any())
+        {
+            novaMatricula += alunos.Max(a => a.Matricula);
+        }
 
         Aluno aluno = new()
         {
             Sexo = EnumeradorSexo.Masculino,
-            Matricula = ultimaMatricula
+            Matricula = novaMatricula
         };
 
         return View(aluno);
@@ -110,17 +111,6 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Cadastrar(Aluno getAluno)
     {
-        int getUltimaMatriculaMaisUm = 0;
-
-        if (!string.IsNullOrEmpty(_repositorio.GetAll().Max(a => a.Matricula.ToString())))
-        {
-            getUltimaMatriculaMaisUm = _repositorio.GetAll().Max(a => a.Matricula.ToString()) == "" ? 1 : _repositorio.GetAll().Max(a => a.Matricula) + 1;
-        }
-        else
-        {
-            getUltimaMatriculaMaisUm = 1;
-        }
-
         Aluno aluno = new()
         {
             Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
@@ -129,45 +119,30 @@ public class HomeController : Controller
             Nascimento = Uteis.ConvertaData(getAluno.Nascimento),
             CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
         };
-        Aluno? verificaSeMatriculaExiste = _repositorio.Get(getAluno.Matricula.ToString());
 
-        if (verificaSeMatriculaExiste == null && !string.IsNullOrWhiteSpace(aluno.Nome) && Uteis.EhValidoNome(aluno.Nome))
+        bool existeMatricula = _repositorio.Get(getAluno.Matricula.ToString())?.Matricula == 0;
+
+        if (!existeMatricula && Uteis.EhValidoNome(aluno.Nome))
         {
             try
             {
                 _repositorio.Add(aluno);
-                ViewBag.Mensagem = "Cadastrado!";
+                RetorneTrue();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Cadastrar");
-                ViewBag.Mensagem = "erro";
+                Retornefalse();
             }
-        }
-        else
-        {
-            ViewBag.Mensagem = "erro";
-            return View();
         }
         return View();
     }
 
     public IActionResult Deletar(string id)
     {
-        if (!int.TryParse(id, out int matricula))
-        {
-            return BadRequest("ID inválido.");
-        }
+        Aluno? aluno = _repositorio.Get(id);
 
-        var aluno = _repositorio.GetAll().FirstOrDefault(a => a.Matricula == matricula);
-
-        if (aluno == null)
-        {
-            return NotFound();
-        }
-
-
-        if (aluno == null || aluno.Matricula < 1)
+        if (aluno is null)
         {
             return NotFound();
         }
@@ -175,19 +150,21 @@ public class HomeController : Controller
         try
         {
             _repositorio.Remove(aluno);
-            ViewBag.Mensagem = "Deletado";
+            RetorneTrue();
         }
-        catch (Exception ex)
+        catch (FbException ex)
         {
-            _logger.LogError(ex, "Cadastrar");
-            ViewBag.Mensagem = "Falha";
+            _logger.LogError(ex, "Deletar");
+            Retornefalse();
         }
-        return RedirectToAction("Index", "Home");
+        return View();//RedirectToAction("Index", "Home");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    public IActionResult Error() =>
+        View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+    private string RetorneTrue() => ViewBag.Mensagem = "true";
+
+    private string Retornefalse() => ViewBag.Mensagem = "false";
 }
