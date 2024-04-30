@@ -134,7 +134,6 @@ function onlynumberData(evt) {
 };
 
 function deletar(a) {
-    debugger
     new swal({
         title: 'Quer mesmo deletar?',
         text: a,

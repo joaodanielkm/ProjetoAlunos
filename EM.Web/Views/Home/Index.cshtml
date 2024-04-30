@@ -99,33 +99,34 @@
                 text: 'Contate o adminsitrador do sistema!',
             })</script>
     }
-    <script defer>
-        document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', async (event) => {
-                event.preventDefault();
+</div>
 
-                const itemDescription = button.getAttribute('data-item-description');
-                const confirmadoDelete = await podeDeletar(itemDescription);
+<script defer>
+    document.querySelectorAll('.delete-button').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            event.preventDefault();
 
-                if (confirmadoDelete) {
-                    window.location.href = button.href;
-                }
-            });
+            const itemDescription = button.getAttribute('data-item-description');
+            const confirmadoDelete = await podeDeletar(itemDescription);
+
+            if (confirmadoDelete) {
+                window.location.href = button.href;
+            }
+        });
+    });
+
+    async function podeDeletar(itemDescription) {
+        const result = await Swal.fire({
+            title: 'Tem certeza que deseja excluir?',
+            text: itemDescription,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Cancelar'
         });
 
-        async function podeDeletar(itemDescription) {
-            const result = await Swal.fire({
-                title: 'Tem certeza que deseja excluir?',
-                text: itemDescription,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sim',
-                cancelButtonText: 'Cancelar'
-            });
-
-            return result.isConfirmed;
-        }
-    </script>
-</div>
+        return result.isConfirmed;
+    }
+</script>

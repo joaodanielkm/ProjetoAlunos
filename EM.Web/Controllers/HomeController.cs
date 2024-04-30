@@ -21,7 +21,6 @@ public class HomeController : Controller
 
     public IActionResult Index(string? searchString, string? pesquisePor)
     {
-        _logger.LogError("teste log");
         if (pesquisePor == "matricula")
         {
             var alunosPorMatricula = from a in _repositorio.GetAll()
