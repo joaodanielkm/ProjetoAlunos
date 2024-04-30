@@ -79,13 +79,13 @@ function verificarCPF(c) {
             return false;
         }
         if (!v) {
-            console.log("Cpf valido: " + cpfOriginal);
             return true;
         }
     }
 }
 
 function validadata(control) {
+    debugger
     var data = document.getElementById("nasc").value;
     data = data.replace(/\//g, "-");
     var data_array = data.split("-");
@@ -167,16 +167,14 @@ function alerta(type, title, mensage) {
 }
 
 function validaCampoNome() {
-    const nomee = document.querySelector('#nome');
-    console.log(nomee.length);
-    if (nomee.value.trim() == "" || nomee.length < 3) {
+    const nome = document.querySelector('#nome');
+    if (nome.value.trim() == "" || nome.length < 3 && nome.length > 100) {
         Swal.fire({
             icon: 'error',
-            title: 'Verifique os dados digitados!',
+            title: 'Verifique o nome digitado!',
             showConfirmButton: false,
             timer: 1500
         })
-        console.log(nomee.length);
         setTimeout(function () { $('#nome').focus(); }, 1);
         return false
     }

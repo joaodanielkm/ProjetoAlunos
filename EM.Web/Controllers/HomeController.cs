@@ -95,12 +95,12 @@ public class HomeController : Controller
     public IActionResult Cadastrar()
     {
         int matriculaUm = 1;
-        int ultimaMatricula = _repositorio.GetAll().Max(a => a.Matricula);
+        int ultimaMatricula = _repositorio.GetAll().Max(a => a.Matricula) + matriculaUm;
 
         Aluno aluno = new()
         {
             Sexo = EnumeradorSexo.Masculino,
-            Matricula = ultimaMatricula == 0 ? matriculaUm : ultimaMatricula++
+            Matricula = ultimaMatricula
         };
 
         return View(aluno);
