@@ -1,6 +1,5 @@
 ﻿const inputCpf = document.querySelector('#cpf');
 const inputNasc = document.querySelector('#nasc');
-debugger
 const inputDelete = document.querySelector('#deletar');
 
 
@@ -13,19 +12,11 @@ inputCpf.addEventListener('keypress', () => {
         inputCpf.value += '-';
     }
 })
-
-inputDelete.addEventListener('keypress', () => {
-    debugger
+if (inputDelete != null) {
+    inputDelete.addEventListener('keypress', () => {
         deletar();
-})
-
-//inputNasc.addEventListener('keypress', () => {
-//    let inputlength = inputNasc.value.length
-//    if (inputlength === 2 || inputlength === 5) {
-//        inputNasc.value += '/';
-//    }
-//})
-
+    })
+}
 
 function verificarCPF(c) {
     var cpfOriginal = c;
