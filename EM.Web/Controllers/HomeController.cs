@@ -49,6 +49,8 @@ public class HomeController : Controller
             {
                 alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString.ToUpper()));
             }
+
+            RetorneTrue();
             return View(alunosPorNome.ToList().OrderBy(a => a.Nome));
         }
     }
@@ -157,7 +159,7 @@ public class HomeController : Controller
             _logger.LogError(ex, "Deletar");
             Retornefalse();
         }
-        return View();//RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Home");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

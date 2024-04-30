@@ -52,7 +52,6 @@
     validaRetorno();
 
     function validaRetorno() {
-        debugger
         if (retorno) {
             Swal.fire({
                 position: 'top-center',
@@ -74,7 +73,9 @@
     }
 
     function limpeCampos() {
-        window.location.href = '@Url.Action("Index", "Home")';
+        setTimeout(() => {
+            window.location.href = '@Url.Action("Index", "Home")', 1500;
+        }, 1500);
     }
 
 </script>
