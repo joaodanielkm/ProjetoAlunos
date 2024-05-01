@@ -7,5 +7,4 @@ public interface IRepositorio<T> where T : IEntidade
 
     IEnumerable<T> GetAll();
 
-
 }

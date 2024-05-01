@@ -22,36 +22,31 @@ public class HomeController : Controller
 
     public IActionResult Index(string? searchString, string? pesquisePor)
     {
+        List<Aluno> alunos = _repositorio.GetAll().ToList();
+        RetorneTrue();
+
+        if (!alunos.Any())
+        {
+            return View();
+        }
+
         if (pesquisePor == "matricula")
         {
-            var alunosPorMatricula = from a in _repositorio.GetAll()
-                                     select a;
-
             if (!string.IsNullOrEmpty(searchString))
             {
-                alunosPorMatricula = alunosPorMatricula.Where(a => a.Matricula.ToString().Contains(searchString));
+                alunos.RemoveAll(a => !a.Matricula.ToString().Contains(searchString));
             }
 
-            return View(alunosPorMatricula.ToList().OrderBy(a => a.Matricula));
+            return View(alunos.ToList().OrderBy(a => a.Matricula));
         }
         else
         {
-
-            if (_repositorio.GetAll == null)
-            {
-                return Problem();
-            }
-
-            var alunosPorNome = from a in _repositorio.GetAll()
-                                select a;
-
             if (!string.IsNullOrEmpty(searchString))
             {
-                alunosPorNome = alunosPorNome.Where(a => a.Nome!.Contains(searchString.ToUpper()));
+                alunos.RemoveAll(a => !a.Nome.Contains(searchString.ToUpper()));
             }
 
-            RetorneTrue();
-            return View(alunosPorNome.ToList().OrderBy(a => a.Nome));
+            return View(alunos.ToList().OrderBy(a => a.Nome));
         }
     }
 
@@ -108,7 +103,6 @@ public class HomeController : Controller
 
         return View(aluno);
     }
-
 
     [HttpPost]
     public IActionResult Cadastrar(Aluno getAluno)
