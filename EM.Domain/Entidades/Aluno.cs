@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using EM.Domain.Enumeradores;
+    using EM.Domain.Utilitarios;
 
     namespace ProjetoEM.EM.Domain
     {
@@ -11,7 +13,6 @@
             [Key]
             [Display(Name = "Matricula")]
             [Required(ErrorMessage = "Matricula Requerida!")]
-            //[ExisteMatricula]
             [Range(1, 999999999, ErrorMessage = "Matricula invalida!")]
             public int Matricula { get; set; }
 
