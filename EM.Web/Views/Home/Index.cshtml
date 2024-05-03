@@ -78,13 +78,14 @@
 </div>
 
 <script defer>
-    let retorno = @ViewBag.Mensagem;
+    let retorno = @ViewBag.Status;
+    let menssagemRetorno = '@ViewBag.Mensagem';
     function validaRetorno() {
         if (retorno) {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: 'Excluído com sucesso!',
+                title: menssagemRetorno,
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -92,7 +93,7 @@
         else {
             Swal.fire({
                 icon: 'error',
-                title: 'Erro ao excluír...',
+                title: menssagemRetorno,
                 text: 'Contate o adminsitrador do sistema!',
                 showConfirmButton: false,
                 timer: 1500

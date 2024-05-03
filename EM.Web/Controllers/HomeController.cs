@@ -115,6 +115,7 @@ public class HomeController : Controller
     {
         if (!ModelState.IsValid)
         {
+            ObtenhaViewBag("Verifique os dados digitados!", false);
             return View(getAluno);
         }
 
@@ -166,6 +167,7 @@ public class HomeController : Controller
             _logger.LogError(ex, "Deletar");
             ObtenhaViewBag("Erro ao deletar!", false);
         }
+
         return RedirectToAction("Index", "Home");
     }
 
