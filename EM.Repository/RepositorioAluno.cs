@@ -1,4 +1,4 @@
-using EM.Domain.Enumeradores;
+using EM.Domain;
 using EM.Domain.Interface;
 using EM.Domain.ProjetoEM.EM.Domain;
 using FirebirdSql.Data.FirebirdClient;

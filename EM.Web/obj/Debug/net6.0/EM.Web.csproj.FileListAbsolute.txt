@@ -1467,3 +1467,8 @@ C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.sourcelink.j
 C:\Users\User\source\repos\ProjetoEM\EM.Web\obj\Debug\net6.0\EM.Web.csproj.Up2Date
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.dll
 C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\EM.Repository.pdb
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Owin.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Microsoft.Owin.Security.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\source\repos\ProjetoEM\EM.Web\bin\Debug\net6.0\Owin.dll

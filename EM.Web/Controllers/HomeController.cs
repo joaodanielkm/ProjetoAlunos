@@ -1,4 +1,4 @@
-﻿using EM.Domain.Enumeradores;
+﻿using EM.Domain;
 using EM.Domain.Interface;
 using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Domain.Utilitarios;
@@ -23,7 +23,7 @@ public class HomeController : Controller
     public IActionResult Index(string? searchString, string? pesquisePor)
     {
         List<Aluno> alunos = _repositorio.GetAll().ToList();
-        RetorneTrue();
+        ObtenhaViewBag("", true);
 
         if (!alunos.Any())
         {
@@ -59,6 +59,11 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Editar(Aluno editaAluno)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(editaAluno);
+        }
+
         Aluno aluno = new()
         {
             Matricula = editaAluno.Matricula,
@@ -73,16 +78,17 @@ public class HomeController : Controller
             try
             {
                 _repositorio.Update(aluno);
-                RetorneTrue();
-                return View();
+                ObtenhaViewBag("Editado com sucesso!", true);
+
+                return View(editaAluno);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Atualizar");
-                Retornefalse();
+                ObtenhaViewBag("Erro ao editar!", false);
             }
         }
-        return View();
+        return View(editaAluno);
     }
 
     public IActionResult Cadastrar()
@@ -107,6 +113,11 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Cadastrar(Aluno getAluno)
     {
+        if (!ModelState.IsValid)
+        {
+            return View(getAluno);
+        }
+
         Aluno aluno = new()
         {
             Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
@@ -116,42 +127,44 @@ public class HomeController : Controller
             CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
         };
 
-        bool existeMatricula = _repositorio.Get(getAluno.Matricula.ToString())?.Matricula == 0;
+        bool ehMatriculaJaCadastrada = _repositorio.Get(getAluno.Matricula.ToString())?.Matricula > 0;
 
-        if (!existeMatricula && Uteis.EhValidoNome(aluno.Nome))
+        if (ehMatriculaJaCadastrada)
+        {
+            ObtenhaViewBag("Matricula já cadastrada!", false);
+            return View(getAluno);
+        }
+
+        if (Uteis.EhValidoNome(aluno.Nome))
         {
             try
             {
                 _repositorio.Add(aluno);
-                RetorneTrue();
+                ObtenhaViewBag("Cadastrado com sucesso!", true);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Cadastrar");
-                Retornefalse();
+                ObtenhaViewBag("Erro ao cadastrar!", false);
             }
         }
-        return View();
+
+        return View(getAluno);
     }
 
     public IActionResult Deletar(string id)
     {
         Aluno? aluno = _repositorio.Get(id);
 
-        if (aluno is null)
-        {
-            return NotFound();
-        }
-
         try
         {
             _repositorio.Remove(aluno);
-            RetorneTrue();
+            ObtenhaViewBag("Deletado com sucesso!", false);
         }
         catch (FbException ex)
         {
             _logger.LogError(ex, "Deletar");
-            Retornefalse();
+            ObtenhaViewBag("Erro ao deletar!", false);
         }
         return RedirectToAction("Index", "Home");
     }
@@ -160,7 +173,16 @@ public class HomeController : Controller
     public IActionResult Error() =>
         View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
-    private string RetorneTrue() => ViewBag.Mensagem = "true";
-
-    private string Retornefalse() => ViewBag.Mensagem = "false";
+    private void ObtenhaViewBag(string menssagem, bool retorno)
+    {
+        ViewBag.Mensagem = menssagem;
+        if (retorno)
+        {
+            ViewBag.Status = "true";
+        }
+        else
+        {
+            ViewBag.Status = "false";
+        }
+    }
 }

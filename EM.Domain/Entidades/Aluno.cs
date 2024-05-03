@@ -1,9 +1,8 @@
 ﻿namespace EM.Domain
 {
+    using EM.Domain.Utilitarios;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using EM.Domain.Enumeradores;
-    using EM.Domain.Utilitarios;
 
     namespace ProjetoEM.EM.Domain
     {
@@ -32,7 +31,7 @@
 
             [Display(Name = "CPF")]
             [MaxLength(14)]
-            [ExisteCPF]
+            //[ExisteCPF]//implementar verificação de cpf repetido
             public string? CPF { get; set; }
 
             public override bool Equals(object? obj) =>

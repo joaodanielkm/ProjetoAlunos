@@ -1,5 +1,7 @@
 ﻿using EM.Domain.Interface;
 using EM.Repository;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace EM.Web
 {
@@ -17,6 +19,7 @@ namespace EM.Web
         {
             services.AddScoped<IRepositorioAluno, RepositorioAluno>();
             services.AddRazorPages();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation().AddViewOptions(options => options.HtmlHelperOptions.ClientValidationEnabled = false);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +32,13 @@ namespace EM.Web
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR"),
+                SupportedCultures = new List<CultureInfo> { new("pt-BR") },
+                SupportedUICultures = new List<CultureInfo> { new("pt-BR") }
+            });
 
             app.UseStaticFiles();
 

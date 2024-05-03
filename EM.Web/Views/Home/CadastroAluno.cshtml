@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <form action="cadastrar" method="post" class="form-control">
+        <form action="CadastroAluno" method="post" class="form-control">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container">
                 <div class="row">
@@ -40,8 +40,8 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="Cadastrar" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
-                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Cadastrar" title="Limpar"><i class="fa fa-broom "></i> </a>
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-action="CadastroAluno" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="CadastroAluno" title="Limpar"><i class="fa fa-broom "></i> </a>
                     </div>
 
                 </div>

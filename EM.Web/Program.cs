@@ -1,4 +1,4 @@
-using EM.Domain.Interface;
+﻿using EM.Domain.Interface;
 using EM.Repository;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -22,9 +22,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -32,3 +30,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
