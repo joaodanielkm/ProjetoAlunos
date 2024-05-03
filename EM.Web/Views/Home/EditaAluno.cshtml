@@ -1,0 +1,86 @@
+﻿@using EM.Domain;
+@{
+    ViewData["Title"] = "Editar aluno";
+}
+@model EM.Domain.ProjetoEM.EM.Domain.Aluno
+
+<h4>Editar aluno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" class="form-control">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 ">
+                        @Html.LabelFor(a => a.Matricula, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Matricula, new { @class = "form-control", @required = "true", @type = "text", @style = "text-align:right", @minlength = "1", @maxlength = "9", @onkeypress = "return onlynumber()", @readonly = true })
+                    </div>
+                    <div class="col-9">
+                        @Html.LabelFor(a => a.Nome, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Nome, new { @class = "form-control", @required = "true", @id = "nome", @placeholder = "Digite o nome do aluno" })
+                        @Html.ValidationMessageFor(a => a.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="Sexo"> Sexo</label>
+                        @Html.DropDownListFor(a => a.Sexo, new SelectList(Enum.GetValues(typeof(EnumeradorSexo))), htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.Sexo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col ">
+                        @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
+                        @Html.EditorFor(a => a.Nascimento, new { htmlAttributes = new { @class = "form-control", @id = "nasc", @type = "date", @required = "tue", @onblur = "return validadata()", @onpaste = "return false", @ondrop = "return false" } })
+                        @Html.ValidationMessageFor(a => a.Nascimento, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col">
+                        @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @onpaste = "return false", @autocomplete = "off" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left " title="Voltar"></i></a>
+                        <input type="submit" value="Salvar" class="btn btn-info " asp-action="EditaAluno" onclick="return validaCampoNome(this), validaCampoMatricula(this)" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script defer>
+    let retorno = @ViewBag.Status;
+    let menssagemRetorno = '@ViewBag.Mensagem';
+    validaRetorno();
+
+    function validaRetorno() {
+        if (retorno) {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: menssagemRetorno,
+                showConfirmButton: false,
+                timer: 1500,
+            })
+            redirecione();
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: menssagemRetorno,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }
+
+    function redirecione() {
+        setTimeout(() => {
+            window.location.href = '@Url.Action("Index", "Home")', 1500;
+        }, 1500);
+    }
+
+</script>
+

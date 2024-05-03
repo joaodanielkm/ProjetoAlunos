@@ -54,10 +54,10 @@ public class HomeController : Controller
     public string Index(string searchString) => "From [HttpPost]Index: filter on " + searchString;
 
     [HttpGet]
-    public IActionResult Editar(string id) => View(_repositorio.Get(id));
+    public IActionResult EditaAluno(string id) => View(_repositorio.Get(id));
 
     [HttpPost]
-    public IActionResult Editar(Aluno editaAluno)
+    public IActionResult EditaAluno(Aluno editaAluno)
     {
         if (!ModelState.IsValid)
         {
@@ -91,7 +91,7 @@ public class HomeController : Controller
         return View(editaAluno);
     }
 
-    public IActionResult Cadastrar()
+    public IActionResult CadastraAluno()
     {
         int novaMatricula = 1;
         IEnumerable<Aluno> alunos = _repositorio.GetAll();
@@ -111,7 +111,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Cadastrar(Aluno getAluno)
+    public IActionResult CadastraAluno(Aluno getAluno)
     {
         if (!ModelState.IsValid)
         {
@@ -153,7 +153,7 @@ public class HomeController : Controller
         return View(getAluno);
     }
 
-    public IActionResult Deletar(string id)
+    public IActionResult DeletaAluno(string id)
     {
         Aluno? aluno = _repositorio.Get(id);
 

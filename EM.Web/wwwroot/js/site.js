@@ -85,47 +85,47 @@ function verificarCPF(c) {
 }
 
 function validaCampoNome() {
-    //const nome = document.querySelector('#nome');
-    //if (nome.value.trim() == "" || nome.length < 3 && nome.length > 100) {
-    //    Swal.fire({
-    //        icon: 'error',
-    //        title: 'Verifique o nome digitado!',
-    //        showConfirmButton: false,
-    //        timer: 1500
-    //    })
-    //    setTimeout(function () { $('#nome').focus(); }, 1);
-    //    return false
-    //}
+    const nome = document.querySelector('#nome');
+    if (nome.value.trim() == "" || nome.length < 3 && nome.length > 100) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Verifique o nome digitado!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        setTimeout(function () { $('#nome').focus(); }, 1);
+        return false
+    }
 }
 
 function validadataNascimento() {
-    //let data = document.getElementById("nasc").value;
-    //data = data.replace(/\//g, "-");
-    //let data_array = data.split("-");
+    let data = document.getElementById("nasc").value;
+    data = data.replace(/\//g, "-");
+    let data_array = data.split("-");
 
-    //if (data_array[0].length != 4) {
-    //    data = data_array[2] + "-" + data_array[1] + "-" + data_array[0];
-    //}
-    //let hoje = new Date();
-    //let nasc = new Date(data);
-    //let idade = hoje.getFullYear() - nasc.getFullYear();
-    //let m = hoje.getMonth() - nasc.getMonth();
-    //if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+    if (data_array[0].length != 4) {
+        data = data_array[2] + "-" + data_array[1] + "-" + data_array[0];
+    }
+    let hoje = new Date();
+    let nasc = new Date(data);
+    let idade = hoje.getFullYear() - nasc.getFullYear();
+    let m = hoje.getMonth() - nasc.getMonth();
+    if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
 
-    //if (idade >= 1 && idade <= 120) {
-    //    return true;
-    //}
+    if (idade >= 1 && idade <= 120) {
+        return true;
+    }
 
-    //if (isNaN(idade) || idade < 1 || idade > 119) {
+    if (isNaN(idade) || idade < 1 || idade > 119) {
 
-    //    Swal.fire({
-    //        icon: 'error',
-    //        title: 'Verifique a data de nascimento!',
-    //        showConfirmButton: false,
-    //        timer: 1500
-    //    })
-    //    return false;
-    //}
+        Swal.fire({
+            icon: 'error',
+            title: 'Verifique a data de nascimento!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        return false;
+    }
 }
 
 function onlynumber(evt) {

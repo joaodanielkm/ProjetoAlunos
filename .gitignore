@@ -396,3 +396,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/EM.Web/.vs/ProjetoEM/v17/.suo
+/EM.Web/obj/Debug/net6.0/apphost.exe

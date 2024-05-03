@@ -14,7 +14,6 @@ namespace EM.Web
 
         public IConfiguration Configuration { get; }
 
-        //injeção do repositório
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRepositorioAluno, RepositorioAluno>();
@@ -49,6 +48,10 @@ namespace EM.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }
