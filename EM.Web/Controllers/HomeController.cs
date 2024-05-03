@@ -65,6 +65,12 @@ public class HomeController : Controller
             return View(editaAluno);
         }
 
+        if (CpfEmUso(editaAluno))
+        {
+            ObtenhaViewBag("CPF em uso!", false);
+            return View(editaAluno);
+        }
+
         Aluno aluno = new()
         {
             Matricula = editaAluno.Matricula,
@@ -112,30 +118,36 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastraAluno(Aluno getAluno)
+    public IActionResult CadastraAluno(Aluno cadastraAluno)
     {
         if (!ModelState.IsValid)
         {
             ObtenhaViewBag("Verifique os dados digitados!", false);
-            return View(getAluno);
+            return View(cadastraAluno);
+        }
+
+        if (CpfEmUso(cadastraAluno))
+        {
+            ObtenhaViewBag("CPF em uso!", false);
+            return View(cadastraAluno);
+        }
+
+        Aluno? alunoJaCadastrado = _repositorio.Get(cadastraAluno.Matricula.ToString());
+
+        if (alunoJaCadastrado is not null)
+        {
+            ObtenhaViewBag("Matricula já cadastrada!", false);
+            return View(cadastraAluno);
         }
 
         Aluno aluno = new()
         {
-            Matricula = (getAluno.Matricula > 0) ? getAluno.Matricula : 1,
-            Nome = getAluno.Nome?.ToUpper().Trim(),
-            Sexo = getAluno.Sexo,
-            Nascimento = Uteis.ConvertaData(getAluno.Nascimento),
-            CPF = Uteis.EhValidoCPF(getAluno.CPF) ? getAluno.CPF : "",
+            Matricula = (cadastraAluno.Matricula > 0) ? cadastraAluno.Matricula : 1,
+            Nome = cadastraAluno.Nome?.ToUpper().Trim(),
+            Sexo = cadastraAluno.Sexo,
+            Nascimento = Uteis.ConvertaData(cadastraAluno.Nascimento),
+            CPF = Uteis.EhValidoCPF(cadastraAluno.CPF) ? cadastraAluno.CPF : "",
         };
-
-        bool ehMatriculaJaCadastrada = _repositorio.Get(getAluno.Matricula.ToString())?.Matricula > 0;
-
-        if (ehMatriculaJaCadastrada)
-        {
-            ObtenhaViewBag("Matricula já cadastrada!", false);
-            return View(getAluno);
-        }
 
         if (Uteis.EhValidoNome(aluno.Nome))
         {
@@ -151,7 +163,7 @@ public class HomeController : Controller
             }
         }
 
-        return View(getAluno);
+        return View(cadastraAluno);
     }
 
     public IActionResult DeletaAluno(string id)
@@ -175,6 +187,9 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error() =>
         View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+    private bool CpfEmUso(Aluno aluno) =>
+        _repositorio.Get(aluno.CPF.ToString()) is not null;
 
     private void ObtenhaViewBag(string menssagem, bool retorno)
     {

@@ -6,7 +6,7 @@
 
     namespace ProjetoEM.EM.Domain
     {
-        public class Aluno : Validation, IEntidade
+        public class Aluno : IEntidade
         {
 
             [Key]
@@ -31,7 +31,6 @@
 
             [Display(Name = "CPF")]
             [MaxLength(14)]
-            //[ExisteCPF]//implementar verificação de cpf repetido
             public string? CPF { get; set; }
 
             public override bool Equals(object? obj) =>
