@@ -23,10 +23,10 @@ public class HomeController : Controller
     public IActionResult Index(string? searchString, string? pesquisePor)
     {
         List<Aluno> alunos = _repositorio.GetAll().ToList();
-        ObtenhaViewBag("", true);
 
         if (!alunos.Any())
         {
+            ObtenhaViewBag("", false);
             return View();
         }
 
@@ -46,6 +46,7 @@ public class HomeController : Controller
                 alunos.RemoveAll(a => !a.Nome.Contains(searchString.ToUpper()));
             }
 
+            ObtenhaViewBag("", true);
             return View(alunos.ToList().OrderBy(a => a.Nome));
         }
     }

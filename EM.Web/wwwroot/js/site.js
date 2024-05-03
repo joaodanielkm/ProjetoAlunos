@@ -2,16 +2,18 @@
 const inputNasc = document.querySelector('#nasc');
 const inputDelete = document.querySelector('#deletar');
 
+if (inputCpf != null) {
+    inputCpf.addEventListener('keypress', () => {
+        let inputlength = inputCpf.value.length
 
-inputCpf.addEventListener('keypress', () => {
-    let inputlength = inputCpf.value.length
+        if (inputlength === 3 || inputlength === 7) {
+            inputCpf.value += '.';
+        } else if (inputlength === 11) {
+            inputCpf.value += '-';
+        }
+    })
+}
 
-    if (inputlength === 3 || inputlength === 7) {
-        inputCpf.value += '.';
-    } else if (inputlength === 11) {
-        inputCpf.value += '-';
-    }
-})
 if (inputDelete != null) {
     inputDelete.addEventListener('keypress', () => {
         deletar();
