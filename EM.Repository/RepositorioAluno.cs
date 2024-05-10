@@ -116,7 +116,7 @@ public class RepositorioAluno : IRepositorioAluno
         }
     }
 
-    public Aluno? Get(string matricula)
+    public Aluno Get(string matricula)
     {
         Aluno alunoObtido = new();
 

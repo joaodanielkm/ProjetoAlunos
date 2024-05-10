@@ -1,10 +1,9 @@
 ﻿using EM.Domain;
-using EM.Domain.Interface;
 
 namespace EM.Repository;
 
 [Obsolete("Com o uso da injeção de dependencia, será usado inteface")]
-public abstract class RepositorioAbstrato<T> where T : IRepositorio<IEntidade>
+public abstract class RepositorioAbstrato<T> where T : IEntidade
 {
     public abstract void Add(T obj);
 

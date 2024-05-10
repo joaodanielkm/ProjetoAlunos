@@ -3,7 +3,7 @@
 public static class Uteis
 {
     private readonly static DateTime DataNaoInformada = new (1910, 1, 1);
-    public static bool EhValidoCPF(string? cpf)
+    public static bool EhValidoCPF(string cpf)
     {
         if (cpf == null) { return false; }
         int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -62,7 +62,7 @@ public static class Uteis
     {
         if (Equals(DBNull.Value, dataEntrada)) return DataNaoInformada;
 
-        string? dtEntrada = dataEntrada.ToString();
+        string dtEntrada = dataEntrada.ToString();
         if (DateTime.TryParse(dtEntrada, out var dt))
         {
             return dt;

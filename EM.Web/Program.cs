@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.Razor;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IRepositorioAluno, RepositorioAluno>();
+builder.Services.AddScoped<IRepositorioAluno, RepositorioAluno>();
+
 
 builder.Services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation()

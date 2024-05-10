@@ -1,6 +1,5 @@
 ﻿namespace EM.Domain
 {
-    using EM.Domain.Utilitarios;
     using System;
     using System.ComponentModel.DataAnnotations;
 
@@ -8,7 +7,6 @@
     {
         public class Aluno : IEntidade
         {
-
             [Key]
             [Display(Name = "Matricula")]
             [Required(ErrorMessage = "Matricula Requerida!")]
@@ -33,7 +31,7 @@
             [MaxLength(14)]
             public string? CPF { get; set; }
 
-            public override bool Equals(object? obj) =>
+            public override bool Equals(object obj) =>
 
                 obj is Aluno aluno &&
                        Matricula == aluno.Matricula &&
