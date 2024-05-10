@@ -4,5 +4,5 @@ namespace EM.Web.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index() => View("Index");
+    public IActionResult Index() => RedirectToAction("Index", "Aluno");
 }

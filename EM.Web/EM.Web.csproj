@@ -20,4 +20,15 @@
     <ProjectReference Include="..\EM.Repository\EM.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Aluno\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
+  </ItemGroup>
+
 </Project>

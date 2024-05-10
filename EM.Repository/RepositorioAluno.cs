@@ -118,6 +118,11 @@ public class RepositorioAluno : IRepositorioAluno
 
     public Aluno Get(string matricula)
     {
+        if (string.IsNullOrEmpty(matricula))
+        {
+            return null;
+        }
+
         Aluno alunoObtido = new();
 
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
