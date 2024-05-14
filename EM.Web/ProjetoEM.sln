@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Domain", "..\EM.Domain\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Repository", "..\EM.Repository\EM.Repository.csproj", "{6D2CCFAB-16F2-4163-8028-7BACA87E5990}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Montador", "..\EM.Montador\EM.Montador.csproj", "{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,26 @@ Global
 		{6D2CCFAB-16F2-4163-8028-7BACA87E5990}.Release|x64.Build.0 = Release|Any CPU
 		{6D2CCFAB-16F2-4163-8028-7BACA87E5990}.Release|x86.ActiveCfg = Release|Any CPU
 		{6D2CCFAB-16F2-4163-8028-7BACA87E5990}.Release|x86.Build.0 = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|x64.Build.0 = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Debug|x86.Build.0 = Debug|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|ARM.Build.0 = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|ARM64.Build.0 = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|x64.ActiveCfg = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|x64.Build.0 = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|x86.ActiveCfg = Release|Any CPU
+		{906FC9FD-F28F-44C2-96A6-8DD8562C98D7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

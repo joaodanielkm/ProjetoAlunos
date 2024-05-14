@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EM.Domain\EM.Domain.csproj" />
+    <ProjectReference Include="..\EM.Montador\EM.Montador.csproj" />
     <ProjectReference Include="..\EM.Repository\EM.Repository.csproj" />
   </ItemGroup>
 

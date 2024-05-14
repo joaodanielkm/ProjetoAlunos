@@ -2,6 +2,7 @@
 using EM.Domain.Interface;
 using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Domain.Utilitarios;
+using EM.Montador.Montador.Aluno;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,13 @@ public class AlunoController : ControllerAbstrato
     {
         _logger = logger;
         _repositorio = repositorio;
+    }
+
+    public IActionResult Emitir()
+    {
+        new MontadorDeRelatorioDoAluno().CrieDocumento();
+        ObtenhaViewBag("Relatório emitido",true);
+        return RedirectToAction("Index", "Home");
     }
 
     public IActionResult Index(string searchString, string pesquisePor)
@@ -176,7 +184,7 @@ public class AlunoController : ControllerAbstrato
             ObtenhaViewBag("Erro ao deletar!", false);
         }
 
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Aluno");
     }
 
     private bool CpfEmUso(Aluno aluno) => _repositorio.Get(aluno.CPF?.ToString()) is not null;
