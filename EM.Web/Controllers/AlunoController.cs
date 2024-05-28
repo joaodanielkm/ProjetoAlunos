@@ -3,34 +3,29 @@ using EM.Domain.Interface;
 using EM.Domain.ProjetoEM.EM.Domain;
 using EM.Domain.Utilitarios;
 using EM.Montador.Montador.Aluno;
-using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class AlunoController : ControllerAbstrato
+public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio) : ControllerAbstrato
 {
-    private readonly ILogger<HomeController> _logger;
-    public readonly IRepositorioAluno _repositorio;
+    private readonly ILogger<HomeController> _logger = logger;
+    public readonly IRepositorioAluno _repositorio = repositorio;
 
-    public AlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio)
+    public IActionResult EmitirTodos()
     {
-        _logger = logger;
-        _repositorio = repositorio;
-    }
+        byte[] pdfContent = new MontadorDeRelatorioDoAluno().CrieDocumento();
+        string fileName = "Relatorio.pdf";
+        string contentType = "application/pdf";
 
-    public IActionResult Emitir()
-    {
-        new MontadorDeRelatorioDoAluno().CrieDocumento();
-        ObtenhaViewBag("Relatório emitido",true);
-        return RedirectToAction("Index", "Home");
+        return File(pdfContent, contentType, fileName);
     }
 
     public IActionResult Index(string searchString, string pesquisePor)
     {
         List<Aluno> alunos = _repositorio.GetAll().ToList();
 
-        if (!alunos.Any())
+        if (alunos.Count == 0)
         {
             ObtenhaViewBag("", false);
             return View();
@@ -135,6 +130,12 @@ public class AlunoController : ControllerAbstrato
             return View(cadastraAluno);
         }
 
+        if (!Uteis.EhValidoNome(cadastraAluno.Nome))
+        {
+            ObtenhaViewBag($"Verifique o nome cadastrado.", false);
+            return View(cadastraAluno);
+        }
+
         Aluno alunoJaCadastrado = _repositorio.Get(cadastraAluno.Matricula.ToString());
 
         if (alunoJaCadastrado is not null)
@@ -142,6 +143,7 @@ public class AlunoController : ControllerAbstrato
             ObtenhaViewBag("Matricula já cadastrada!", false);
             return View(cadastraAluno);
         }
+
 
         Aluno aluno = new()
         {
@@ -152,18 +154,15 @@ public class AlunoController : ControllerAbstrato
             CPF = Uteis.EhValidoCPF(cadastraAluno.CPF) ? cadastraAluno.CPF : "",
         };
 
-        if (Uteis.EhValidoNome(aluno.Nome))
+        try
         {
-            try
-            {
-                _repositorio.Add(aluno);
-                ObtenhaViewBag("Cadastrado com sucesso!", true);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Cadastrar");
-                ObtenhaViewBag("Erro ao cadastrar!", false);
-            }
+            _repositorio.Add(aluno);
+            ObtenhaViewBag("Cadastrado com sucesso!", true);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Cadastrar");
+            ObtenhaViewBag($"Erro ao cadastrar:\n {ex.Message}", false);
         }
 
         return View(cadastraAluno);
@@ -178,7 +177,7 @@ public class AlunoController : ControllerAbstrato
             _repositorio.Remove(aluno);
             ObtenhaViewBag("Deletado com sucesso!", false);
         }
-        catch (FbException ex)
+        catch (Exception ex)
         {
             _logger.LogError(ex, "Deletar");
             ObtenhaViewBag("Erro ao deletar!", false);

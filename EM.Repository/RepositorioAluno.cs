@@ -37,84 +37,50 @@ public class RepositorioAluno : IRepositorioAluno
     public void Add(Aluno aluno)
     {
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
-        try
-        {
-            conexaoFireBird.Open();
-            string sql = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
+        conexaoFireBird.Open();
+        string sql = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
 
-            FbCommand cmd = new(sql, conexaoFireBird);
+        FbCommand cmd = new(sql, conexaoFireBird);
 
-            cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
-            cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
-            cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
-            cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
-            cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+        cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
+        cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
+        cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
+        cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
+        cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
 
-            cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
-            cmd.Parameters["@NOME"].Value = aluno.Nome;
-            cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-            cmd.Parameters["@CPF"].Value = aluno.CPF;
-            cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+        cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
+        cmd.Parameters["@NOME"].Value = aluno.Nome;
+        cmd.Parameters["@SEXO"].Value = aluno.Sexo;
+        cmd.Parameters["@CPF"].Value = aluno.CPF;
+        cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
-            cmd.ExecuteNonQuery();
-        }
-        catch (FbException fbex)
-        {
-            throw new Exception(fbex.Message);
-        }
-        finally
-        {
-            conexaoFireBird.Dispose();
-        }
+        cmd.ExecuteNonQuery();
     }
 
     public void Update(Aluno aluno)
     {
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
-        try
-        {
-            conexaoFireBird.Open();
-            string sql = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
+        conexaoFireBird.Open();
+        string sql = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
 
-            FbCommand cmd = new(sql, conexaoFireBird);
+        FbCommand cmd = new(sql, conexaoFireBird);
 
-            cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
-            cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
-            cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
-            cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
-            cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+        cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
+        cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
+        cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
+        cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
+        cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
 
-            cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
-            cmd.Parameters["@NOME"].Value = aluno.Nome;
-            cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-            cmd.Parameters["@CPF"].Value = aluno.CPF;
-            cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+        cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
+        cmd.Parameters["@NOME"].Value = aluno.Nome;
+        cmd.Parameters["@SEXO"].Value = aluno.Sexo;
+        cmd.Parameters["@CPF"].Value = aluno.CPF;
+        cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
 
-
-            cmd.ExecuteNonQuery();
-        }
-        catch (FbException fbex)
-        {
-            throw new Exception(fbex.Message);
-        }
-        finally
-        {
-            conexaoFireBird.Dispose();
-        }
+        cmd.ExecuteNonQuery();
     }
 
-    public void Remove(Aluno aluno)
-    {
-        try
-        {
-            string sql = $"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}";
-            Banco.Comando(sql);
-        }
-        catch (FbException fbex)
-        {
-            throw new Exception(fbex.Message);
-        }
-    }
+    public void Remove(Aluno aluno) => Banco.Comando($"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}");
 
     public Aluno Get(string matricula)
     {

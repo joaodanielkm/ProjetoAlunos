@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Web.Mvc;
 using FirebirdSql.Data.FirebirdClient;
 
 namespace EM.Repository;
@@ -25,12 +26,12 @@ public static class Banco
         }
         catch (FbException ex)
         {
-            throw new Exception($"Comando {sql}.\nErro ao consultar o banco: {ex.Message}");
+
+            throw new Exception($"Comando {sql}.\nErro do comando: {ex.Message}");
         }
 
         return dt;
     }
-
 }
 
 
