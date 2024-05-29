@@ -1,7 +1,8 @@
-﻿using EM.Domain;
+﻿using EM.Dominio;
+using EM.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProjetoEM.EM.Domain
+namespace ProjetoEM.EM.Dominio
 {
     public class Aluno : IEntidade
     {

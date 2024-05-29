@@ -1,4 +1,4 @@
-﻿namespace EM.Domain.Enumeradores;
+﻿namespace EM.Dominio.Enumeradores;
 
 public enum EnumeradorDeEstadoBrasileiro
 {

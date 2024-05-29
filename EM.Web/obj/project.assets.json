@@ -537,11 +537,21 @@
           "bin/placeholder/EM.Domain.dll": {}
         }
       },
+      "EM.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/EM.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EM.Dominio.dll": {}
+        }
+      },
       "EM.Montador/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "EM.Domain": "1.0.0"
+          "EM.Dominio": "1.0.0"
         },
         "compile": {
           "bin/placeholder/EM.Montador.dll": {}
@@ -554,9 +564,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "EM.Domain": "1.0.0",
+          "EM.Dominio": "1.0.0",
           "FirebirdSql.Data.FirebirdClient": "10.2.0",
-          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "8.0.5",
           "System.Globalization": "4.3.0"
         },
         "compile": {
@@ -1510,6 +1519,11 @@
       "path": "../EM.Domain/EM.Domain.csproj",
       "msbuildProject": "../EM.Domain/EM.Domain.csproj"
     },
+    "EM.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../EM.Dominio/EM.Dominio.csproj",
+      "msbuildProject": "../EM.Dominio/EM.Dominio.csproj"
+    },
     "EM.Montador/1.0.0": {
       "type": "project",
       "path": "../EM.Montador/EM.Montador.csproj",
@@ -1524,6 +1538,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "EM.Domain >= 1.0.0",
+      "EM.Dominio >= 1.0.0",
       "EM.Montador >= 1.0.0",
       "EM.Repository >= 1.0.0",
       "Microsoft.AspNet.SignalR.Core >= 2.4.3",
@@ -1566,6 +1581,9 @@
           "projectReferences": {
             "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj": {
               "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj"
+            },
+            "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj"
             },
             "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Montador\\EM.Montador.csproj": {
               "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Montador\\EM.Montador.csproj"

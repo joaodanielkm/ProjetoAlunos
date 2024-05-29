@@ -1,13 +1,13 @@
-﻿namespace EM.Domain.Utilitarios;
+﻿namespace EM.Dominio.Utilitarios;
 
 public static class Uteis
 {
-    private readonly static DateTime DataNaoInformada = new (1910, 1, 1);
+    private readonly static DateTime DataNaoInformada = new(1910, 1, 1);
     public static bool EhValidoCPF(string cpf)
     {
         if (cpf == null) { return false; }
-        int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+        int[] multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
         string tempCpf;
         string digito;
         int soma;
@@ -20,7 +20,7 @@ public static class Uteis
         cpf = cpf.Replace(".", "").Replace("-", "");
         if (cpf.Length != 11)
             return false;
-        tempCpf = cpf.Substring(0, 9);
+        tempCpf = cpf[..9];
         soma = 0;
 
         for (int i = 0; i < 9; i++)
@@ -48,7 +48,7 @@ public static class Uteis
     {
         if (!string.IsNullOrEmpty(texto))
         {
-            string textoLimpo = new (texto.Where(char.IsDigit).ToArray());
+            string textoLimpo = new(texto.Where(char.IsDigit).ToArray());
             if (string.IsNullOrWhiteSpace(textoLimpo) || string.IsNullOrEmpty(textoLimpo))
             {
                 return texto;

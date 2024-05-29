@@ -1,4 +1,6 @@
-﻿namespace EM.Domain.Interface;
+﻿using EM.Dominio.Interfaces;
+
+namespace EM.Dominio.Interface;
 
 public interface IRepositorio<T> where T : IEntidade
 {

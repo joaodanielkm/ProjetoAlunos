@@ -1,4 +1,4 @@
-﻿using EM.Domain;
+﻿using EM.Dominio.Interfaces;
 
 namespace EM.Repository;
 

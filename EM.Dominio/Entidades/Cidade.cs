@@ -1,6 +1,6 @@
-﻿using EM.Domain.Enumeradores;
+﻿using EM.Dominio.Enumeradores;
 
-namespace EM.Domain.Entidades;
+namespace EM.Dominio.Entidades;
 
 public class Cidade
 {
@@ -12,7 +12,7 @@ public class Cidade
 
     public int CodigoIBGE { get; set; }
 
-    public EnumeradorDeEstadoBrasileiro Estado  { get; set; }
+    public EnumeradorDeEstadoBrasileiro Estado { get; set; }
 
     public override string ToString() => $"{Descricao} - {EstadoBrasileiro.ObtenhaSigla(Estado.ToString())}";
 }

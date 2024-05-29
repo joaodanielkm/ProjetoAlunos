@@ -1,7 +1,8 @@
-﻿@{
+﻿@using ProjetoEM.EM.Dominio
+@{
     ViewData["Title"] = "Pesquisar";
 }
-@model IEnumerable<EM.Domain.ProjetoEM.EM.Domain.Aluno>
+@model IEnumerable<Aluno>
 <br />
 <div class="row">
     @if (Model != null && Model.Any())

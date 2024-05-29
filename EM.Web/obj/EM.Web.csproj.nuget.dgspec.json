@@ -79,6 +79,71 @@
         }
       }
     },
+    "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj",
+        "projectName": "EM.Dominio",
+        "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Montador\\EM.Montador.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -108,8 +173,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj"
+              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj"
               }
             }
           }
@@ -177,8 +242,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj": {
-                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj"
+              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj"
               }
             }
           }
@@ -201,10 +266,6 @@
             "FirebirdSql.Data.FirebirdClient": {
               "target": "Package",
               "version": "[10.2.0, )"
-            },
-            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
-              "target": "Package",
-              "version": "[8.0.5, )"
             },
             "System.Globalization": {
               "target": "Package",
@@ -262,6 +323,9 @@
             "projectReferences": {
               "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj": {
                 "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj"
+              },
+              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Dominio\\EM.Dominio.csproj"
               },
               "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Montador\\EM.Montador.csproj": {
                 "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Montador\\EM.Montador.csproj"

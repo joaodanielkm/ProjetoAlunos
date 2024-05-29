@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EM.Domain\EM.Domain.csproj" />
+    <ProjectReference Include="..\EM.Dominio\EM.Dominio.csproj" />
     <ProjectReference Include="..\EM.Montador\EM.Montador.csproj" />
     <ProjectReference Include="..\EM.Repository\EM.Repository.csproj" />
   </ItemGroup>

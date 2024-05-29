@@ -1,10 +1,11 @@
 ﻿using iTextSharp5.text.pdf;
+using ProjetoEM.EM.Dominio;
 
 namespace EM.Montador.Montador.Aluno;
 
 public class MontadorDeRelatorioDoAluno() : MontadorDePdfAbstrato
 {
-    private readonly List<Aluno> _alunos = [];
+    //private readonly List<Aluno> _alunos = [];
 
     public void EmitaTodosAlunos()
     {

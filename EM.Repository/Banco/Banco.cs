@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Web.Mvc;
 using FirebirdSql.Data.FirebirdClient;
 
 namespace EM.Repository;

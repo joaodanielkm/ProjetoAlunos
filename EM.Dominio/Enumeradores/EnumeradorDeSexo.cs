@@ -1,4 +1,4 @@
-﻿namespace EM.Domain;
+﻿namespace EM.Dominio;
 
 public enum EnumeradorSexo
 {

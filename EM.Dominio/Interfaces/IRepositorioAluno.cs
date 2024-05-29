@@ -1,6 +1,7 @@
-﻿using ProjetoEM.EM.Domain;
+﻿using EM.Dominio.Interface;
+using ProjetoEM.EM.Dominio;
 
-namespace EM.Domain.Interface;
+namespace EM.Dominio.Interfaces;
 
 public interface IRepositorioAluno : IRepositorio<Aluno>
 {

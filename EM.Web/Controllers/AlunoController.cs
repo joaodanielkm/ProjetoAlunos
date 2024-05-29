@@ -1,9 +1,9 @@
-﻿using EM.Domain;
-using EM.Domain.Interface;
-using EM.Domain.ProjetoEM.EM.Domain;
-using EM.Domain.Utilitarios;
+﻿using EM.Dominio;
+using EM.Dominio.Interfaces;
+using EM.Dominio.Utilitarios;
 using EM.Montador.Montador.Aluno;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoEM.EM.Dominio;
 
 namespace EM.Web.Controllers;
 
