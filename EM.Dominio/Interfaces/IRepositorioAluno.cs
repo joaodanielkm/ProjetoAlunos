@@ -1,5 +1,5 @@
-﻿using EM.Dominio.Interface;
-using ProjetoEM.EM.Dominio;
+﻿using EM.Dominio.Entidades;
+using EM.Dominio.Interface;
 
 namespace EM.Dominio.Interfaces;
 

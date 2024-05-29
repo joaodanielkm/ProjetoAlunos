@@ -9,17 +9,15 @@ public abstract class MontadorDeRelatorio
 
     public byte[] CrieDocumento()
     {
-        using (MemoryStream memoryStream = new())
-        {
-            PdfWriter.GetInstance(Documento, memoryStream);
-            Documento.Open();
-            MonteCabecalhoRelatorio();
-            MonteCorpoRelatorio();
-            MonteRodaeRelatorio();
-            Documento.Close();
+        using MemoryStream memoryStream = new();
+        PdfWriter.GetInstance(Documento, memoryStream);
+        Documento.Open();
+        MonteCabecalhoRelatorio();
+        MonteCorpoRelatorio();
+        MonteRodaeRelatorio();
+        Documento.Close();
 
-            return memoryStream.ToArray();
-        }
+        return memoryStream.ToArray();
     }
 
     protected abstract void MonteCabecalhoRelatorio();

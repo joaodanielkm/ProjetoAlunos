@@ -1,7 +1,7 @@
 using EM.Dominio;
+using EM.Dominio.Entidades;
 using EM.Dominio.Interfaces;
 using FirebirdSql.Data.FirebirdClient;
-using ProjetoEM.EM.Dominio;
 using System.Data;
 
 namespace EM.Repository;

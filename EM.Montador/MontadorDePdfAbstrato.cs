@@ -1,4 +1,5 @@
-﻿using iTextSharp5.text;
+﻿using EM.Montador.Utilidades;
+using iTextSharp5.text;
 using iTextSharp5.text.pdf;
 
 namespace EM.Montador;
@@ -17,7 +18,12 @@ public abstract class MontadorDePdfAbstrato : MontadorDeRelatorio
         cabecalho.DefaultCell.Border = Rectangle.NO_BORDER;
         cabecalho.SpacingAfter = 10;
 
-        cabecalho.AddCell(new PdfPCell(new Phrase("Cabecalho")));
+        cabecalho.AddCell(new PdfPCell(new Phrase("Relatório", Fontes.FonteHelvetica17Negrito))
+        {
+            HorizontalAlignment = Element.ALIGN_CENTER,
+            Border = Rectangle.NO_BORDER,
+            PaddingBottom = 20
+        });
         Documento.Add(cabecalho);
     }
 
@@ -33,7 +39,12 @@ public abstract class MontadorDePdfAbstrato : MontadorDeRelatorio
         rodape.DefaultCell.Border = Rectangle.NO_BORDER;
         rodape.SpacingBefore = 10;
 
-        rodape.AddCell(new PdfPCell(new Phrase("Rodapé")));
+        rodape.AddCell(new PdfPCell(new Phrase("Rodapé", Fontes.FonteHelvetica14Italico))
+        {
+            HorizontalAlignment = Element.ALIGN_CENTER,
+            Border = Rectangle.NO_BORDER,
+            PaddingTop = 20
+        });
         Documento.Add(rodape);
     }
 }
