@@ -1,0 +1,40 @@
+﻿@using ProjetoEM.EM.Dominio
+@{
+    ViewData["Title"] = "Pesquisar";
+}
+@model IEnumerable<Aluno>
+<br />
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="text-center">
+                <tr>
+                    <th scope="col">Matricula</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">CPF</th>
+                    <th scope="col">Nascimento</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th style="max-width: 9px;" scope="row">@item.Matricula</th>
+                        <td style="max-width: 100px; text-overflow: ellipsis;">@item.Nome</td>
+                        <td style="max-width: 9px;">@item.Sexo</td>
+                        <td style="max-width: 14px;">@item.CPF</td>
+                        <td style="max-width: 10px;">@item.Nascimento</td>
+                        <td>
+                            <a asp-area="" asp-controller="Home" asp-action="Deletar" asp-route-id="@item.Matricula" onclick="return confirm('Tem ceteza que deseja excluir @item.ToString()?');" class="btn btn-danger btn-sm text-white">Excluir</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Editar" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white">Editar</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
