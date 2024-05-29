@@ -21,6 +21,15 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
         return File(pdfContent, contentType, fileName);
     }
 
+    public IActionResult EmiteAluno(string id)
+    {
+        new MontadorDeRelatorioDoAluno().EmitaAluno(id);
+        string fileName = "Relatorio.pdf";
+        string contentType = "application/pdf";
+
+        return File(contentType, fileName);
+    }
+
     public IActionResult Index(string searchString, string pesquisePor)
     {
         List<Aluno> alunos = _repositorio.GetAll().ToList();

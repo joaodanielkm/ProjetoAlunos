@@ -12,7 +12,7 @@ public class MontadorDeRelatorioDoAluno() : MontadorDePdfAbstrato
         CrieDocumento();
     }
 
-    public void EmitaAluno(int matricula)
+    public void EmitaAluno(string matricula)
     {
         CrieDocumento();
     }
