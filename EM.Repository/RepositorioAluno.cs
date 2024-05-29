@@ -1,7 +1,7 @@
 using EM.Domain;
 using EM.Domain.Interface;
-using EM.Domain.ProjetoEM.EM.Domain;
 using FirebirdSql.Data.FirebirdClient;
+using ProjetoEM.EM.Domain;
 using System.Data;
 
 namespace EM.Repository;
@@ -12,7 +12,7 @@ public class RepositorioAluno : IRepositorioAluno
     {
         using (Banco.ObtenhaConexao())
         {
-            List<Aluno> alunos = new();
+            List<Aluno> alunos = [];
 
             string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
             DataTable dt = Banco.Comando(sql);

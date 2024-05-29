@@ -107,7 +107,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj": {
+                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM--\\EM.Domain\\EM.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

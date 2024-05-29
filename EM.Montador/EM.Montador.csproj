@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EM.Domain\EM.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="itextsharp5">
       <HintPath>Dependencias\itextsharp5.dll</HintPath>
     </Reference>

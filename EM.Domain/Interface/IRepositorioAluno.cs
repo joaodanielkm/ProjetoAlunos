@@ -1,4 +1,4 @@
-﻿using EM.Domain.ProjetoEM.EM.Domain;
+﻿using ProjetoEM.EM.Domain;
 
 namespace EM.Domain.Interface;
 
