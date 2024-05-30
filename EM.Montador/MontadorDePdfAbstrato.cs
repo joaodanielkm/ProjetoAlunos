@@ -6,6 +6,8 @@ namespace EM.Montador;
 
 public abstract class MontadorDePdfAbstrato : MontadorDeRelatorio
 {
+    protected virtual string TituloRelatorio => "Relatorio";
+
     protected override void MonteCabecalhoRelatorio()
     {
         PdfPTable cabecalho = new(1)
@@ -18,7 +20,7 @@ public abstract class MontadorDePdfAbstrato : MontadorDeRelatorio
         cabecalho.DefaultCell.Border = Rectangle.NO_BORDER;
         cabecalho.SpacingAfter = 10;
 
-        cabecalho.AddCell(new PdfPCell(new Phrase("Relatório", Fontes.FonteHelvetica17Negrito))
+        cabecalho.AddCell(new PdfPCell(new Phrase(TituloRelatorio, Fontes.FonteHelvetica17Negrito))
         {
             HorizontalAlignment = Element.ALIGN_CENTER,
             Border = Rectangle.NO_BORDER,

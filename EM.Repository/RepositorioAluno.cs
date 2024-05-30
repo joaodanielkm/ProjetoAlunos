@@ -1,6 +1,7 @@
 using EM.Dominio;
 using EM.Dominio.Entidades;
 using EM.Dominio.Interfaces;
+using EM.Dominio.Utilitarios;
 using FirebirdSql.Data.FirebirdClient;
 using System.Data;
 
@@ -93,7 +94,7 @@ public class RepositorioAluno : IRepositorioAluno
 
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
 
-        string sql = $"SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = {matricula}";
+        string sql = $"SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = {Uteis.ApenasNumeros(matricula)}";
         DataTable dt = Banco.Comando(sql);
 
         if (dt.Rows.Count > 0)

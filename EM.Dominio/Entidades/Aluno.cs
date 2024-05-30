@@ -23,7 +23,7 @@ public class Aluno : IEntidade
     [Display(Name = "Nascimento")]
     [Required(ErrorMessage = "Nascimento Requerido!")]
     [DataType(DataType.Date)]
-    public DateTime? Nascimento { get; set; }
+    public DateTime Nascimento { get; set; }
 
     [Display(Name = "CPF")]
     [MaxLength(14)]

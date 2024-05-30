@@ -12,22 +12,22 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
     private readonly ILogger<HomeController> _logger = logger;
     public readonly IRepositorioAluno _repositorio = repositorio;
 
-    public IActionResult EmitirTodos()
+    public IActionResult EmitaTodos()
     {
-        byte[] pdfContent = new MontadorDeRelatorioDoAluno().CrieDocumento();
-        string fileName = "Relatorio.pdf";
-        string contentType = "application/pdf";
+        byte[] pdf = new MontadorDeListaDeAlunos().CrieDocumento();
+        string nomeArquivo = "Relatorio.pdf";
+        string tipoArquivo = "application/pdf";
 
-        return File(pdfContent, contentType, fileName);
+        return File(pdf, tipoArquivo, nomeArquivo);
     }
 
-    public IActionResult EmiteAluno(string id)
+    public IActionResult Emita(string id)
     {
-        new MontadorDeRelatorioDoAluno().EmitaAluno(id);
-        string fileName = "Relatorio.pdf";
-        string contentType = "application/pdf";
+        byte[] pdf = new MontadorDeFichaDoAluno(id).CrieDocumento();
+        string nomeArquivo = "Relatorio.pdf";
+        string tipoArquivo = "application/pdf";
 
-        return File(contentType, fileName);
+        return File(pdf, tipoArquivo, nomeArquivo);
     }
 
     public IActionResult Index(string searchString, string pesquisePor)

@@ -25,7 +25,6 @@ public static class Banco
         }
         catch (FbException ex)
         {
-
             throw new Exception($"Comando {sql}.\nErro do comando: {ex.Message}");
         }
 

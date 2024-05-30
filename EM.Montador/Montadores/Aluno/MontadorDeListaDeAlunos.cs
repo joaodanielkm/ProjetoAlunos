@@ -4,18 +4,13 @@ using iTextSharp5.text.pdf;
 
 namespace EM.Montador.Montadores.Aluno;
 
-public class MontadorDeRelatorioDoAluno() : MontadorDePdfAbstrato
+public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
 {
-    public void EmitaTodosAlunos()
-    {
+    protected override string TituloRelatorio => "Lista de Alunos";
 
-        CrieDocumento();
-    }
+    private readonly List<Dominio.Entidades.Aluno> _alunos = [];
 
-    public void EmitaAluno(string matricula)
-    {
-        CrieDocumento();
-    }
+    public MontadorDeListaDeAlunos() => _alunos = new RepositorioAluno().GetAll().ToList();
 
     protected override void MonteCorpoRelatorio()
     {
@@ -30,14 +25,12 @@ public class MontadorDeRelatorioDoAluno() : MontadorDePdfAbstrato
         tabela.AddCell("CPF");
         tabela.AddCell("Nome");
 
-        IEnumerable<Dominio.Entidades.Aluno> alunos = new RepositorioAluno().GetAll();
-
-        if (!alunos.Any())
+        if (_alunos.Count == 0)
         {
             throw new Exception("Não existem alunos cadastrados!");
         }
 
-        foreach (Dominio.Entidades.Aluno aluno in alunos)
+        foreach (Dominio.Entidades.Aluno aluno in _alunos)
         {
             tabela.AddCell(aluno.Matricula.ToString());
             tabela.AddCell(aluno.CPF ?? string.Empty);
