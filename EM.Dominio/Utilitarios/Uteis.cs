@@ -3,6 +3,7 @@
 public static class Uteis
 {
     private readonly static DateTime DataNaoInformada = new(1910, 1, 1);
+
     public static bool EhValidoCPF(string cpf)
     {
         if (cpf == null) { return false; }
@@ -49,11 +50,7 @@ public static class Uteis
         if (!string.IsNullOrEmpty(texto))
         {
             string textoLimpo = new(texto.Where(char.IsDigit).ToArray());
-            if (string.IsNullOrWhiteSpace(textoLimpo) || string.IsNullOrEmpty(textoLimpo))
-            {
-                return texto;
-            }
-            return textoLimpo;
+            return !(!string.IsNullOrWhiteSpace(textoLimpo) && !string.IsNullOrEmpty(textoLimpo)) ? texto : textoLimpo;
         }
         return texto;
     }
@@ -62,7 +59,7 @@ public static class Uteis
     {
         if (Equals(DBNull.Value, dataEntrada)) return DataNaoInformada;
 
-        string dtEntrada = dataEntrada.ToString();
+        string dtEntrada = nameof(dataEntrada);
         if (DateTime.TryParse(dtEntrada, out var dt))
         {
             return dt;

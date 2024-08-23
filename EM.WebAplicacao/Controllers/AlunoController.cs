@@ -1,11 +1,12 @@
-﻿using EM.Dominio;
-using EM.Dominio.Entidades;
+﻿using EM.Dominio.Entidades;
+using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
-using EM.Montador.Montadores.Aluno;
+using EM.Montador.Montadores.RelatorioDeAluno;
+using EM.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EM.Web.Controllers;
+namespace EM.WebAplicacao.Controllers;
 
 public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio) : ControllerAbstrato
 {
@@ -32,11 +33,11 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
     public IActionResult Index(string searchString, string pesquisePor)
     {
-        List<Aluno> alunos = _repositorio.GetAll().ToList();
+        List<Aluno> alunos = [.. _repositorio.ObtenhaTodos()];
 
         if (alunos.Count == 0)
         {
-            ObtenhaViewBag("", false);
+            ObtenhaViewBag("", retorno: false);
             return View();
         }
 
@@ -53,16 +54,16 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
         {
             if (!string.IsNullOrEmpty(searchString))
             {
-                alunos.RemoveAll(a => !a.Nome.Contains(searchString.ToUpper()));
+                alunos.RemoveAll(a => !a.Nome.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            ObtenhaViewBag("", true);
+            ObtenhaViewBag("", retorno: true);
             return View(alunos.ToList().OrderBy(a => a.Nome));
         }
     }
 
     [HttpGet]
-    public IActionResult EditaAluno(string id) => View(_repositorio.Get(id));
+    public IActionResult EditaAluno(string id) => View(_repositorio.Obtenha(id));
 
     [HttpPost]
     public IActionResult EditaAluno(Aluno editaAluno)
@@ -74,7 +75,7 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
         if (CpfEmUso(editaAluno))
         {
-            ObtenhaViewBag("CPF em uso!", false);
+            ObtenhaViewBag("CPF em uso!", retorno: false);
             return View(editaAluno);
         }
 
@@ -91,15 +92,15 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
         {
             try
             {
-                _repositorio.Update(aluno);
-                ObtenhaViewBag("Editado com sucesso!", true);
+                _repositorio.Atualize(aluno);
+                ObtenhaViewBag("Editado com sucesso!", retorno: true);
 
                 return View(editaAluno);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Atualizar");
-                ObtenhaViewBag("Erro ao editar!", false);
+                ObtenhaViewBag("Erro ao editar!", retorno: false);
             }
         }
         return View(editaAluno);
@@ -108,7 +109,7 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
     public IActionResult CadastraAluno()
     {
         int novaMatricula = 1;
-        IEnumerable<Aluno> alunos = _repositorio.GetAll();
+        IEnumerable<Aluno> alunos = _repositorio.ObtenhaTodos();
 
         if (alunos.Any())
         {
@@ -129,34 +130,33 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
     {
         if (!ModelState.IsValid)
         {
-            ObtenhaViewBag("Verifique os dados digitados!", false);
+            ObtenhaViewBag("Verifique os dados digitados!", retorno: false);
             return View(cadastraAluno);
         }
 
         if (CpfEmUso(cadastraAluno))
         {
-            ObtenhaViewBag("CPF em uso!", false);
+            ObtenhaViewBag("CPF em uso!", retorno: false);
             return View(cadastraAluno);
         }
 
         if (!Uteis.EhValidoNome(cadastraAluno.Nome))
         {
-            ObtenhaViewBag($"Verifique o nome cadastrado.", false);
+            ObtenhaViewBag($"Verifique o nome cadastrado.", retorno: false);
             return View(cadastraAluno);
         }
 
-        Aluno alunoJaCadastrado = _repositorio.Get(cadastraAluno.Matricula.ToString());
+        Aluno alunoJaCadastrado = _repositorio.Obtenha(nameof(cadastraAluno.Matricula));
 
         if (alunoJaCadastrado is not null)
         {
-            ObtenhaViewBag("Matricula já cadastrada!", false);
+            ObtenhaViewBag("Matricula já cadastrada!", retorno: false);
             return View(cadastraAluno);
         }
 
-
         Aluno aluno = new()
         {
-            Matricula = (cadastraAluno.Matricula > 0) ? cadastraAluno.Matricula : 1,
+            Matricula = cadastraAluno.Matricula > 0 ? cadastraAluno.Matricula : 1,
             Nome = cadastraAluno.Nome?.ToUpper().Trim(),
             Sexo = cadastraAluno.Sexo,
             Nascimento = Uteis.ConvertaData(cadastraAluno.Nascimento),
@@ -165,13 +165,13 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
         try
         {
-            _repositorio.Add(aluno);
-            ObtenhaViewBag("Cadastrado com sucesso!", true);
+            _repositorio.Adicione(aluno);
+            ObtenhaViewBag("Cadastrado com sucesso!", retorno: true);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Cadastrar");
-            ObtenhaViewBag($"Erro ao cadastrar:\n {ex.Message}", false);
+            ObtenhaViewBag($"Erro ao cadastrar:\n {ex.Message}", retorno: false);
         }
 
         return View(cadastraAluno);
@@ -179,22 +179,22 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
     public IActionResult DeletaAluno(string id)
     {
-        Aluno aluno = _repositorio.Get(id);
+        Aluno aluno = _repositorio.Obtenha(id);
 
         try
         {
-            _repositorio.Remove(aluno);
-            ObtenhaViewBag("Deletado com sucesso!", false);
+            _repositorio.Remova(aluno);
+            ObtenhaViewBag("Deletado com sucesso!", retorno: false);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Deletar");
-            ObtenhaViewBag("Erro ao deletar!", false);
+            ObtenhaViewBag("Erro ao deletar!", retorno: false);
         }
 
         return RedirectToAction("Index", "Aluno");
     }
 
-    private bool CpfEmUso(Aluno aluno) => _repositorio.Get(aluno.CPF?.ToString()) is not null;
+    private bool CpfEmUso(Aluno aluno) => _repositorio.Obtenha(aluno.CPF?.ToString()) is not null;
 
 }

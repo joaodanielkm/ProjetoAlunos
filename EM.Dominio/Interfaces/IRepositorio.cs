@@ -1,12 +1,10 @@
-﻿using EM.Dominio.Interfaces;
-
-namespace EM.Dominio.Interface;
+﻿namespace EM.Dominio.Interfaces;
 
 public interface IRepositorio<T> where T : IEntidade
 {
 
-    T Get(string obj);
+    T Obtenha(string obj);
 
-    IEnumerable<T> GetAll();
+    IEnumerable<T> ObtenhaTodos();
 
 }

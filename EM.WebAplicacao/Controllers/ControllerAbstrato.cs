@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace EM.Web.Controllers;
+namespace EM.WebAplicacao.Controllers;
 
 public abstract class ControllerAbstrato : Controller
 {

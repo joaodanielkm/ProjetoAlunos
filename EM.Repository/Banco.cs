@@ -15,13 +15,14 @@ public static class Banco
 
     public static DataTable Comando(string sql)
     {
-        DataTable dt = new ();
+        DataTable dt = new();
         try
         {
             using FbConnection conexaoFireBird = ObtenhaConexao();
             conexaoFireBird.Open();
             using FbDataAdapter da = new(sql, conexaoFireBird);
             da.Fill(dt);
+            conexaoFireBird.Close();
         }
         catch (FbException ex)
         {

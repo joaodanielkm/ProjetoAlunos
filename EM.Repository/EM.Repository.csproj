@@ -14,4 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\EM.Dominio\EM.Dominio.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Banco\" />
+  </ItemGroup>
 </Project>

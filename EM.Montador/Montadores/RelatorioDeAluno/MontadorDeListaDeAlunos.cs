@@ -2,7 +2,7 @@
 using iTextSharp5.text;
 using iTextSharp5.text.pdf;
 
-namespace EM.Montador.Montadores.Aluno;
+namespace EM.Montador.Montadores.RelatorioDeAluno;
 
 public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
 {
@@ -10,7 +10,7 @@ public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
 
     private readonly List<Dominio.Entidades.Aluno> _alunos = [];
 
-    public MontadorDeListaDeAlunos() => _alunos = new RepositorioAluno().GetAll().ToList();
+    public MontadorDeListaDeAlunos() => _alunos = [.. new RepositorioAluno().ObtenhaTodos()];
 
     protected override void MonteCorpoRelatorio()
     {
@@ -32,7 +32,7 @@ public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
 
         foreach (Dominio.Entidades.Aluno aluno in _alunos)
         {
-            tabela.AddCell(aluno.Matricula.ToString());
+            tabela.AddCell(nameof(aluno.Matricula));
             tabela.AddCell(aluno.CPF ?? string.Empty);
             tabela.AddCell(new PdfPCell(new Phrase(aluno.Nome)) { HorizontalAlignment = Element.ALIGN_LEFT });
         }

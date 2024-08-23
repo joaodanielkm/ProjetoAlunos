@@ -1,13 +1,12 @@
 ﻿using EM.Dominio.Entidades;
-using EM.Dominio.Interface;
 
 namespace EM.Dominio.Interfaces;
 
 public interface IRepositorioAluno : IRepositorio<Aluno>
 {
-    void Add(Aluno obj);
+    void Adicione(Aluno obj);
 
-    void Remove(Aluno obj);
+    void Remova(Aluno obj);
 
-    void Update(Aluno obj);
+    void Atualize(Aluno obj);
 }

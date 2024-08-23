@@ -31,7 +31,7 @@ public abstract class MontadorDePdfAbstrato : MontadorDeRelatorio
 
     protected override void MonteRodaeRelatorio()
     {
-        PdfPTable rodape = new(1)
+        PdfPTable rodape = new(numColumns: 1)
         {
             WidthPercentage = 100
         };

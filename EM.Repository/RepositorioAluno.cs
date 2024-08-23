@@ -1,5 +1,5 @@
-using EM.Dominio;
 using EM.Dominio.Entidades;
+using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
 using FirebirdSql.Data.FirebirdClient;
@@ -9,7 +9,7 @@ namespace EM.Repository;
 
 public class RepositorioAluno : IRepositorioAluno
 {
-    public IEnumerable<Aluno> GetAll()
+    public IEnumerable<Aluno> ObtenhaTodos()
     {
         using (Banco.ObtenhaConexao())
         {
@@ -35,7 +35,7 @@ public class RepositorioAluno : IRepositorioAluno
         }
     }
 
-    public void Add(Aluno aluno)
+    public void Adicione(Aluno aluno)
     {
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
         conexaoFireBird.Open();
@@ -58,7 +58,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public void Update(Aluno aluno)
+    public void Atualize(Aluno aluno)
     {
         using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
         conexaoFireBird.Open();
@@ -81,9 +81,9 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public void Remove(Aluno aluno) => Banco.Comando($"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}");
+    public void Remova(Aluno aluno) => Banco.Comando($"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}");
 
-    public Aluno Get(string matricula)
+    public Aluno Obtenha(string matricula)
     {
         if (string.IsNullOrEmpty(matricula))
         {
@@ -97,24 +97,29 @@ public class RepositorioAluno : IRepositorioAluno
         string sql = $"SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = {Uteis.ApenasNumeros(matricula)}";
         DataTable dt = Banco.Comando(sql);
 
-        if (dt.Rows.Count > 0)
+        switch (dt.Rows.Count)
         {
-            foreach (DataRow item in dt.Rows)
-            {
-                Aluno aluno = new()
+            case > 0:
                 {
-                    Matricula = item.Field<int>("MATRICULA"),
-                    Nome = item.Field<string>("NOME"),
-                    Sexo = item.Field<EnumeradorSexo>("SEXO"),
-                    CPF = item.Field<string>("CPF"),
-                    Nascimento = item.Field<DateTime>("NASCIMENTO"),
-                };
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        Aluno aluno = new()
+                        {
+                            Matricula = item.Field<int>("MATRICULA"),
+                            Nome = item.Field<string>("NOME"),
+                            Sexo = item.Field<EnumeradorSexo>("SEXO"),
+                            CPF = item.Field<string>("CPF"),
+                            Nascimento = item.Field<DateTime>("NASCIMENTO"),
+                        };
 
-                alunoObtido = aluno;
-            }
-            return alunoObtido;
+                        alunoObtido = aluno;
+                    }
+                    return alunoObtido;
+                }
+
+            default:
+                return null;
         }
-        return null;
     }
 }
 

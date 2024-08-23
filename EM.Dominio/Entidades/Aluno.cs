@@ -1,4 +1,5 @@
-﻿using EM.Dominio.Interfaces;
+﻿using EM.Dominio.Enumeradores;
+using EM.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
 namespace EM.Dominio.Entidades;

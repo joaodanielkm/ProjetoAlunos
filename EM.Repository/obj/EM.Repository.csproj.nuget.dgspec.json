@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\EM.Dominio.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\EM.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj",
         "projectName": "EM.Dominio",
-        "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\EM.Dominio.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -65,18 +65,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
         "projectName": "EM.Repository",
-        "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\EM.Repository.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Repository\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -98,8 +98,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\EM.Dominio.csproj": {
-                "projectPath": "C:\\Users\\User\\source\\repos\\ProjetoEM\\EM.Dominio\\EM.Dominio.csproj"
+              "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj": {
+                "projectPath": "C:\\Users\\User\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj"
               }
             }
           }
@@ -144,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
