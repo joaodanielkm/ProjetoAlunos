@@ -40,7 +40,7 @@
 
 <br />
 <div class="row ">
-    @if (Model != null && Model.Any())
+    @if (Model is { } && Model.Any())
     {
         <table class="table table-striped table-hover ">
             <thead class="">
@@ -67,7 +67,7 @@
                         <td scope="row" class=" text-center">
                             <a asp-area="" asp-controller="Aluno" asp-action="Emita" asp-route-id="@item.Matricula" class="btn btn-primary btn-sm text-white text-button" title="Emitir"><i class="fa fa-file-pdf"></i></a>
                             <a asp-area="" asp-controller="Aluno" asp-action="DeletaAluno" asp-route-id="@item.Matricula" class="btn btn-danger btn-sm text-white delete-button" title="Deletar"><i class="fa fa-trash"></i></a>
-                            <a asp-area="" asp-controller="Aluno" asp-action="EditaAluno" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
+                            <a asp-area="" asp-controller="CadastroAluno" asp-action="EditaAluno" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
                         </td>
                     </tr>
                 }

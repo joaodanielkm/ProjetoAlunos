@@ -1,0 +1,34 @@
+﻿@using EM.Dominio.Entidades
+
+@model Cidade
+
+<h4>Novo aluno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form action="CadastraAluno" method="post" class="form-control">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-3 ">
+                        @Html.LabelFor(a => a.Codigo, new { @class = "control-label"})
+                        @Html.TextBoxFor(a => a.Codigo, new { @class = "form-control", @readonly = "true", @required = "tue", @minlength = "1", @maxlength = "9" })
+                    </div>
+                    <div class="col-9 ">
+                        @Html.LabelFor(a => a.Descricao, new { @class = "control-label" })
+                        @Html.TextBoxFor(a => a.Descricao, new { @class = "form-control", @required = "tue", @minlength = "1", @maxlength = "100" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-12 text-right">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-controller="Cidade" asp-action="Grave"/>
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Cidade" asp-action="Index" title="Limpar"><i class="fa fa-broom "></i> </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
