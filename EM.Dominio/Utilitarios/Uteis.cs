@@ -4,47 +4,6 @@ public static class Uteis
 {
     private readonly static DateTime DataNaoInformada = new(1910, 1, 1);
 
-    public static bool EhValidoCPF(string cpf)
-    {
-        if (cpf == null) { return false; }
-        int[] multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
-        int[] multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
-        string tempCpf;
-        string digito;
-        int soma;
-        int resto;
-        if (string.IsNullOrEmpty(cpf))
-        {
-            return false;
-        }
-        cpf = cpf.Trim();
-        cpf = cpf.Replace(".", "").Replace("-", "");
-        if (cpf.Length != 11)
-            return false;
-        tempCpf = cpf[..9];
-        soma = 0;
-
-        for (int i = 0; i < 9; i++)
-            soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
-        resto = soma % 11;
-        if (resto < 2)
-            resto = 0;
-        else
-            resto = 11 - resto;
-        digito = resto.ToString();
-        tempCpf += digito;
-        soma = 0;
-        for (int i = 0; i < 10; i++)
-            soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
-        resto = soma % 11;
-        if (resto < 2)
-            resto = 0;
-        else
-            resto = 11 - resto;
-        digito += resto.ToString();
-        return cpf.EndsWith(digito);
-    }
-
     public static string ApenasNumeros(string texto)
     {
         if (!string.IsNullOrEmpty(texto))

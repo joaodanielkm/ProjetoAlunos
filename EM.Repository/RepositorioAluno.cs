@@ -1,7 +1,7 @@
 using EM.Dominio.Entidades;
-using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
+using EM.Repository.Extensoes;
 using FirebirdSql.Data.FirebirdClient;
 using System.Data;
 
@@ -11,43 +11,38 @@ public class RepositorioAluno : IRepositorioAluno
 {
     public IEnumerable<Aluno> ObtenhaTodos()
     {
-        using (Banco.ObtenhaConexao())
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+
+        cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
+
+        using FbDataReader dr = cmd.ExecuteReader();
+
+        while (dr.Read())
         {
-            List<Aluno> alunos = [];
-
-            string sql = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO";
-            DataTable dt = Banco.Comando(sql);
-
-            foreach (DataRow item in dt.Rows)
+            yield return new Aluno()
             {
-                Aluno aluno = new()
-                {
-                    Matricula = item.Field<int>("MATRICULA"),
-                    Nome = item.Field<string>("NOME"),
-                    Sexo = item.Field<EnumeradorSexo>("SEXO"),
-                    CPF = item.Field<string>("CPF"),
-                    Nascimento = item.Field<DateTime>("NASCIMENTO")
-                };
-
-                alunos.Add(aluno);
-            }
-            return alunos;
+                Matricula = dr.GetInt32("MATRICULA"),
+                Nome = dr.GetString("NOME"),
+                Sexo = dr.GetSexo("SEXO"),
+                CPF = dr.GetCPF("CPF"),
+                Nascimento = dr.GetDateTime("NASCIMENTO")
+            };
         }
     }
 
     public void Adicione(Aluno aluno)
     {
-        using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
-        conexaoFireBird.Open();
-        string sql = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
 
-        FbCommand cmd = new(sql, conexaoFireBird);
+        cmd.CommandText = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
 
-        cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
-        cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
-        cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
-        cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
-        cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+        cmd.Parameters.Add("@MATRICULA");
+        cmd.Parameters.Add("@NOME");
+        cmd.Parameters.Add("@SEXO");
+        cmd.Parameters.Add("@CPF");
+        cmd.Parameters.Add("@NASCIMENTO");
 
         cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
         cmd.Parameters["@NOME"].Value = aluno.Nome;
@@ -60,17 +55,16 @@ public class RepositorioAluno : IRepositorioAluno
 
     public void Atualize(Aluno aluno)
     {
-        using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
-        conexaoFireBird.Open();
-        string sql = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
 
-        FbCommand cmd = new(sql, conexaoFireBird);
+        cmd.CommandText = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
 
-        cmd.Parameters.Add("@MATRICULA", SqlDbType.Int);
-        cmd.Parameters.Add("@NOME", SqlDbType.VarChar);
-        cmd.Parameters.Add("@SEXO", SqlDbType.VarChar);
-        cmd.Parameters.Add("@CPF", SqlDbType.VarChar);
-        cmd.Parameters.Add("@NASCIMENTO", SqlDbType.DateTime);
+        cmd.Parameters.Add("@MATRICULA");
+        cmd.Parameters.Add("@NOME");
+        cmd.Parameters.Add("@SEXO");
+        cmd.Parameters.Add("@CPF");
+        cmd.Parameters.Add("@NASCIMENTO");
 
         cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
         cmd.Parameters["@NOME"].Value = aluno.Nome;
@@ -81,7 +75,17 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public void Remova(Aluno aluno) => Banco.Comando($"DELETE FROM ALUNO WHERE MATRICULA = {aluno.Matricula}");
+    public void Remova(Aluno aluno)
+    {
+        using var conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+
+        cmd.CommandText = "DELETE FROM ALUNO WHERE MATRICULA = @MATRICULA";
+
+        cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
+
+        cmd.ExecuteNonQuery();
+    }
 
     public Aluno Obtenha(string matricula)
     {
@@ -90,36 +94,26 @@ public class RepositorioAluno : IRepositorioAluno
             return null;
         }
 
-        Aluno alunoObtido = new();
+        using FbConnection conexao = Banco.CrieConexao();
 
-        using FbConnection conexaoFireBird = Banco.ObtenhaConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+        cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA"; ;
 
-        string sql = $"SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = {Uteis.ApenasNumeros(matricula)}";
-        DataTable dt = Banco.Comando(sql);
+        cmd.Parameters.Add("@Matricula");
+        cmd.Parameters.Add(Uteis.ApenasNumeros(matricula));
 
-        switch (dt.Rows.Count)
-        {
-            case > 0:
-                {
-                    foreach (DataRow item in dt.Rows)
-                    {
-                        Aluno aluno = new()
-                        {
-                            Matricula = item.Field<int>("MATRICULA"),
-                            Nome = item.Field<string>("NOME"),
-                            Sexo = item.Field<EnumeradorSexo>("SEXO"),
-                            CPF = item.Field<string>("CPF"),
-                            Nascimento = item.Field<DateTime>("NASCIMENTO"),
-                        };
+        FbDataReader dr = cmd.ExecuteReader();
 
-                        alunoObtido = aluno;
-                    }
-                    return alunoObtido;
-                }
-
-            default:
-                return null;
-        }
+        return dr.Read()
+            ? new Aluno()
+            {
+                Matricula = dr.GetInt32("MATRICULA"),
+                Nome = dr.GetString("NOME"),
+                Sexo = dr.GetSexo("SEXO"),
+                CPF = dr.GetCPF("CPF"),
+                Nascimento = dr.GetDateTime("NASCIMENTO"),
+            }
+            : null;
     }
 }
 

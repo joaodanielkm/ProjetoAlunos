@@ -6,4 +6,8 @@
     <Nullable>warnings</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Extensoes\" />
+  </ItemGroup>
+
 </Project>

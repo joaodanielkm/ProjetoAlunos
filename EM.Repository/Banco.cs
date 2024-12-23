@@ -1,36 +1,29 @@
-﻿using System.Data;
-using FirebirdSql.Data.FirebirdClient;
+﻿using FirebirdSql.Data.FirebirdClient;
+using Microsoft.Extensions.Configuration;
 
 namespace EM.Repository;
 
 public static class Banco
 {
-    public static FbConnection ObtenhaConexao()
+    private static FbConnection ObtenhaConexao()
     {
-        var diretorio = Directory.GetCurrentDirectory();
-        string connString = $@"User=SYSDBA;Password=masterkey;Database=localhost/3054:{diretorio}\Banco\DBPROJETOEM.FB4;DataSource=localhost;Dialect=3;Charset=NONE;Pooling=true;user=sysdba;password=masterkey;dialect=3;";
+        string diretorio = Directory.GetCurrentDirectory();
 
-        return new FbConnection(connString);
+        IConfigurationRoot configuracao = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        string stringConexao = configuracao.GetConnectionString("StrConexao")!.Replace("@diretorio", diretorio);
+
+        FbConnection conexao = new (stringConexao);
+        conexao.Open();
+
+        return conexao;
     }
 
-    public static DataTable Comando(string sql)
-    {
-        DataTable dt = new();
-        try
-        {
-            using FbConnection conexaoFireBird = ObtenhaConexao();
-            conexaoFireBird.Open();
-            using FbDataAdapter da = new(sql, conexaoFireBird);
-            da.Fill(dt);
-            conexaoFireBird.Close();
-        }
-        catch (FbException ex)
-        {
-            throw new Exception($"Comando {sql}.\nErro do comando: {ex.Message}");
-        }
+    public static FbConnection CrieConexao() => ObtenhaConexao();
 
-        return dt;
-    }
 }
 
 

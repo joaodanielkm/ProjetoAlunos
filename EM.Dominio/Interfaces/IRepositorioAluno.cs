@@ -1,5 +1,4 @@
 ﻿using EM.Dominio.Entidades;
-
 namespace EM.Dominio.Interfaces;
 
 public interface IRepositorioAluno : IRepositorio<Aluno>
@@ -9,4 +8,5 @@ public interface IRepositorioAluno : IRepositorio<Aluno>
     void Remova(Aluno obj);
 
     void Atualize(Aluno obj);
+
 }

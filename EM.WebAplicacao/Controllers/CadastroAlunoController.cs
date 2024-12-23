@@ -37,7 +37,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = editaAluno.Nome?.ToUpper().Trim() ?? string.Empty,
             Sexo = editaAluno.Sexo,
             Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
-            CPF = Uteis.EhValidoCPF(editaAluno.CPF) ? editaAluno.CPF : null,
+            CPF =  editaAluno.CPF.EhValidoCPF() ? editaAluno.CPF : null,
         };
 
         if (Uteis.EhValidoNome(aluno.Nome))
@@ -112,7 +112,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = cadastraAluno.Nome?.ToUpper().Trim(),
             Sexo = cadastraAluno.Sexo,
             Nascimento = Uteis.ConvertaData(cadastraAluno.Nascimento),
-            CPF = Uteis.EhValidoCPF(cadastraAluno.CPF) ? cadastraAluno.CPF : "",
+            CPF = cadastraAluno.CPF.EhValidoCPF() ? cadastraAluno.CPF : new CPF(),
         };
 
         try

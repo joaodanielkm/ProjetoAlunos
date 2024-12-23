@@ -21,7 +21,7 @@ public class MontadorDeFichaDoAluno(string id) : MontadorDePdfAbstrato
         tabelaAluno.AddCell(new Phrase(nameof(_aluno.Matricula)));
 
         tabelaAluno.AddCell(new Phrase("CPF"));
-        tabelaAluno.AddCell(new Phrase(_aluno.CPF));
+        tabelaAluno.AddCell(new Phrase(nameof(_aluno.CPF.CPFNumero)));
 
         tabelaAluno.AddCell(new Phrase("Nome"));
         tabelaAluno.AddCell(new Phrase(_aluno.Nome));
