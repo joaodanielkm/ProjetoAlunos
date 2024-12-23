@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Banco\**" />
+    <EmbeddedResource Remove="Banco\**" />
+    <None Remove="Banco\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
@@ -15,9 +21,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EM.Dominio\EM.Dominio.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Banco\" />
   </ItemGroup>
 </Project>

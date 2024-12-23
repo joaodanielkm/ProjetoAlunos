@@ -38,17 +38,11 @@ public class RepositorioAluno : IRepositorioAluno
 
         cmd.CommandText = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
 
-        cmd.Parameters.Add("@MATRICULA");
-        cmd.Parameters.Add("@NOME");
-        cmd.Parameters.Add("@SEXO");
-        cmd.Parameters.Add("@CPF");
-        cmd.Parameters.Add("@NASCIMENTO");
-
-        cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
-        cmd.Parameters["@NOME"].Value = aluno.Nome;
-        cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-        cmd.Parameters["@CPF"].Value = aluno.CPF;
-        cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+        cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
+        cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
+        cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
+        cmd.Parameters.AddWithValue("@CPF", aluno.CPF);
+        cmd.Parameters.AddWithValue("@NASCIMENTO", aluno.Nascimento);
 
         cmd.ExecuteNonQuery();
     }
@@ -60,17 +54,11 @@ public class RepositorioAluno : IRepositorioAluno
 
         cmd.CommandText = "UPDATE ALUNO SET NOME = @NOME, SEXO = @SEXO, CPF = @CPF, NASCIMENTO = @NASCIMENTO WHERE MATRICULA = @MATRICULA";
 
-        cmd.Parameters.Add("@MATRICULA");
-        cmd.Parameters.Add("@NOME");
-        cmd.Parameters.Add("@SEXO");
-        cmd.Parameters.Add("@CPF");
-        cmd.Parameters.Add("@NASCIMENTO");
-
-        cmd.Parameters["@MATRICULA"].Value = aluno.Matricula;
-        cmd.Parameters["@NOME"].Value = aluno.Nome;
-        cmd.Parameters["@SEXO"].Value = aluno.Sexo;
-        cmd.Parameters["@CPF"].Value = aluno.CPF;
-        cmd.Parameters["@NASCIMENTO"].Value = aluno.Nascimento;
+        cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
+        cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
+        cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
+        cmd.Parameters.AddWithValue("@CPF", aluno.CPF);
+        cmd.Parameters.AddWithValue("@NASCIMENTO",aluno.Nascimento);
 
         cmd.ExecuteNonQuery();
     }
@@ -95,12 +83,10 @@ public class RepositorioAluno : IRepositorioAluno
         }
 
         using FbConnection conexao = Banco.CrieConexao();
-
         using FbCommand cmd = conexao.CreateCommand();
         cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA"; ;
 
-        cmd.Parameters.Add("@Matricula");
-        cmd.Parameters.Add(Uteis.ApenasNumeros(matricula));
+        cmd.Parameters.AddWithValue("@MATRICULA", Uteis.ApenasNumeros(matricula));
 
         FbDataReader dr = cmd.ExecuteReader();
 

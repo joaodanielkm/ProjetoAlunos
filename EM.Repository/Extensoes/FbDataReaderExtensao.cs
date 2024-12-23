@@ -8,22 +8,17 @@ namespace EM.Repository.Extensoes;
 
 public static class FbDataReaderExtensao
 {
-    public static EnumeradorSexo GetSexo(this FbDataReader dr, string campo)//refatorar para uso de generics, posso precisar adicionar outros enumeradores
+    public static EnumeradorSexo GetSexo(this FbDataReader dr, string campo)
     {
         string value = dr.GetString(campo);
 
-        if (Enum.IsDefined(typeof(EnumeradorSexo), value))
-        {
-            return (EnumeradorSexo)Enum.ToObject(typeof(EnumeradorSexo), value);
-        }
-
-        return new();
+        return Enum.TryParse(value, true, out EnumeradorSexo enumerador) ? enumerador : new();
     }
 
-    public static CPF GetCPF(this FbDataReader dr, string campo)
+    public static string GetCPF(this FbDataReader dr, string campo)
     {
         string value = dr.GetString(campo);
 
-        return new CPF(value);
+        return new CPF(value).CPFNumero;
     }
 }

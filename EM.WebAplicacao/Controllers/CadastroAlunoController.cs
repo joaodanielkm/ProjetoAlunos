@@ -15,7 +15,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
     public IActionResult Index() => View(ViewCadastro);
 
     [HttpGet]
-    public IActionResult EditaAluno(string id) => View(ViewCadastro, _repositorio.Obtenha(id));
+    public IActionResult EditaAluno(string id) => View(ViewEditar, _repositorio.Obtenha(id));
 
     [HttpPost]
     public IActionResult EditaAluno(Aluno editaAluno)
@@ -37,7 +37,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = editaAluno.Nome?.ToUpper().Trim() ?? string.Empty,
             Sexo = editaAluno.Sexo,
             Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
-            CPF =  editaAluno.CPF.EhValidoCPF() ? editaAluno.CPF : null,
+            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : string.Empty,
         };
 
         if (Uteis.EhValidoNome(aluno.Nome))
@@ -47,7 +47,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
                 _repositorio.Atualize(aluno);
                 ObtenhaViewBag("Editado com sucesso!", retorno: true);
 
-                return View(editaAluno);
+                return View(ViewEditar, editaAluno);
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = cadastraAluno.Nome?.ToUpper().Trim(),
             Sexo = cadastraAluno.Sexo,
             Nascimento = Uteis.ConvertaData(cadastraAluno.Nascimento),
-            CPF = cadastraAluno.CPF.EhValidoCPF() ? cadastraAluno.CPF : new CPF(),
+            CPF = new CPF(cadastraAluno.CPF).EhValidoCPF() ? cadastraAluno.CPF : string.Empty,
         };
 
         try
