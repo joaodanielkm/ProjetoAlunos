@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container">
                 <div class="row">
-                    <div class="col-3 ">
+                    <div class="col-3">
                         @Html.LabelFor(a => a.Matricula, new { @class = "control-label" })
                         @Html.TextBoxFor(a => a.Matricula, new { @class = "form-control", @required = "true", @type = "text", @style = "text-align:right", @minlength = "1", @maxlength = "9", @onkeypress = "return onlynumber()", @readonly = true })
                     </div>
@@ -25,17 +25,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-3">
                         <label for="Sexo"> Sexo</label>
                         @Html.DropDownListFor(a => a.Sexo, new SelectList(Enum.GetValues(typeof(EnumeradorSexo))), htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(a => a.Sexo, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col ">
+                    <div class="col">
                         @Html.LabelFor(a => a.Nascimento, new { @class = "control-label" })
                         @Html.EditorFor(a => a.Nascimento, new { htmlAttributes = new { @class = "form-control", @id = "nasc", @type = "date", @required = "tue", @onblur = "return validadata()", @onpaste = "return false", @ondrop = "return false" } })
                         @Html.ValidationMessageFor(a => a.Nascimento, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
                         @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @onpaste = "return false", @autocomplete = "off" })
                     </div>

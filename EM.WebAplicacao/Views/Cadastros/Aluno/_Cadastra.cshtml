@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-3">
                         <label for="Sexo"> Sexo</label>
                         @Html.DropDownListFor(a => a.Sexo, new SelectList(Enum.GetValues(typeof(EnumeradorSexo))), htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(a => a.Sexo, "", new { @class = "text-danger" })
@@ -36,7 +36,7 @@
                         @Html.TextBoxFor(a => a.Nascimento, new { @class = "form-control", @id = "nasc", @type = "date", @required = "tue", @onpaste = "return false", @ondrop = "return false" })
                         @Html.ValidationMessageFor(a => a.Nascimento, "", new { @class = "text-danger" })
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         @Html.LabelFor(a => a.CPF, new { @class = "control-label" })
                         @Html.TextBoxFor(a => a.CPF, new { @class = "form-control", @id = "cpf", @onblur = "return verificarCPF(this.value)", @placeholder = "Digite o cpf do aluno", @onpaste = "return false", @ondrop = "return false", @autocomplete = "off" })
                     </div>
@@ -45,8 +45,8 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-primary " asp-controller="CadastraAluno" asp-action="CadastraAluno" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
                         <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="CadastraAluno" asp-action="Index" title="Limpar"><i class="fa fa-broom "></i> </a>
+                        <input type="submit" value="Salvar" class="btn btn-primary " asp-controller="CadastraAluno" asp-action="CadastraAluno" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
                     </div>
 
                 </div>

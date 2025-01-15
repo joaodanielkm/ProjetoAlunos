@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Montador", "..\EM.Montad
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Dominio", "..\EM.Dominio\EM.Dominio.csproj", "{FEDF602A-A309-4DFB-A610-F3A5E89CB923}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.WebAplicacao", "..\EM.WebAplicacao\EM.WebAplicacao.csproj", "{A680ED85-0702-42E4-9170-07A168B5BBB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Web", "..\EM.WebAplicacao\EM.Web.csproj", "{A680ED85-0702-42E4-9170-07A168B5BBB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Testes", "EM.Testes\EM.Testes.csproj", "{7F13C1E0-C6DC-4B0F-AD1D-4B567B59D338}"
 EndProject
