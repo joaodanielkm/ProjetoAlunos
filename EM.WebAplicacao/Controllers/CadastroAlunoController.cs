@@ -2,10 +2,9 @@
 using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
-using EM.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EM.WebAplicacao.Controllers;
+namespace EM.Web.Controllers;
 
 public class CadastroAlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio)
     : ControladorDeCadastroAbstrato<Aluno>(logger)

@@ -1,6 +1,4 @@
-﻿using EM.Web.Controllers;
-
-namespace EM.WebAplicacao.Controllers
+﻿namespace EM.Web.Controllers
 {
     public abstract class ControladorDeCadastroAbstrato<T>(ILogger<HomeController> logger) 
         : ControllerAbstrato(logger)

@@ -1,10 +1,9 @@
 ﻿using EM.Dominio.Entidades;
 using EM.Dominio.Interfaces;
 using EM.Montador.Montadores.RelatorioDeAluno;
-using EM.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EM.WebAplicacao.Controllers;
+namespace EM.Web.Controllers;
 
 public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio) : ControllerAbstrato(logger)
 {
@@ -21,7 +20,7 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
     public IActionResult Emita(string id)
     {
-        byte[] pdf = new MontadorDeFichaDoAluno(id).CrieDocumento();
+        byte[] pdf = new MontadorDeFichaDoAluno(id, repositorio).CrieDocumento();
         string nomeArquivo = "Relatorio.pdf";
         string tipoArquivo = "application/pdf";
 

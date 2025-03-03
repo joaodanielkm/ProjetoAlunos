@@ -1,9 +1,8 @@
-﻿using EM.Web.Controllers;
-using EM.WebAplicacao.Models;
+﻿using EM.WebAplicacao.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace EM.WebAplicacao.Controllers;
+namespace EM.Web.Controllers;
 
 public abstract class ControllerAbstrato(ILogger<HomeController> logger) : Controller
 {
