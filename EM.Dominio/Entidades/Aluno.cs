@@ -28,7 +28,7 @@ public class Aluno : IEntidade
 
     [Display(Name = "CPF")]
     [MaxLength(14)]
-    public string CPF { get; set; }
+    public string? CPF { get; set; }
 
     public override bool Equals(object obj) =>
 

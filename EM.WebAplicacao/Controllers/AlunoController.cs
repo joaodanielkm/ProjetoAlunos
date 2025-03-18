@@ -20,7 +20,7 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
     public IActionResult Emita(string id)
     {
-        byte[] pdf = new MontadorDeFichaDoAluno(id, repositorio).CrieDocumento();
+        byte[] pdf = new MontadorDeFichaDoAluno(id, _repositorio).CrieDocumento();
         string nomeArquivo = "Relatorio.pdf";
         string tipoArquivo = "application/pdf";
 
@@ -33,7 +33,6 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
 
         if (alunos.Count == 0)
         {
-            ObtenhaViewBag("", retorno: false);
             return View();
         }
 
@@ -53,7 +52,6 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
                 alunos.RemoveAll(a => !a.Nome.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            ObtenhaViewBag("", retorno: true);
             return View(alunos.ToList().OrderBy(a => a.Nome));
         }
     }
@@ -65,12 +63,12 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
         try
         {
             _repositorio.Remova(aluno);
-            ObtenhaViewBag("Deletado com sucesso!", retorno: false);
+            TempData["Mensagem"] = "Deletado com sucesso!";
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Deletar");
-            ObtenhaViewBag("Erro ao deletar!", retorno: false);
+            TempData["Mensagem"] = "Erro ao deletar!";
         }
 
         return RedirectToAction("Index", "Aluno");

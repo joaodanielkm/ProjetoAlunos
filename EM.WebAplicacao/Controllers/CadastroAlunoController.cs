@@ -2,7 +2,6 @@
 using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
-using EM.WebAplicacao.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
@@ -18,7 +17,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
     public IActionResult EditaAluno(string id) => View(ViewEditar, _repositorio.Obtenha(id));
 
     [HttpPost]
-    public IActionResult EditaAluno(Aluno editaAluno)
+    public IActionResult Edita(Aluno editaAluno)
     {
         if (!ModelState.IsValid)
         {
@@ -27,7 +26,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
 
         if (CpfEmUso(editaAluno))
         {
-            ObtenhaViewBag("CPF em uso!", retorno: false);
+            TempData["Mensagem"] = "CPF em uso!";
             return View(editaAluno);
         }
 
@@ -37,7 +36,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = editaAluno.Nome?.ToUpper().Trim() ?? string.Empty,
             Sexo = editaAluno.Sexo,
             Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
-            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : string.Empty,
+            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : string.Empty,//corrigir
         };
 
         if (Uteis.EhValidoNome(aluno.Nome))
@@ -45,14 +44,13 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             try
             {
                 _repositorio.Atualize(aluno);
-                ObtenhaViewBag("Editado com sucesso!", retorno: true);
-
+                TempData["Mensagem"] = "Editado com sucesso!";
                 return View(ViewEditar, editaAluno);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Atualizar");
-                ObtenhaViewBag("Erro ao editar!", retorno: false);
+                TempData["Mensagem"] = "Erro ao editar!";
             }
         }
         return View(editaAluno);
@@ -82,19 +80,20 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
     {
         if (!ModelState.IsValid)
         {
-            ObtenhaViewBag("Verifique os dados digitados!", retorno: false);
+            TempData["Mensagem"] = "Verifique os dados digitados!";
+
             return View(cadastraAluno);
         }
 
         if (CpfEmUso(cadastraAluno))
         {
-            ObtenhaViewBag("CPF em uso!", retorno: false);
+            TempData["Mensagem"] = "CPF em uso!";
             return View(cadastraAluno);
         }
 
         if (!Uteis.EhValidoNome(cadastraAluno.Nome))
         {
-            ObtenhaViewBag($"Verifique o nome cadastrado.", retorno: false);
+            TempData["Mensagem"] = "Verifique o nome cadastrado.";
             return View(cadastraAluno);
         }
 
@@ -102,7 +101,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
 
         if (alunoJaCadastrado is not null)
         {
-            ObtenhaViewBag("Matricula já cadastrada!", retorno: false);
+            TempData["Mensagem"] = "Matricula já cadastrada!";
             return View(cadastraAluno);
         }
 
@@ -118,12 +117,12 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         try
         {
             _repositorio.Adicione(aluno);
-            ObtenhaViewBag("Cadastrado com sucesso!", retorno: true);
+            TempData["Mensagem"] = "Cadastrado com sucesso!";
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Cadastrar");
-            ObtenhaViewBag($"Erro ao cadastrar:\n {ex.Message}", retorno: false);
+            TempData["Mensagem"] = $"Erro ao cadastrar:\n {ex.Message}";
         }
 
         return View(cadastraAluno);

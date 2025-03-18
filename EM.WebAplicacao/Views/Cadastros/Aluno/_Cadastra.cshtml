@@ -57,7 +57,7 @@
 
 <script defer>
     let retorno = @ViewBag.Status;
-    let menssagemRetorno = '@ViewBag.Mensagem';
+    let mensagemRetorno = '@ViewBag.Mensagem';
     validaRetorno();
 
     function validaRetorno() {
@@ -65,7 +65,7 @@
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: menssagemRetorno,
+                title: mensagemRetorno,
                 showConfirmButton: false,
                 timer: 1500,
             })
@@ -74,7 +74,7 @@
         else {
             Swal.fire({
                 icon: 'error',
-                title: menssagemRetorno,
+                title: mensagemRetorno,
                 showConfirmButton: false,
                 timer: 1500
             })

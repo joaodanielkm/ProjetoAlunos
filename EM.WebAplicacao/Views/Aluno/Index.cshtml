@@ -1,6 +1,7 @@
 ﻿@using EM.Dominio.Entidades
 @{
     ViewData["Title"] = "Projeto EM";
+    var menssagemRetorno = TempData["Mensagem"];
 }
 @model IEnumerable<Aluno>
 
@@ -77,7 +78,7 @@
 </div>
 
 <script defer>
-    let retorno = @ViewBag.Status;
+    //let retorno = @ViewBag.Status;
     let menssagemRetorno = '@ViewBag.Mensagem';
     function validaRetorno() {
         if (retorno) {

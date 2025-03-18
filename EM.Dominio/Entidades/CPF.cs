@@ -4,11 +4,7 @@ namespace EM.Dominio.Entidades;
 
 public class CPF(string CPFFormatado)
 {
-    public CPF() : this(string.Empty)
-    {
-    }
-
-    private string Cpf { get; set; } = CPFFormatado;
+    private string? Cpf { get; set; } = CPFFormatado ?? string.Empty;
 
     public string CPFNumero => Uteis.ApenasNumeros(Cpf);
 

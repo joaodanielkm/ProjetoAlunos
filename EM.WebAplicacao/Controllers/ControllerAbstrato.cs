@@ -11,18 +11,6 @@ public abstract class ControllerAbstrato(ILogger<HomeController> logger) : Contr
     [HttpPost]
     public virtual ActionResult Index(string searchString) => View("From [HttpPost]Index: filter on " + searchString);
 
-    protected void ObtenhaViewBag(string menssagem, bool retorno)
-    {
-        ViewBag.Mensagem = menssagem;
-        if (retorno)
-        {
-            ViewBag.Status = "true";
-        }
-        else
-        {
-            ViewBag.Status = "false";
-        }
-    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error() =>
