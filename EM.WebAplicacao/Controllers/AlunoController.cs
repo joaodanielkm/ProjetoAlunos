@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio) : ControllerAbstrato(logger)
+public class AlunoController(IRepositorioAluno repositorio) : ControllerAbstrato
 {
     protected IRepositorioAluno _repositorio = repositorio;
 
@@ -60,17 +60,26 @@ public class AlunoController(ILogger<HomeController> logger, IRepositorioAluno r
     {
         Aluno aluno = _repositorio.Obtenha(id);
 
+        if (aluno == null)
+        {
+            TempData["Mensagem"] = "Aluno não encontrado!";
+            TempData["Retorno"] = false;
+            return RedirectToAction("Index", "Aluno");
+        }
+
         try
         {
             _repositorio.Remova(aluno);
             TempData["Mensagem"] = "Deletado com sucesso!";
+            TempData["Retorno"] = true;
+            return RedirectToAction("Index", "Aluno");
         }
-        catch (Exception ex)
+        catch
         {
-            _logger.LogError(ex, "Deletar");
             TempData["Mensagem"] = "Erro ao deletar!";
+            TempData["Retorno"] = false;
         }
 
-        return RedirectToAction("Index", "Aluno");
+        return View("Index", "Aluno");
     }
 }

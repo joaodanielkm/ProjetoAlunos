@@ -4,13 +4,10 @@ using System.Diagnostics;
 
 namespace EM.Web.Controllers;
 
-public abstract class ControllerAbstrato(ILogger<HomeController> logger) : Controller
+public abstract class ControllerAbstrato : Controller
 {
-    protected ILogger<HomeController> _logger = logger;
-
     [HttpPost]
     public virtual ActionResult Index(string searchString) => View("From [HttpPost]Index: filter on " + searchString);
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error() =>

@@ -2,6 +2,8 @@
 @using EM.Dominio.Entidades
 @using EM.Dominio.Enumeradores
 @{
+    var menssagemRetorno = TempData["Mensagem"];
+    var retorno = TempData["Retorno"];
     ViewData["Title"] = "Editar aluno";
 }
 @model Aluno
@@ -53,10 +55,6 @@
 </div>
 
 <script defer>
-    let retorno = @ViewBag.Status;
-    let menssagemRetorno = '@ViewBag.Mensagem';
-    validaRetorno();
-
     function validaRetorno() {
         if (retorno) {
             Swal.fire({

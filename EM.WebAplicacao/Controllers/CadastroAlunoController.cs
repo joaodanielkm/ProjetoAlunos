@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class CadastroAlunoController(ILogger<HomeController> logger, IRepositorioAluno repositorio)
-    : ControladorDeCadastroAbstrato<Aluno>(logger)
+public class CadastroAlunoController(IRepositorioAluno repositorio)
+    : ControladorDeCadastroAbstrato<Aluno>
 {
     protected IRepositorioAluno _repositorio = repositorio;
 
@@ -27,6 +27,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         if (CpfEmUso(editaAluno))
         {
             TempData["Mensagem"] = "CPF em uso!";
+            TempData["Retorno"] = false;
             return View(editaAluno);
         }
 
@@ -36,7 +37,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
             Nome = editaAluno.Nome?.ToUpper().Trim() ?? string.Empty,
             Sexo = editaAluno.Sexo,
             Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
-            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : string.Empty,//corrigir
+            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : null,
         };
 
         if (Uteis.EhValidoNome(aluno.Nome))
@@ -47,9 +48,8 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
                 TempData["Mensagem"] = "Editado com sucesso!";
                 return View(ViewEditar, editaAluno);
             }
-            catch (Exception ex)
+            catch 
             {
-                _logger.LogError(ex, "Atualizar");
                 TempData["Mensagem"] = "Erro ao editar!";
             }
         }
@@ -81,6 +81,7 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         if (!ModelState.IsValid)
         {
             TempData["Mensagem"] = "Verifique os dados digitados!";
+            TempData["Retorno"] = false;
 
             return View(cadastraAluno);
         }
@@ -88,12 +89,16 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         if (CpfEmUso(cadastraAluno))
         {
             TempData["Mensagem"] = "CPF em uso!";
+            TempData["Retorno"] = false;
+
             return View(cadastraAluno);
         }
 
         if (!Uteis.EhValidoNome(cadastraAluno.Nome))
         {
             TempData["Mensagem"] = "Verifique o nome cadastrado.";
+            TempData["Retorno"] = false;
+
             return View(cadastraAluno);
         }
 
@@ -102,6 +107,8 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         if (alunoJaCadastrado is not null)
         {
             TempData["Mensagem"] = "Matricula já cadastrada!";
+            TempData["Retorno"] = false;
+
             return View(cadastraAluno);
         }
 
@@ -118,11 +125,13 @@ public class CadastroAlunoController(ILogger<HomeController> logger, IRepositori
         {
             _repositorio.Adicione(aluno);
             TempData["Mensagem"] = "Cadastrado com sucesso!";
+            TempData["Retorno"] = false;
+
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Cadastrar");
             TempData["Mensagem"] = $"Erro ao cadastrar:\n {ex.Message}";
+            TempData["Retorno"] = false;
         }
 
         return View(cadastraAluno);

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class CadastroCidadeController(ILogger<HomeController> logger, IRepositorioAluno repositorio) 
-    : ControladorDeCadastroAbstrato<Cidade>(logger)
+public class CadastroCidadeController(IRepositorioAluno repositorio) 
+    : ControladorDeCadastroAbstrato<Cidade>
 {
 
     protected IRepositorioAluno _repositorio = repositorio;
