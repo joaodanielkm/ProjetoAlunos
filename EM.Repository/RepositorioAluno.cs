@@ -11,6 +11,8 @@ public class RepositorioAluno : IRepositorioAluno
 {
     public IEnumerable<Aluno> ObtenhaTodos()
     {
+        List<Aluno> alunos = [];
+
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
 
@@ -20,7 +22,7 @@ public class RepositorioAluno : IRepositorioAluno
 
         while (dr.Read())
         {
-            yield return new Aluno()
+            Aluno aluno = new()
             {
                 Matricula = dr.GetInt32("MATRICULA"),
                 Nome = dr.GetString("NOME"),
@@ -28,7 +30,10 @@ public class RepositorioAluno : IRepositorioAluno
                 CPF = dr.GetCPF("CPF"),
                 Nascimento = dr.GetDateTime("NASCIMENTO")
             };
+            alunos.Add(aluno);
         }
+
+        return alunos;
     }
 
     public void Adicione(Aluno aluno)
@@ -58,7 +63,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
         cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
         cmd.Parameters.AddWithValue("@CPF", aluno.CPF);
-        cmd.Parameters.AddWithValue("@NASCIMENTO",aluno.Nascimento);
+        cmd.Parameters.AddWithValue("@NASCIMENTO", aluno.Nascimento);
 
         cmd.ExecuteNonQuery();
     }

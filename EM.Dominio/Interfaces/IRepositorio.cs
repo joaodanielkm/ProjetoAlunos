@@ -3,7 +3,7 @@
 public interface IRepositorio<T> where T : IEntidade
 {
 
-    T Obtenha(string obj);
+    T Obtenha(string codigo);
 
     IEnumerable<T> ObtenhaTodos();
 

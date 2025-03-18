@@ -2,6 +2,7 @@
 using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
+using EM.WebAplicacao.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;

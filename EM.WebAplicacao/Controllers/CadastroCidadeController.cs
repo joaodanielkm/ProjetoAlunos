@@ -1,5 +1,6 @@
 ﻿using EM.Dominio.Entidades;
 using EM.Dominio.Interfaces;
+using EM.WebAplicacao.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
