@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class CadastroCidadeController(IRepositorioAluno repositorio) 
+public class CidadeController(IRepositorioAluno repositorio) 
     : ControladorDeCadastroAbstrato<Cidade>
 {
 

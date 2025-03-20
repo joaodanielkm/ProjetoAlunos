@@ -9,6 +9,16 @@ namespace EM.Repository;
 
 public class RepositorioAluno : IRepositorioAluno
 {
+   public int ObtenhaProximMatricula()
+    {
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+
+        cmd.CommandText = "SELECT GEN_ID(GEN_ALUNO, 1) FROM RDB$DATABASE";
+
+        return Convert.ToInt32(cmd.ExecuteScalar());
+    }
+
     public IEnumerable<Aluno> ObtenhaTodos()
     {
         List<Aluno> alunos = [];
@@ -41,9 +51,11 @@ public class RepositorioAluno : IRepositorioAluno
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
 
+        int matricula = aluno.Matricula == 0 ? ObtenhaProximMatricula() : aluno.Matricula;
+
         cmd.CommandText = "INSERT INTO ALUNO (MATRICULA, NOME, SEXO, CPF, NASCIMENTO) VALUES (@MATRICULA, @NOME, @SEXO, @CPF, @NASCIMENTO)";
 
-        cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
+        cmd.Parameters.AddWithValue("@MATRICULA", matricula);
         cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
         cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
         cmd.Parameters.AddWithValue("@CPF", aluno.CPF);

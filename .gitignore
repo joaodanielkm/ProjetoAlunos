@@ -398,3 +398,6 @@ FodyWeavers.xsd
 *.sln.iml
 /EM.Web/.vs/ProjetoEM/v17/.suo
 /EM.Web/obj/Debug/net6.0/apphost.exe
+/EM.Web/.vs/ProjetoEM/DesignTimeBuild/.dtbcache.v2
+/EM.Web/.vs/ProjetoEM/v17/.futdcache.v2
+/EM.Web/.vs/ProjetoEM/v17/fileList.bin

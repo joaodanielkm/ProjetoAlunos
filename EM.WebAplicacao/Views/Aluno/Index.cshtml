@@ -11,7 +11,7 @@
 <br />
 <div class="row">
     <div class=" col-lg-12" style="text-align: right;">
-        <a tabindex="3" class="btn btn-primary  " asp-area="" asp-controller="CadastroAluno" asp-action="Index"><i class="fa fa-user-plus"></i> Novo Aluno</a>
+        <a tabindex="3" class="btn btn-primary  " asp-area="" asp-controller="Aluno" asp-action="Cadastra"><i class="fa fa-user-plus"></i> Novo Aluno</a>
         <a tabindex="4" class="btn btn-secondary  " asp-area="" asp-controller="Aluno" asp-action="EmitaTodos"><i class="fa fa-file-pdf " onclick="validaRetorno"></i> Emitir Lista de Alunos</a>
     </div>
 </div>
@@ -63,12 +63,20 @@
                         <td scope="row" class="text-center">@item.Sexo</td>
                         <td scope="row" id="cpf" class="text-center">@item.CPF</td>
                         <td scope="row" class=" text-center">
-                            @Html.TextBoxFor(model => item.Nascimento, "{0:dd/MM/yyyy}", new { @class = " text-center  bg-transparent border-0  border-light", @id = "inputNascimento", @readOnly = "true" })
+                            @Html.TextBoxFor(
+                                     model => item.Nascimento,
+                                     "{0:dd/MM/yyyy}",
+                                     new
+                                     {
+                                         @class = " text-center  bg-transparent border-0  border-light",
+                                         @id = "inputNascimento",
+                                         @readOnly = "true"
+                                     })
                         </td>
                         <td scope="row" class=" text-center">
                             <a asp-area="" asp-controller="Aluno" asp-action="Emita" asp-route-id="@item.Matricula" class="btn btn-primary btn-sm text-white text-button" title="Emitir"><i class="fa fa-file-pdf"></i></a>
                             <a asp-area="" asp-controller="Aluno" asp-action="DeletaAluno" asp-route-id="@item.Matricula" class="btn btn-danger btn-sm text-white delete-button" title="Deletar"><i class="fa fa-trash"></i></a>
-                            <a asp-area="" asp-controller="CadastroAluno" asp-action="Edita" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
+                            <a asp-area="" asp-controller="Aluno" asp-action="Edita" asp-route-id="@item.Matricula" class="btn btn-info btn-sm text-white"><i class="fa fa-edit" title="Editar"></i></a>
                         </td>
                     </tr>
                 }

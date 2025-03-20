@@ -31,7 +31,6 @@ public class Aluno : IEntidade
     public string? CPF { get; set; }
 
     public override bool Equals(object obj) =>
-
         obj is Aluno aluno &&
                Matricula == aluno.Matricula &&
                Nome == aluno.Nome &&

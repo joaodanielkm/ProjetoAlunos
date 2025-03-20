@@ -9,4 +9,6 @@ public interface IRepositorioAluno : IRepositorio<Aluno>
 
     void Atualize(Aluno obj);
 
+    int ObtenhaProximMatricula();
+
 }

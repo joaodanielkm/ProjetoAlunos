@@ -2,9 +2,9 @@
 @using EM.Dominio.Entidades
 @using EM.Dominio.Enumeradores
 @{
+    ViewData["Title"] = "Editar aluno";
     var menssagemRetorno = TempData["Mensagem"];
     var retorno = TempData["Retorno"];
-    ViewData["Title"] = "Editar aluno";
 }
 @model Aluno
 
@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left " title="Voltar"></i></a>
-                        <input type="submit" value="Salvar" class="btn btn-info " asp-controller="CadastroAluno" asp-action="Edita" onclick="return validaCampoNome(this), validaCampoMatricula(this)" />
+                        <input type="submit" value="Salvar" class="btn btn-info " asp-controller="Aluno" asp-action="Edita" onclick="return validaCampoNome(this), validaCampoMatricula(this)" />
                     </div>
                 </div>
             </div>
@@ -56,20 +56,20 @@
 
 <script defer>
     function validaRetorno() {
-        if (retorno) {
+        if (@retorno) {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: menssagemRetorno,
+                title: '@menssagemRetorno',
                 showConfirmButton: false,
                 timer: 1500,
             })
-            redirecione();
+            //redirecione();
         }
         else {
             Swal.fire({
                 icon: 'error',
-                title: menssagemRetorno,
+                title: '@menssagemRetorno',
                 showConfirmButton: false,
                 timer: 1500
             })
