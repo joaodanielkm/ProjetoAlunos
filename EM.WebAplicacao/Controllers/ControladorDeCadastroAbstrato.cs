@@ -4,10 +4,12 @@
         : ControllerAbstrato
         where T : class, new()
     {
-        private static string? DescricaoModel => typeof(T).Name.Replace("Model", "");
-        protected string ViewCadastro => $"~/Views/Cadastros/{DescricaoModel}/_Cadastra.cshtml";
-        protected string ViewEditar => $"~/Views/Cadastros/{DescricaoModel}/_Edita.cshtml";
-        protected virtual void Grave(T model) => throw new NotImplementedException();
+        protected virtual string ObterNomeEntidade() => typeof(T).Name.EndsWith("Model")
+            ? typeof(T).Name[..^5]
+            : typeof(T).Name;
+
+        protected string ViewCadastro => $"~/Views/Cadastros/{ObterNomeEntidade()}/_Cadastra.cshtml";
+        protected string ViewEditar => $"~/Views/Cadastros/{ObterNomeEntidade()}/_Edita.cshtml";
 
     }
 }

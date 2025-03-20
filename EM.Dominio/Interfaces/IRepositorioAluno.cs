@@ -10,5 +10,7 @@ public interface IRepositorioAluno : IRepositorio<Aluno>
     void Atualize(Aluno obj);
 
     int ObtenhaProximMatricula();
+    
+    Aluno ObtenhaPorCpf(string cpf);
 
 }

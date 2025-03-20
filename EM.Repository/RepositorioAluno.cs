@@ -118,5 +118,26 @@ public class RepositorioAluno : IRepositorioAluno
             }
             : null;
     }
+
+    public Aluno ObtenhaPorCpf(string cpf)
+    {
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+        cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE CPF = @CPF";
+
+        cmd.Parameters.AddWithValue("@CPF", Uteis.ApenasNumeros(cpf));
+
+        FbDataReader dr = cmd.ExecuteReader();
+
+        return dr.Read()
+            ? new Aluno(dr.GetCPF("CPF"))
+            {
+                Matricula = dr.GetInt32("MATRICULA"),
+                Nome = dr.GetString("NOME"),
+                Sexo = dr.GetSexo("SEXO"),
+                Nascimento = dr.GetDateTime("NASCIMENTO"),
+            }
+            : null;
+    }
 }
 

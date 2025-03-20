@@ -13,8 +13,4 @@ public class CidadeController(IRepositorioAluno repositorio)
     public IActionResult Index()
         => View(ViewCadastro, new Cidade() { Codigo = 1, Descricao = "Teste"});//REFATORAR
 
-    protected override void Grave(Cidade model)
-    {
-        base.Grave(model);
-    }
 }

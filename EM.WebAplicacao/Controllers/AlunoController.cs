@@ -181,8 +181,7 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
         return View(ViewCadastro, model);
     }
 
-    //mover para locar correto
-    private bool CpfEmUso(AlunoModel aluno) => _repositorio.Obtenha(aluno.CPF?.ToString()) is not null;
+    private bool CpfEmUso(AlunoModel aluno) => _repositorio.ObtenhaPorCpf(aluno.CPF) is not null;
 
     public IActionResult DeletaAluno(string id)
     {
