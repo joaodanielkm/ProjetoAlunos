@@ -101,7 +101,7 @@ public class RepositorioAluno : IRepositorioAluno
 
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
-        cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA"; ;
+        cmd.CommandText = "SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE MATRICULA = @MATRICULA";
 
         cmd.Parameters.AddWithValue("@MATRICULA", Uteis.ApenasNumeros(matricula));
 

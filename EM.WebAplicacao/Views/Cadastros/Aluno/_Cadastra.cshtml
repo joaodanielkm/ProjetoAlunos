@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-sm-12 text-right">
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger"><i class="fa fa-arrow-left" title="Voltar"></i></a>
-                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Aluno" asp-action="Index" title="Limpar"><i class="fa fa-broom "></i> </a>
+                        <a tabindex="3" class="btn btn-warning" asp-area="" asp-controller="Aluno" asp-action="Cadastra" title="Limpar"><i class="fa fa-broom "></i> </a>
                         <input type="submit" value="Salvar" class="btn btn-primary " asp-controller="Aluno" asp-action="Cadastra" onclick="return validaCampoMatricula(this), validadataNascimento(), validaCampoNome()" />
                     </div>
 
@@ -58,31 +58,28 @@
 </div>
 
 <script defer>
+    validaRetorno();
+
     function validaRetorno() {
-        if (retorno) {
+        if('@retorno' == ''){
+            return;
+        }
+        if ('@retorno') {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: mensagemRetorno,
+                title: '@menssagemRetorno',
                 showConfirmButton: false,
                 timer: 1500,
             })
-            redirecione();
         }
         else {
             Swal.fire({
                 icon: 'error',
-                title: mensagemRetorno,
+                title: '@menssagemRetorno',
                 showConfirmButton: false,
                 timer: 1500
             })
         }
     }
-
-    function redirecione() {
-        setTimeout(() => {
-            window.location.href = '@Url.Action("CadastraAluno", "Aluno")', 1500;
-        }, 1500);
-    }
-
 </script>

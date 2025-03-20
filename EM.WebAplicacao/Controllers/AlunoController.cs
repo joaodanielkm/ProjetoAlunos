@@ -115,7 +115,7 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
     }
 
     [HttpPost]
-    public IActionResult CadastraAluno(Aluno cadastraAluno)
+    public IActionResult Cadastra(Aluno cadastraAluno)
     {
         if (!ModelState.IsValid)
         {
@@ -141,9 +141,9 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
             return View(cadastraAluno);
         }
 
-        Aluno alunoJaCadastrado = _repositorio.Obtenha(nameof(cadastraAluno.Matricula));
+        Aluno alunoJaCadastrado = _repositorio.Obtenha(cadastraAluno.Matricula.ToString());
 
-        if (alunoJaCadastrado is not null)
+        if (alunoJaCadastrado is { })
         {
             TempData["Mensagem"] = "Matricula já cadastrada!";
             TempData["Retorno"] = false;
@@ -173,7 +173,7 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
             TempData["Retorno"] = false;
         }
 
-        return View(cadastraAluno);
+        return View(ViewCadastro, cadastraAluno);
     }
 
     //mover para locar correto
