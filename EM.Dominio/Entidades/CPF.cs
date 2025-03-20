@@ -2,29 +2,34 @@
 
 namespace EM.Dominio.Entidades;
 
-public class CPF(string CPFFormatado)
+public class CPF(string cpf)
 {
-    private string Cpf { get; set; } = CPFFormatado;
+    private string _cpfFormatado = cpf;
 
-    public string CPFNumero => Uteis.ApenasNumeros(Cpf);
+    public string CPFNumero => Uteis.ApenasNumeros(_cpfFormatado);
+
+    public string CPFFormatado => FormateCPF(CPFNumero);
+
+    public static string FormateCPF(string numero) =>
+        $"{numero[..3]}.{numero.Substring(3, 3)}.{numero.Substring(6, 3)}-{numero.Substring(9, 2)}";
 
     public bool EhValidoCPF()
     {
-        if (string.IsNullOrEmpty(Cpf)) { return false; }
+        if (string.IsNullOrEmpty(_cpfFormatado)) { return false; }
         int[] multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
         int[] multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
         string tempCpf;
         string digito;
         int soma;
         int resto;
-        if (string.IsNullOrEmpty(Cpf))
+        if (string.IsNullOrEmpty(_cpfFormatado))
         {
             return false;
         }
-        Cpf = Cpf.Trim().Replace(".", "").Replace("-", "");
-        if (Cpf.Length != 11)
+        _cpfFormatado = _cpfFormatado.Trim().Replace(".", "").Replace("-", "");
+        if (_cpfFormatado.Length != 11)
             return false;
-        tempCpf = Cpf[..9];
+        tempCpf = _cpfFormatado[..9];
         soma = 0;
 
         for (int i = 0; i < 9; i++)
@@ -45,8 +50,8 @@ public class CPF(string CPFFormatado)
         else
             resto = 11 - resto;
         digito += resto.ToString();
-        return Cpf.EndsWith(digito);
+        return _cpfFormatado.EndsWith(digito);
     }
 
-    public override string ToString() => Cpf;
+    public override string ToString() => _cpfFormatado;
 }

@@ -1,9 +1,12 @@
 ﻿@using EM.Dominio.Entidades
+@using EM.Web.Models
+
 @{
     ViewData["Title"] = "Projeto EM";
+    var retorno = TempData["Retorno"];
     var menssagemRetorno = TempData["Mensagem"];
 }
-@model IEnumerable<Aluno>
+@model IEnumerable<AlunoModel>
 
 <div class="text-center">
     <h1 class="display-4 ">Projeto EM</h1>
@@ -86,14 +89,12 @@
 </div>
 
 <script defer>
-    //let retorno = @ViewBag.Status;
-    let menssagemRetorno = '@ViewBag.Mensagem';
     function validaRetorno() {
-        if (retorno) {
+        if ('@retorno') {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
-                title: menssagemRetorno,
+                title: '@menssagemRetorno',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -101,7 +102,7 @@
         else {
             Swal.fire({
                 icon: 'error',
-                title: menssagemRetorno,
+                title: '@menssagemRetorno',
                 text: 'Contate o adminsitrador do sistema!',
                 showConfirmButton: false,
                 timer: 1500

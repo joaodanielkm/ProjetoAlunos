@@ -1,8 +1,10 @@
 ﻿@using EM.Dominio.Entidades
+@using EM.Web.Models
+
 @{
     ViewData["Title"] = "Pesquisar";
 }
-@model IEnumerable<Aluno>
+@model IEnumerable<AlunoModel>
 <br />
 <div class="row">
     @if (Model != null && Model.Any())

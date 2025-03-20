@@ -3,11 +3,13 @@ using EM.Dominio.Enumeradores;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
 using EM.Montador.Montadores.RelatorioDeAluno;
+using EM.Web.Conversores;
+using EM.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EM.Web.Controllers;
 
-public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadastroAbstrato<Aluno>
+public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadastroAbstrato<AlunoModel>
 {
     protected IRepositorioAluno _repositorio = repositorio;
 
@@ -54,36 +56,48 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
                 alunos.RemoveAll(a => !a.Nome.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
             }
 
-            return View(alunos.ToList().OrderBy(a => a.Nome));
+            return View(alunos
+                .ToList()
+                .OrderBy(a => a.Nome)
+                .Select(m => m.Converta()));
         }
     }
 
     [HttpGet]
-    public IActionResult Edita(string id) => View(ViewEditar, _repositorio.Obtenha(id));
+    public IActionResult Edita(string id) => View(ViewEditar, _repositorio.Obtenha(id).Converta());
 
     [HttpPost]
-    public IActionResult Edita(Aluno editaAluno)
+    public IActionResult Edita(AlunoModel model)
     {
         if (!ModelState.IsValid)
         {
-            return View(editaAluno);
+            TempData["Mensagem"] = "Verifique os dados digitados!";
+            TempData["Retorno"] = false;
+
+            return View(ViewEditar, model);
         }
 
-        if (CpfEmUso(editaAluno))
+        if (CpfEmUso(model))
         {
             TempData["Mensagem"] = "CPF em uso!";
             TempData["Retorno"] = false;
-            return View(editaAluno);
+            return View(ViewEditar, model);
         }
 
-        Aluno aluno = new()
+        Aluno aluno = new(model.CPF.ToString())
         {
-            Matricula = editaAluno.Matricula,
-            Nome = editaAluno.Nome?.ToUpper(),
-            Sexo = editaAluno.Sexo,
-            Nascimento = Uteis.ConvertaData(editaAluno.Nascimento),
-            CPF = new CPF(editaAluno.CPF).EhValidoCPF() ? editaAluno.CPF : null,
+            Matricula = model.Matricula,
+            Nome = model.Nome?.ToUpper(),
+            Sexo = model.Sexo,
+            Nascimento = Uteis.ConvertaData(model.Nascimento)
         };
+
+        if (!aluno.CPF.EhValidoCPF())
+        {
+            TempData["Mensagem"] = "CPF inválido!";
+            TempData["Retorno"] = false;
+            return View(ViewEditar, model);
+        }
 
         if (Uteis.EhValidoNome(aluno.Nome))
         {
@@ -92,7 +106,7 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
                 _repositorio.Atualize(aluno);
                 TempData["Mensagem"] = "Editado com sucesso!";
                 TempData["Retorno"] = true;
-                return View(ViewEditar, editaAluno);
+                return View(ViewEditar, model);
             }
             catch
             {
@@ -100,12 +114,12 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
                 TempData["Mensagem"] = "Erro ao editar!";
             }
         }
-        return View(editaAluno);
+        return View(ViewEditar, model);
     }
 
     public IActionResult Cadastra()
     {
-        Aluno aluno = new()
+        AlunoModel aluno = new()
         {
             Sexo = EnumeradorSexo.Masculino,
             Matricula = _repositorio.ObtenhaProximMatricula()
@@ -115,54 +129,45 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
     }
 
     [HttpPost]
-    public IActionResult Cadastra(Aluno cadastraAluno)
+    public IActionResult Cadastra(AlunoModel model)
     {
         if (!ModelState.IsValid)
         {
             TempData["Mensagem"] = "Verifique os dados digitados!";
             TempData["Retorno"] = false;
 
-            return View(cadastraAluno);
+            return View(ViewCadastro,model);
         }
 
-        if (CpfEmUso(cadastraAluno))
+        if (CpfEmUso(model))
         {
             TempData["Mensagem"] = "CPF em uso!";
             TempData["Retorno"] = false;
 
-            return View(cadastraAluno);
+            return View(ViewCadastro, model);
         }
 
-        if (!Uteis.EhValidoNome(cadastraAluno.Nome))
+        if (!Uteis.EhValidoNome(model.Nome))
         {
             TempData["Mensagem"] = "Verifique o nome cadastrado.";
             TempData["Retorno"] = false;
 
-            return View(cadastraAluno);
+            return View(ViewCadastro,model);
         }
 
-        Aluno alunoJaCadastrado = _repositorio.Obtenha(cadastraAluno.Matricula.ToString());
+        Aluno alunoJaCadastrado = _repositorio.Obtenha(model.Matricula.ToString());
 
         if (alunoJaCadastrado is { })
         {
             TempData["Mensagem"] = "Matricula já cadastrada!";
             TempData["Retorno"] = false;
 
-            return View(cadastraAluno);
+            return View(ViewCadastro, model);
         }
-
-        Aluno aluno = new()
-        {
-            Matricula = cadastraAluno.Matricula,
-            Nome = cadastraAluno.Nome?.ToUpper().Trim(),
-            Sexo = cadastraAluno.Sexo,
-            Nascimento = Uteis.ConvertaData(cadastraAluno.Nascimento),
-            CPF = new CPF(cadastraAluno.CPF).EhValidoCPF() ? cadastraAluno.CPF : null,
-        };
 
         try
         {
-            _repositorio.Adicione(aluno);
+            _repositorio.Adicione(model.Converta());
             TempData["Mensagem"] = "Cadastrado com sucesso!";
             TempData["Retorno"] = false;
 
@@ -173,11 +178,11 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
             TempData["Retorno"] = false;
         }
 
-        return View(ViewCadastro, cadastraAluno);
+        return View(ViewCadastro, model);
     }
 
     //mover para locar correto
-    private bool CpfEmUso(Aluno aluno) => _repositorio.Obtenha(aluno.CPF?.ToString()) is not null;
+    private bool CpfEmUso(AlunoModel aluno) => _repositorio.Obtenha(aluno.CPF?.ToString()) is not null;
 
     public IActionResult DeletaAluno(string id)
     {
@@ -192,7 +197,7 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
 
         try
         {
-            _repositorio.Remova(aluno);
+            _repositorio.Remova(aluno.Matricula);
             TempData["Mensagem"] = "Deletado com sucesso!";
             TempData["Retorno"] = true;
             return RedirectToAction("Index", "Aluno");

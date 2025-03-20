@@ -7,11 +7,10 @@ namespace EM.Testes;
 
 public class UnitTest1
 {
-    private readonly Aluno AlunoTeste = new()
+    private readonly Aluno AlunoTeste = new("652.930.330-85")
     {
         Matricula = 10,
         Nome = "Jose",
-        CPF = "652.930.330-85",
         Nascimento = new DateTime(1989, 10, 10),
         Sexo = EnumeradorSexo.Masculino
     };

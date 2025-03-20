@@ -1,10 +1,9 @@
 ﻿using EM.Dominio.Enumeradores;
-using EM.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
-namespace EM.Dominio.Entidades;
+namespace EM.Web.Models;
 
-public class Aluno(string cpf) : IEntidade
+public class AlunoModel
 {
     [Key]
     [Display(Name = "Matricula")]
@@ -28,16 +27,5 @@ public class Aluno(string cpf) : IEntidade
 
     [Display(Name = "CPF")]
     [MaxLength(14)]
-    public CPF CPF { get; set; } = new CPF(cpf);
-
-    public override bool Equals(object obj) =>
-        obj is Aluno aluno &&
-               Matricula == aluno.Matricula &&
-               Nome == aluno.Nome &&
-               CPF == aluno.CPF &&
-               Nascimento == aluno.Nascimento;
-
-    public override int GetHashCode() => HashCode.Combine(Matricula);
-
-    public override string ToString() => Matricula + " - " + Nome;
+    public string CPF { get; set; }
 }

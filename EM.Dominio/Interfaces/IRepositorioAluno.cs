@@ -5,7 +5,7 @@ public interface IRepositorioAluno : IRepositorio<Aluno>
 {
     void Adicione(Aluno obj);
 
-    void Remova(Aluno obj);
+    void Remova(int matricula);
 
     void Atualize(Aluno obj);
 

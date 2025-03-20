@@ -32,12 +32,13 @@ public class RepositorioAluno : IRepositorioAluno
 
         while (dr.Read())
         {
-            Aluno aluno = new()
+            string cpf = dr.GetCPF("CPF");
+
+            Aluno aluno = new(cpf)
             {
                 Matricula = dr.GetInt32("MATRICULA"),
                 Nome = dr.GetString("NOME"),
                 Sexo = dr.GetSexo("SEXO"),
-                CPF = dr.GetCPF("CPF"),
                 Nascimento = dr.GetDateTime("NASCIMENTO")
             };
             alunos.Add(aluno);
@@ -80,14 +81,14 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public void Remova(Aluno aluno)
+    public void Remova(int matricula)
     {
         using var conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
 
         cmd.CommandText = "DELETE FROM ALUNO WHERE MATRICULA = @MATRICULA";
 
-        cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
+        cmd.Parameters.AddWithValue("@MATRICULA", matricula);
 
         cmd.ExecuteNonQuery();
     }
@@ -108,12 +109,11 @@ public class RepositorioAluno : IRepositorioAluno
         FbDataReader dr = cmd.ExecuteReader();
 
         return dr.Read()
-            ? new Aluno()
+            ? new Aluno(dr.GetCPF("CPF"))
             {
                 Matricula = dr.GetInt32("MATRICULA"),
                 Nome = dr.GetString("NOME"),
                 Sexo = dr.GetSexo("SEXO"),
-                CPF = dr.GetCPF("CPF"),
                 Nascimento = dr.GetDateTime("NASCIMENTO"),
             }
             : null;

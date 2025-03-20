@@ -18,7 +18,7 @@ public static class Uteis
     {
         if (Equals(DBNull.Value, dataEntrada)) return DataNaoInformada;
 
-        string dtEntrada = nameof(dataEntrada);
+        string dtEntrada = dataEntrada.ToString();
         if (DateTime.TryParse(dtEntrada, out var dt))
         {
             return dt;
