@@ -866,23 +866,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dev-Joao.daniel\\.nuget\\packages\\": {},
+    "C:\\Users\\joaod\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dev-Joao.daniel\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
+      "projectUniqueName": "C:\\Users\\joaod\\OneDrive\\Documentos\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
       "projectName": "EM.Repository",
-      "projectPath": "C:\\Users\\dev-Joao.daniel\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
-      "packagesPath": "C:\\Users\\dev-Joao.daniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dev-Joao.daniel\\Documents\\GitHub\\ProjetoAlunos\\EM.Repository\\obj\\",
+      "projectPath": "C:\\Users\\joaod\\OneDrive\\Documentos\\ProjetoAlunos\\EM.Repository\\EM.Repository.csproj",
+      "packagesPath": "C:\\Users\\joaod\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\joaod\\OneDrive\\Documentos\\ProjetoAlunos\\EM.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\dev-Joao.daniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\joaod\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -897,8 +897,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\dev-Joao.daniel\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj": {
-              "projectPath": "C:\\Users\\dev-Joao.daniel\\Documents\\GitHub\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj"
+            "C:\\Users\\joaod\\OneDrive\\Documentos\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj": {
+              "projectPath": "C:\\Users\\joaod\\OneDrive\\Documentos\\ProjetoAlunos\\EM.Dominio\\EM.Dominio.csproj"
             }
           }
         }
@@ -913,7 +913,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -952,7 +952,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
