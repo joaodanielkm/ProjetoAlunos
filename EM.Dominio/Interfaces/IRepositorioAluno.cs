@@ -13,4 +13,5 @@ public interface IRepositorioAluno : IRepositorio<Aluno>
     
     Aluno ObtenhaPorCpf(string cpf);
 
+    IEnumerable<Aluno> ObtenhaPor(string? matricula, string? nome);
 }

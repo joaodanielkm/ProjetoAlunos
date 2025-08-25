@@ -4,21 +4,19 @@ public static class Uteis
 {
     private readonly static DateTime DataNaoInformada = new(1910, 1, 1);
 
-    public static string ApenasNumeros(string texto)
+    public static string ApenasNumeros(string? texto)
     {
-        if (!string.IsNullOrEmpty(texto))
-        {
-            string textoLimpo = new(texto.Where(char.IsDigit).ToArray());
-            return !(!string.IsNullOrWhiteSpace(textoLimpo) && !string.IsNullOrEmpty(textoLimpo)) ? texto : textoLimpo;
-        }
-        return texto;
+        if (string.IsNullOrEmpty(texto))
+            return "";
+
+        return new string(texto.Where(char.IsDigit).ToArray());
     }
 
     public static DateTime ConvertaData(DateTime? dataEntrada)
     {
         if (Equals(DBNull.Value, dataEntrada)) return DataNaoInformada;
 
-        string dtEntrada = dataEntrada.ToString();
+        string dtEntrada = dataEntrada.ToString() ?? "";
         if (DateTime.TryParse(dtEntrada, out var dt))
         {
             return dt;
@@ -38,6 +36,4 @@ public static class Uteis
             return DataNaoInformada.AddDays(anoMesDia - 2);
         }
     }
-
-    public static bool EhValidoNome(string nome) => nome.Length > 2 && nome.Length < 101;
 }

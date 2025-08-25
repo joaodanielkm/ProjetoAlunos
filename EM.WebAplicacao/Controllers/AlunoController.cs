@@ -33,33 +33,20 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
 
     public IActionResult Index(string searchString, string pesquisePor)
     {
-        List<Aluno> alunos = [.. _repositorio.ObtenhaTodos()];
+        string? matricula = pesquisePor == "matricula" ? searchString : null;
+        string? nome = pesquisePor == "nome" ? searchString : null;
 
-        if (alunos.Count == 0)
-        {
-            return View();
-        }
+        IEnumerable<Aluno> alunos = _repositorio.ObtenhaPor(matricula, nome);
+
+        IEnumerable<AlunoModel> model = alunos.Select(a => a.Converta());
 
         if (pesquisePor == "matricula")
         {
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                alunos.RemoveAll(a => !a.Matricula.ToString().Contains(searchString));
-            }
-
-            return View(alunos.ToList().OrderBy(a => a.Matricula));
+            return View(model.OrderBy(a => a.Matricula));
         }
         else
         {
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                alunos.RemoveAll(a => !a.Nome.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
-            }
-
-            return View(alunos
-                .ToList()
-                .OrderBy(a => a.Nome)
-                .Select(m => m.Converta()));
+            return View(model.OrderBy(a => a.Nome));
         }
     }
 
@@ -84,37 +71,32 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
             return View(ViewEditar, model);
         }
 
-        Aluno aluno = new(model.CPF.ToString())
+        try
         {
-            Matricula = model.Matricula,
-            Nome = model.Nome?.ToUpper(),
-            Sexo = model.Sexo,
-            Nascimento = Uteis.ConvertaData(model.Nascimento)
-        };
-
-        if (!aluno.CPF.EhValidoCPF())
+            Aluno aluno = new(model.CPF.ToString())
+            {
+                Matricula = model.Matricula,
+                Nome = model.Nome?.ToUpper(),
+                Sexo = model.Sexo,
+                Nascimento = Uteis.ConvertaData(model.Nascimento)
+            };
+            _repositorio.Atualize(aluno);
+            TempData["Mensagem"] = "Editado com sucesso!";
+            TempData["Retorno"] = true;
+            return View(ViewEditar, model);
+        }
+        catch (System.ComponentModel.DataAnnotations.ValidationException ex)
         {
-            TempData["Mensagem"] = "CPF inválido!";
+            TempData["Mensagem"] = ex.Message;
             TempData["Retorno"] = false;
             return View(ViewEditar, model);
         }
-
-        if (Uteis.EhValidoNome(aluno.Nome))
+        catch
         {
-            try
-            {
-                _repositorio.Atualize(aluno);
-                TempData["Mensagem"] = "Editado com sucesso!";
-                TempData["Retorno"] = true;
-                return View(ViewEditar, model);
-            }
-            catch
-            {
-                TempData["Retorno"] = false;
-                TempData["Mensagem"] = "Erro ao editar!";
-            }
+            TempData["Retorno"] = false;
+            TempData["Mensagem"] = "Erro ao editar!";
+            return View(ViewEditar, model);
         }
-        return View(ViewEditar, model);
     }
 
     public IActionResult Cadastra()
@@ -147,13 +129,6 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
             return View(ViewCadastro, model);
         }
 
-        if (!Uteis.EhValidoNome(model.Nome))
-        {
-            TempData["Mensagem"] = "Verifique o nome cadastrado.";
-            TempData["Retorno"] = false;
-
-            return View(ViewCadastro,model);
-        }
 
         Aluno alunoJaCadastrado = _repositorio.Obtenha(model.Matricula.ToString());
 
@@ -169,8 +144,13 @@ public class AlunoController(IRepositorioAluno repositorio) : ControladorDeCadas
         {
             _repositorio.Adicione(model.Converta());
             TempData["Mensagem"] = "Cadastrado com sucesso!";
-            TempData["Retorno"] = false;
+            TempData["Retorno"] = true;
 
+        }
+        catch (System.ComponentModel.DataAnnotations.ValidationException ex)
+        {
+            TempData["Mensagem"] = ex.Message;
+            TempData["Retorno"] = false;
         }
         catch (Exception ex)
         {
