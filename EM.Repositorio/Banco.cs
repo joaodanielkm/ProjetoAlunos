@@ -1,7 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using Microsoft.Extensions.Configuration;
 
-namespace EM.Repository;
+namespace EM.Repositorio;
 
 public static class Banco
 {

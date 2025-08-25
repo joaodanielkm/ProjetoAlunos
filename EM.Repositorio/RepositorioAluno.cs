@@ -1,12 +1,12 @@
 using EM.Dominio.Entidades;
 using EM.Dominio.Interfaces;
 using EM.Dominio.Utilitarios;
-using EM.Repository.Extensoes;
+using EM.Repositorio.Extensoes;
 using FirebirdSql.Data.FirebirdClient;
 using System.Data;
 using System.Text;
 
-namespace EM.Repository;
+namespace EM.Repositorio;
 
 public class RepositorioAluno : IRepositorioAluno
 {
@@ -51,7 +51,7 @@ public class RepositorioAluno : IRepositorioAluno
         return alunos;
     }
 
-    public IEnumerable<Aluno> ObtenhaPor(string? matricula, string? nome)
+    public IEnumerable<Aluno> ObtenhaPor(string matricula, string nome)
     {
         List<Aluno> alunos = [];
         using FbConnection conexao = Banco.CrieConexao();
@@ -127,7 +127,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public Aluno? Obtenha(string matricula)
+    public Aluno Obtenha(string matricula)
     {
         if (string.IsNullOrEmpty(matricula))
         {
@@ -145,7 +145,7 @@ public class RepositorioAluno : IRepositorioAluno
         return dr.Read() ? MapeieParaAluno(dr) : null;
     }
 
-    public Aluno? ObtenhaPorCpf(string cpf)
+    public Aluno ObtenhaPorCpf(string cpf)
     {
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();

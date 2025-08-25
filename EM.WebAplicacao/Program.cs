@@ -1,5 +1,5 @@
 using EM.Dominio.Interfaces;
-using EM.Repository;
+using EM.Repositorio;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

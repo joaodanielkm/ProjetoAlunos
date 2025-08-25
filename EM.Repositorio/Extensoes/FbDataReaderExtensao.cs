@@ -1,7 +1,7 @@
 ﻿using EM.Dominio.Enumeradores;
 using FirebirdSql.Data.FirebirdClient;
 
-namespace EM.Repository.Extensoes;
+namespace EM.Repositorio.Extensoes;
 
 public static class FbDataReaderExtensao
 {

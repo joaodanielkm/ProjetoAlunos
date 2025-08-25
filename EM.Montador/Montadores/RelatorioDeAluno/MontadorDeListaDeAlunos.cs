@@ -1,4 +1,5 @@
-﻿using EM.Repository;
+﻿using EM.Dominio.Entidades;
+using EM.Repositorio;
 using iTextSharp5.text;
 using iTextSharp5.text.pdf;
 
@@ -8,7 +9,7 @@ public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
 {
     protected override string TituloRelatorio => "Lista de Alunos";
 
-    private readonly List<Dominio.Entidades.Aluno> _alunos = [];
+    private readonly List<Aluno> _alunos = [];
 
     public MontadorDeListaDeAlunos() => _alunos = [.. new RepositorioAluno().ObtenhaTodos()];
 
@@ -30,7 +31,7 @@ public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
             throw new Exception("Não existem alunos cadastrados!");
         }
 
-        foreach (Dominio.Entidades.Aluno aluno in _alunos)
+        foreach (Aluno aluno in _alunos)
         {
             tabela.AddCell(nameof(aluno.Matricula));
             tabela.AddCell(aluno.CPF.Formatado);
