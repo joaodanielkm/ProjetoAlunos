@@ -1,57 +1,76 @@
-﻿using EM.Dominio.Utilitarios;
+using EM.Dominio.Utilitarios;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Dominio.Entidades;
 
-public class CPF(string cpf)
+public class CPF
 {
-    private string _cpfFormatado = cpf;
+    public string Numero { get; }
 
-    public string CPFNumero => Uteis.ApenasNumeros(_cpfFormatado);
+    public string Formatado => Formate(Numero);
 
-    public string CPFFormatado => FormateCPF(CPFNumero);
-
-    public static string FormateCPF(string numero) =>
-        $"{numero[..3]}.{numero.Substring(3, 3)}.{numero.Substring(6, 3)}-{numero.Substring(9, 2)}";
-
-    public bool EhValidoCPF()
+    public CPF(string? numero)
     {
-        if (string.IsNullOrEmpty(_cpfFormatado)) { return false; }
-        int[] multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
-        int[] multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
-        string tempCpf;
-        string digito;
-        int soma;
-        int resto;
-        if (string.IsNullOrEmpty(_cpfFormatado))
+        if (string.IsNullOrWhiteSpace(numero))
         {
-            return false;
+            Numero = "";
+            return;
         }
-        _cpfFormatado = _cpfFormatado.Trim().Replace(".", "").Replace("-", "");
-        if (_cpfFormatado.Length != 11)
+
+        Numero = Uteis.ApenasNumeros(numero);
+        if (!EhValido(Numero))
+            throw new ValidationException("CPF inválido!");
+    }
+
+    public static string Formate(string? numero)
+    {
+        if (string.IsNullOrWhiteSpace(numero) || numero.Length != 11)
+            return numero ?? "";
+
+        return Convert.ToUInt64(numero).ToString(@"000\.000\.000\-00");
+    }
+
+    public static bool EhValido(string? cpf)
+    {
+        if (string.IsNullOrWhiteSpace(cpf))
             return false;
-        tempCpf = _cpfFormatado[..9];
-        soma = 0;
+
+        var cpfNumeros = Uteis.ApenasNumeros(cpf);
+
+        if (cpfNumeros.Length != 11)
+            return false;
+
+        if (cpfNumeros.All(c => c == cpfNumeros[0]))
+            return false;
+
+        int[] multiplicador1 = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplicador2 = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+
+        string tempCpf = cpfNumeros.Substring(0, 9);
+        int soma = 0;
 
         for (int i = 0; i < 9; i++)
             soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
-        resto = soma % 11;
-        if (resto < 2)
-            resto = 0;
-        else
-            resto = 11 - resto;
-        digito = resto.ToString();
-        tempCpf += digito;
+
+        int resto = soma % 11;
+        int digito1 = resto < 2 ? 0 : 11 - resto;
+
+        if (int.Parse(cpfNumeros[9].ToString()) != digito1)
+            return false;
+
         soma = 0;
         for (int i = 0; i < 10; i++)
-            soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+            soma += int.Parse(cpfNumeros[i].ToString()) * multiplicador2[i];
+
         resto = soma % 11;
-        if (resto < 2)
-            resto = 0;
-        else
-            resto = 11 - resto;
-        digito += resto.ToString();
-        return _cpfFormatado.EndsWith(digito);
+        int digito2 = resto < 2 ? 0 : 11 - resto;
+
+        return int.Parse(cpfNumeros[10].ToString()) == digito2;
     }
 
-    public override string ToString() => _cpfFormatado;
+    public override string ToString() => Numero;
+
+    public override bool Equals(object? obj) => obj is CPF outro && Numero == outro.Numero;
+
+    public override int GetHashCode() => Numero.GetHashCode();
 }

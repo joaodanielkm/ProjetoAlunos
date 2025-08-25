@@ -4,12 +4,25 @@ using EM.Dominio.Utilitarios;
 using EM.Repository.Extensoes;
 using FirebirdSql.Data.FirebirdClient;
 using System.Data;
+using System.Text;
 
 namespace EM.Repository;
 
 public class RepositorioAluno : IRepositorioAluno
 {
-   public int ObtenhaProximMatricula()
+    private Aluno MapeieParaAluno(FbDataReader dr)
+    {
+        string cpf = dr.GetStringSafe("CPF");
+        return new Aluno(cpf)
+        {
+            Matricula = dr.GetInt32("MATRICULA"),
+            Nome = dr.GetStringSafe("NOME"),
+            Sexo = dr.GetSexo("SEXO"),
+            Nascimento = dr.GetDateTime("NASCIMENTO")
+        };
+    }
+
+    public int ObtenhaProximMatricula()
     {
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
@@ -32,18 +45,39 @@ public class RepositorioAluno : IRepositorioAluno
 
         while (dr.Read())
         {
-            string cpf = dr.GetCPF("CPF");
-
-            Aluno aluno = new(cpf)
-            {
-                Matricula = dr.GetInt32("MATRICULA"),
-                Nome = dr.GetString("NOME"),
-                Sexo = dr.GetSexo("SEXO"),
-                Nascimento = dr.GetDateTime("NASCIMENTO")
-            };
-            alunos.Add(aluno);
+            alunos.Add(MapeieParaAluno(dr));
         }
 
+        return alunos;
+    }
+
+    public IEnumerable<Aluno> ObtenhaPor(string? matricula, string? nome)
+    {
+        List<Aluno> alunos = [];
+        using FbConnection conexao = Banco.CrieConexao();
+        using FbCommand cmd = conexao.CreateCommand();
+
+        var sql = new StringBuilder("SELECT MATRICULA, NOME, SEXO, CPF, NASCIMENTO FROM ALUNO WHERE 1=1");
+
+        if (!string.IsNullOrEmpty(matricula))
+        {
+            sql.Append(" AND MATRICULA = @MATRICULA");
+            cmd.Parameters.AddWithValue("@MATRICULA", matricula);
+        }
+
+        if (!string.IsNullOrEmpty(nome))
+        {
+            sql.Append(" AND NOME LIKE @NOME");
+            cmd.Parameters.AddWithValue("@NOME", $"%{nome}%");
+        }
+
+        cmd.CommandText = sql.ToString();
+
+        using FbDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            alunos.Add(MapeieParaAluno(dr));
+        }
         return alunos;
     }
 
@@ -59,7 +93,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.Parameters.AddWithValue("@MATRICULA", matricula);
         cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
         cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
-        cmd.Parameters.AddWithValue("@CPF", aluno.CPF);
+        cmd.Parameters.AddWithValue("@CPF", aluno.CPF.ToString());
         cmd.Parameters.AddWithValue("@NASCIMENTO", aluno.Nascimento);
 
         cmd.ExecuteNonQuery();
@@ -75,7 +109,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.Parameters.AddWithValue("@MATRICULA", aluno.Matricula);
         cmd.Parameters.AddWithValue("@NOME", aluno.Nome);
         cmd.Parameters.AddWithValue("@SEXO", aluno.Sexo);
-        cmd.Parameters.AddWithValue("@CPF", aluno.CPF);
+        cmd.Parameters.AddWithValue("@CPF", aluno.CPF.ToString());
         cmd.Parameters.AddWithValue("@NASCIMENTO", aluno.Nascimento);
 
         cmd.ExecuteNonQuery();
@@ -93,7 +127,7 @@ public class RepositorioAluno : IRepositorioAluno
         cmd.ExecuteNonQuery();
     }
 
-    public Aluno Obtenha(string matricula)
+    public Aluno? Obtenha(string matricula)
     {
         if (string.IsNullOrEmpty(matricula))
         {
@@ -106,20 +140,12 @@ public class RepositorioAluno : IRepositorioAluno
 
         cmd.Parameters.AddWithValue("@MATRICULA", Uteis.ApenasNumeros(matricula));
 
-        FbDataReader dr = cmd.ExecuteReader();
+        using FbDataReader dr = cmd.ExecuteReader();
 
-        return dr.Read()
-            ? new Aluno(dr.GetCPF("CPF"))
-            {
-                Matricula = dr.GetInt32("MATRICULA"),
-                Nome = dr.GetString("NOME"),
-                Sexo = dr.GetSexo("SEXO"),
-                Nascimento = dr.GetDateTime("NASCIMENTO"),
-            }
-            : null;
+        return dr.Read() ? MapeieParaAluno(dr) : null;
     }
 
-    public Aluno ObtenhaPorCpf(string cpf)
+    public Aluno? ObtenhaPorCpf(string cpf)
     {
         using FbConnection conexao = Banco.CrieConexao();
         using FbCommand cmd = conexao.CreateCommand();
@@ -127,17 +153,8 @@ public class RepositorioAluno : IRepositorioAluno
 
         cmd.Parameters.AddWithValue("@CPF", Uteis.ApenasNumeros(cpf));
 
-        FbDataReader dr = cmd.ExecuteReader();
+        using FbDataReader dr = cmd.ExecuteReader();
 
-        return dr.Read()
-            ? new Aluno(dr.GetCPF("CPF"))
-            {
-                Matricula = dr.GetInt32("MATRICULA"),
-                Nome = dr.GetString("NOME"),
-                Sexo = dr.GetSexo("SEXO"),
-                Nascimento = dr.GetDateTime("NASCIMENTO"),
-            }
-            : null;
+        return dr.Read() ? MapeieParaAluno(dr) : null;
     }
 }
-
