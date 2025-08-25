@@ -19,7 +19,7 @@ public static class Conversores
         new()
         {
             Nome = aluno.Nome,
-            CPF = aluno.CPF.CPFNumero,
+            CPF = aluno.CPF.Numero,
             Matricula = aluno.Matricula,
             Nascimento = aluno.Nascimento,
             Sexo = aluno.Sexo

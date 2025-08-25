@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Repository", "..\EM.Repository\EM.Repository.csproj", "{6D2CCFAB-16F2-4163-8028-7BACA87E5990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Repositorio", "..\EM.Repositorio\EM.Repositorio.csproj", "{6D2CCFAB-16F2-4163-8028-7BACA87E5990}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EM.Montador", "..\EM.Montador\EM.Montador.csproj", "{D7C69CBA-E932-497E-B330-4D7A14D23059}"
 EndProject

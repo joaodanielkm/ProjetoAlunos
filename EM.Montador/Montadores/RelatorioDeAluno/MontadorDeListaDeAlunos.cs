@@ -33,7 +33,7 @@ public class MontadorDeListaDeAlunos : MontadorDePdfAbstrato
         foreach (Dominio.Entidades.Aluno aluno in _alunos)
         {
             tabela.AddCell(nameof(aluno.Matricula));
-            tabela.AddCell(aluno.CPF.CPFFormatado);
+            tabela.AddCell(aluno.CPF.Formatado);
             tabela.AddCell(new PdfPCell(new Phrase(aluno.Nome)) { HorizontalAlignment = Element.ALIGN_LEFT });
         }
 

@@ -24,7 +24,7 @@ public class MontadorDeFichaDoAluno(string id, IRepositorioAluno repositorioAlun
         tabelaAluno.AddCell(new Phrase(nameof(aluno.Matricula)));
 
         tabelaAluno.AddCell(new Phrase("CPF"));
-        tabelaAluno.AddCell(new Phrase(nameof(aluno.CPF.CPFFormatado)));
+        tabelaAluno.AddCell(new Phrase(nameof(aluno.CPF.Formatado)));
 
         tabelaAluno.AddCell(new Phrase("Nome"));
         tabelaAluno.AddCell(new Phrase(aluno.Nome));
